@@ -1,0 +1,10 @@
+﻿@page "/router/{routerText?}"
+
+<h3>Router</h3>
+@if(!(routerText == null)) {
+    <p>Blazor router is @routerText</p>
+}
+@code {
+    [Parameter]
+    public string? routerText{ get; set; }
+}

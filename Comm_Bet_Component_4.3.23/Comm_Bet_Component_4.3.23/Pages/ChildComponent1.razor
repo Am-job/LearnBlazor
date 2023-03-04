@@ -1,0 +1,6 @@
+﻿<button @onclick="@(()=>OnButtonClick.InvokeAsync("This From Child 1"))">Button 1</button>
+
+
+@code {
+    [Parameter] public EventCallback<string> OnButtonClick { get; set; }
+}

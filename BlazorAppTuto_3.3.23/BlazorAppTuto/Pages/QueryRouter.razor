@@ -1,0 +1,21 @@
+﻿@page "/queryRouter"
+
+
+<h1>My Page</h1>
+<p>param1: @param1</p>
+<p>param2: @param2</p>
+<p>param3: @param3</p>
+
+@code{
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public int param1 { get; set; } = 0;
+
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public string? param2 { get; set; }
+
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public bool param3 { get; set; } = false;
+}

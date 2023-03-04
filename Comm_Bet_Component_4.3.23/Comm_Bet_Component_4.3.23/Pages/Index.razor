@@ -1,0 +1,21 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<!-- Parent Component -->
+
+<ChildComponent OnClick="ClickHandler"></ChildComponent>
+<ChildComponent1 OnButtonClick="ClickHandler"></ChildComponent1>
+
+<p>@message</p>
+
+@code {
+
+    string message = "Hello from ParentComponent";
+
+    void ClickHandler(string newMessage)
+    {
+        message = newMessage;
+    }
+
+}

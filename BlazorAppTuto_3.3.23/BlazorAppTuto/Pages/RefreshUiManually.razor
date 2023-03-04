@@ -1,0 +1,19 @@
+﻿@page "/refreshUi"
+@using System.Threading;
+
+
+<h3>RefreshUiManually</h3>
+<p>@Count</p>
+<button @onclick="StartCountDown">Start Countdown</button>
+
+@code {
+    private int Count { get; set; } = 10;
+
+    private void StartCountDown()
+    {
+        if (Count <= 0) return;
+        Count--; 
+        StateHasChanged();
+    }
+
+}

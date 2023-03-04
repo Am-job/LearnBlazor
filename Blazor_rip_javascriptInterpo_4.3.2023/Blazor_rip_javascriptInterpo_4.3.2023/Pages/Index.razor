@@ -1,0 +1,37 @@
+﻿@page "/"
+@inject IJSRuntime jsRuntime
+
+<PageTitle>JavaScript Interop Demo</PageTitle>
+
+<h1>JavaScript Interop Demo</h1>
+<hr/>
+<button class="btn btn-primary" @onclick="CallCSMethod">Call C# Method</button>
+<button class="btn btn-primary" @onclick="CallJSMethod">Call Js Method</button>
+
+<br />
+<p id="demop"></p>
+<br />
+<p>@message</p>
+@code {
+
+
+    protected static string? message { get; set; }
+
+    protected void CallCSMethod()
+    {
+        jsRuntime.InvokeAsync<object>("CSMethod");
+    }
+
+    protected void CallJSMethod()
+    {
+        message = "";
+        jsRuntime.InvokeAsync<object>("JSMethod");
+    }
+
+    [JSInvokable]
+    public static void CSCallBackMethod()
+    {
+        message = "C# function called from JavaScript";
+    }
+
+}

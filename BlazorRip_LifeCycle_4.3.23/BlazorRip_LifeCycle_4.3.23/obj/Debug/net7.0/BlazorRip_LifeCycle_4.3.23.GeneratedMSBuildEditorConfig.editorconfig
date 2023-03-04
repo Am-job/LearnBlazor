@@ -1,0 +1,49 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = BlazorRip_LifeCycle_4.3.23
+build_property.RootNamespace = BlazorRip_LifeCycle_4.3.23
+build_property.ProjectDir = C:\Users\Server\source\repos\BlazorRip_LifeCycle_4.3.23\BlazorRip_LifeCycle_4.3.23\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Server\source\repos\BlazorRip_LifeCycle_4.3.23\BlazorRip_LifeCycle_4.3.23
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Server/source/repos/BlazorRip_LifeCycle_4.3.23/BlazorRip_LifeCycle_4.3.23/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/BlazorRip_LifeCycle_4.3.23/BlazorRip_LifeCycle_4.3.23/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/BlazorRip_LifeCycle_4.3.23/BlazorRip_LifeCycle_4.3.23/Pages/OnAfterRen.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT25BZnRlclJlbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/BlazorRip_LifeCycle_4.3.23/BlazorRip_LifeCycle_4.3.23/Pages/OnParameterSet.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT25QYXJhbWV0ZXJTZXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/BlazorRip_LifeCycle_4.3.23/BlazorRip_LifeCycle_4.3.23/Pages/ShouldRend.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvdWxkUmVuZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/BlazorRip_LifeCycle_4.3.23/BlazorRip_LifeCycle_4.3.23/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/BlazorRip_LifeCycle_4.3.23/BlazorRip_LifeCycle_4.3.23/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-zz7ep7d343
+
+[C:/Users/Server/source/repos/BlazorRip_LifeCycle_4.3.23/BlazorRip_LifeCycle_4.3.23/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-dnek3tfsia

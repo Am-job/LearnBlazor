@@ -1,0 +1,15 @@
+
+https://dotnet.microsoft.com/en-us/learn/aspnet/blazor-tutorial/intro
+https://riptutorial.com/blazor/learn/100000/getting-started
+https://blazorschool.com/tutorial/blazor-wasm/dotnet7/create-a-project-131966
+https://chrissainty.com/3-ways-to-communicate-between-components-in-blazor/
+https://blazor-university.com  ==> HOME
+
+
+
+---------------------------- Home Work -------------------------------------
+https://www.pragimtech.com/blog/blazor/what-is-blazor/
+
+DI
+https://www.thinktecture.com/en/blazor/dependency-injection-scopes-in-blazor/
+ 

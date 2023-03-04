@@ -1,0 +1,13 @@
+﻿<div>
+    <h1>Parent Component</h1>
+    <CascadingValue Value="@SharedValue">
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private string SharedValue = "Hello, world!";
+}

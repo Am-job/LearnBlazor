@@ -1,0 +1,37 @@
+﻿@*https://chrissainty.com/understanding-cascading-values-and-cascading-parameters/ *@
+
+@page "/cascading"
+
+<h3>Cascading_Values_Parameters</h3>
+
+<CascadingValue Value="@TheAnswer">
+    <CasFooComponent></CasFooComponent>
+</CascadingValue>
+
+<CascadingValue Value="@FruitName">
+    <CascadingValue Value="@FruitCount">
+        <CasTypeFruit></CasTypeFruit>
+    </CascadingValue>
+</CascadingValue>
+
+<CascadingValue Name="FirstFruit" Value="@FirstFruit">
+    <CascadingValue Name="SecondFruit" Value="@SecondFruit">
+        <CasSameFruit></CasSameFruit>
+        <CasNameFruit></CasNameFruit>
+    </CascadingValue>
+</CascadingValue>
+
+@*Performence*@
+<CascadingValue Value="@FruitName" IsFixed="true">
+    <CasIsFixed></CasIsFixed>
+</CascadingValue>
+
+@code {
+    int TheAnswer = 42;
+
+    string FruitName { get; set; } = "Apple";
+    int FruitCount { get; set; } = 111;
+
+    string FirstFruit { get; set; } = "Apple";
+    string SecondFruit { get; set; } = "Banana";
+}

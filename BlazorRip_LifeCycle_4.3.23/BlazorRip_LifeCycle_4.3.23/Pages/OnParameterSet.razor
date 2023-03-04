@@ -1,0 +1,22 @@
+﻿@page "/onParameter"
+
+<h1>OnParametersSet & OnParametersSetAsync Demo</h1>
+
+@foreach (var item in EventType)
+{
+   @item <hr />
+}
+
+@functions{
+   List<string> EventType = new List<string>();
+
+   protected override void OnParametersSet()
+   {
+       EventType.Add("OnParameterSet is called");
+   }
+   protected override async Task OnParametersSetAsync()
+   {
+       EventType.Add("OnParametersSetAsync is called");
+       await Task.Delay(100000);         
+   }
+}

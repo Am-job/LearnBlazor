@@ -1,0 +1,89 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = Comm_Bet_Component_4.3.23
+build_property.RootNamespace = Comm_Bet_Component_4.3.23
+build_property.ProjectDir = C:\Users\Server\source\repos\Comm_Bet_Component_4.3.23\Comm_Bet_Component_4.3.23\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Server\source\repos\Comm_Bet_Component_4.3.23\Comm_Bet_Component_4.3.23
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CascadingPCParam.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzY2FkaW5nUENQYXJhbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/Cascading_Values_Parameters.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzY2FkaW5nX1ZhbHVlc19QYXJhbWV0ZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasChild.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzQ2hpbGQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasChild1.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzQ2hpbGQxLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasFooComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzRm9vQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasIsFixed.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzSXNGaXhlZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasNameFruit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzTmFtZUZydWl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasParent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzUGFyZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasParent1.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzUGFyZW50MS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasSameFruit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzU2FtZUZydWl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasTypeFruit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzVHlwZUZydWl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/ChildComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hpbGRDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/ChildComponent1.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hpbGRDb21wb25lbnQxLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-acr8ue1lyg
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-c8gziopqop

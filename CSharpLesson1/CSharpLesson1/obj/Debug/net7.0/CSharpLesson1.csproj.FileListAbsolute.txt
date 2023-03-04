@@ -1,0 +1,15 @@
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\bin\Debug\net7.0\CSharpLesson1.exe
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\bin\Debug\net7.0\CSharpLesson1.deps.json
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\bin\Debug\net7.0\CSharpLesson1.runtimeconfig.json
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\bin\Debug\net7.0\CSharpLesson1.dll
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\bin\Debug\net7.0\CSharpLesson1.pdb
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\obj\Debug\net7.0\CSharpLesson1.csproj.AssemblyReference.cache
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\obj\Debug\net7.0\CSharpLesson1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\obj\Debug\net7.0\CSharpLesson1.AssemblyInfoInputs.cache
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\obj\Debug\net7.0\CSharpLesson1.AssemblyInfo.cs
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\obj\Debug\net7.0\CSharpLesson1.csproj.CoreCompileInputs.cache
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\obj\Debug\net7.0\CSharpLesson1.dll
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\obj\Debug\net7.0\refint\CSharpLesson1.dll
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\obj\Debug\net7.0\CSharpLesson1.pdb
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\obj\Debug\net7.0\CSharpLesson1.genruntimeconfig.cache
+C:\Users\Server\source\repos\CSharpLesson1\CSharpLesson1\obj\Debug\net7.0\ref\CSharpLesson1.dll

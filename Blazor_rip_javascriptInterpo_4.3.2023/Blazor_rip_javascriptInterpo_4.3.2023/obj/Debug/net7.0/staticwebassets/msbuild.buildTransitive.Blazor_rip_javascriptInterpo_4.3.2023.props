@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Blazor_rip_javascriptInterpo_4.3.2023.props" />
+</Project>

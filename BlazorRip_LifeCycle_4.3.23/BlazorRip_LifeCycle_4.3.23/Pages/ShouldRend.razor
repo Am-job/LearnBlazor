@@ -1,0 +1,17 @@
+﻿@page "/shouldRender"
+
+<h1>ShouldRender Method Demo</h1>
+@foreach (var item in EventType)
+{
+    @item
+    <hr />
+}
+@functions {
+    List<string> EventType = new List<string>();
+
+    protected override bool ShouldRender()
+    {
+        EventType.Add("ShouldRender is called");
+        return true;
+    }
+}

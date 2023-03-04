@@ -1,0 +1,10 @@
+﻿<div>
+    <h2>Child Component</h2>
+    <p>The value passed down from the parent component is: @Theme</p>
+</div>
+
+@code {
+    [Parameter]
+    [CascadingParameter(Name = "SharedValue")]
+    public string? Theme { get; set; }
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comm_Bet_Component_4.3.23", "Comm_Bet_Component_4.3.23\Comm_Bet_Component_4.3.23.csproj", "{838AE2F0-37DB-405A-AAA9-AED5BC3ABF93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{838AE2F0-37DB-405A-AAA9-AED5BC3ABF93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{838AE2F0-37DB-405A-AAA9-AED5BC3ABF93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{838AE2F0-37DB-405A-AAA9-AED5BC3ABF93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{838AE2F0-37DB-405A-AAA9-AED5BC3ABF93}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {711B0F0E-70E8-4874-A03D-BA6E1FE603E2}
+	EndGlobalSection
+EndGlobal

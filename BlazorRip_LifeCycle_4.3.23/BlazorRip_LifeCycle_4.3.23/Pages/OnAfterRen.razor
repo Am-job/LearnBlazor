@@ -1,0 +1,26 @@
+﻿@page "/onAfterRend"
+
+<h1>On After Render @Message</h1>
+
+@functions {
+    private string? Message { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Message = "Hello, World!";
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // component has just been rendered for the first time
+            Console.WriteLine("Component has been rendered for the first time");
+        }
+        else
+        {
+            // component has been re-rendered
+            Console.WriteLine("Component has been re-rendered");
+        }
+    }
+}

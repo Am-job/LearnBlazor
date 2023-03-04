@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\BlazorRip_LifeCycle_4.3.23.props" />
+</Project>
