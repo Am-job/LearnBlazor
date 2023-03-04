@@ -1,16 +1,21 @@
-﻿<!-- Tab Component -->
+﻿<!-- Tab Container -->
 
-<div @onclick="SetSelectedTab">@Title @(TabContainer.SelectedTab == Title ? "Selected" : "")</div>
+<h1>@SelectedTab</h1>
+
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
 
 
 @code {
 
-    [CascadingParameter] TabContainer TabContainer { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
-    [Parameter] public string Title { get; set; }
+    public string SelectedTab { get; private set; }
 
-    void SetSelectedTab()
+    public void SetSelectedTab(string selectedTab)
     {
-        TabContainer.SetSelectedTab(Title);
+        SelectedTab = selectedTab;
+        StateHasChanged();
     }
 }
