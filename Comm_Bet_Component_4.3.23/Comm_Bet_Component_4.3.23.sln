@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comm_Bet_Component_4.3.23", "Comm_Bet_Component_4.3.23\Comm_Bet_Component_4.3.23.csproj", "{838AE2F0-37DB-405A-AAA9-AED5BC3ABF93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comm_Bet_Component_4.3.23", "Comm_Bet_Component_4.3.23\Comm_Bet_Component_4.3.23.csproj", "{838AE2F0-37DB-405A-AAA9-AED5BC3ABF93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

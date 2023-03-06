@@ -1,0 +1,237 @@
+﻿@page "/entry"
+
+
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<div style="width : fit-content; height : fit-content " class="d-flex justify-content-center align-content-lg-center bgb rounded">
+    <div class=" p-5 d-flex flex-column just" >
+
+        @if(CloneData == null)
+        {
+            @if (Name?.Length == 0 || Model?.Length == 0 || Name == null || Model == null && ShowError)
+            {
+                <div class="bg-warning px-2 rounded py-1">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Please Fill the required fields.
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Name:</div>
+                <input @bind-value="Name" class="my-3 rounded" required placeholder="required" />
+            </div>
+            @if (Name?.Length >= 5 && CharaError)
+            {
+                <div class="bg-warning px-2 py-1 rounded">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Maxium char for name is 4.
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vechical's Model:</div>
+                <input @bind-value="Model" class="my-3 rounded" required placeholder="required" />
+            </div>
+
+            @if (Model?.Length >= 5 && CharaError)
+            {
+                <div class="bg-warning px-2 py-1 rounded">
+                    <span class="oi oi-warning " aria-hidden="true"></span> Maxium char for Model is 4.
+                </div>
+            }
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Brand:</div>
+                <input @bind-value="Brand" class="my-3 rounded" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Color:</div>
+                <input @bind-value="Color" class="my-3 rounded" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Num of Seater :</div>
+                <input @bind-value="NPerson" class="my-3 rounded" />
+            </div>
+        } else
+        {
+            @if (CloneData?.Name?.Length == 0 || CloneData?.Model?.Length == 0 || CloneData?.Name == null || CloneData?.Model == null && ShowError)
+            {
+                <div class="bg-warning px-2 rounded py-1">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Please Fill the required fields.
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Name:</div>
+                <input @bind-value="CloneData.Name" class="my-3 rounded" required placeholder="required" />
+            </div>
+            @if (CloneData?.Name?.Length >= 5 && CharaError)
+            {
+                <div class="bg-warning px-2 py-1 rounded">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Maxium char for name is 4.
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vechical's Model:</div>
+                <input @bind-value="CloneData.Model" class="my-3 rounded" required placeholder="required" />
+            </div>
+
+            @if (CloneData?.Model?.Length >= 5 && CharaError)
+            {
+                <div class="bg-warning px-2 py-1 rounded">
+                    <span class="oi oi-warning " aria-hidden="true"></span> Maxium char for Model is 4.
+                </div>
+            }
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Brand:</div>
+                <input @bind-value="CloneData.Brand" class="my-3 rounded" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Color:</div>
+                <input @bind-value="CloneData.Color" class="my-3 rounded" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Num of Seater :</div>
+                <input @bind-value="CloneData.NPerson" class="my-3 rounded" />
+            </div>
+        }
+
+
+            @if(CloneData == null)
+            {
+                <div class="d-flex align-items-lg-center justify-content-between">
+                    <button @onclick="AddVechical" class="btn btn-info text-white">Add Vehical</button>
+                </div>
+            } else
+            {
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <button @onclick="() =>SaveChangeHandler(CloneData.Name, CloneData.Model, CloneData.Brand, CloneData.Color, CloneData.NPerson, CloneData.Id)" class="btn btn-info">Save Changes</button>
+            </div>
+            <div class="d-flex align-items-lg-center justify-content-between mt-2">
+                <button @onclick="goBackHome" class="btn btn-dark text-white">Home</button>
+            </div>
+            }
+            </div>
+
+</div>
+
+@code {
+    [Inject]
+    Carservice? Carservice { get; set; }
+
+    public string? Name, Model, Brand, Color;
+
+    public int Id, NPerson;
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int ParaID { get; set; }
+
+    public Cardata? CloneData { get; set; }
+
+    public bool ShowError { get; set; } = false;
+
+    public string? OverlimitName { get; set; } = "";
+
+    public string? OverlimitModel { get; set; } = "";
+
+    public bool CharaError { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        CloneData = Carservice?.Carlist.ConvertAll(item => (Cardata)item.Clone()).Find(item => item.Id == ParaID);
+    }
+
+    private void AddVechical()
+    {
+        var setcardatas = new Cardata
+            {
+                Name  = Name,
+                Model = Model,
+                Brand = Brand,
+                Color = Color,
+                NPerson = NPerson,
+                Id = Id
+            };
+        if (Name?.Length == 0 || Model?.Length == 0 || Name == null || Model == null )
+        {
+            ShowError = true;
+            CharaError = true;
+            
+
+        } else
+        { 
+            ShowError = false;
+            StateHasChanged();
+            JSRuntime.InvokeVoidAsync("console.log", ShowError);
+
+            if (Name?.Length >= 5 || Model?.Length >= 5)
+            {
+                CharaError = true;
+
+            }else
+            {
+                
+                ShowError = false;
+                CharaError = false;
+                Name = ""; Model = ""; Brand = ""; Color = ""; Id = 0; NPerson = 0;
+                JSRuntime.InvokeVoidAsync("alert", "Successfully added");
+                Carservice?.AddCarList(setcardatas);
+                StateHasChanged();
+            }
+
+        }
+
+    }
+    public void SaveChangeHandler(string? Name, string? Model, string? Brand, string? Color, int NPerson, int id)
+    {
+        Cardata? OriginalData = Carservice?.Carlist.Find(item => item.Id == id);
+
+        if (CloneData?.Name?.Length == 0 || CloneData?.Model?.Length == 0 || CloneData?.Name == null || CloneData?.Model == null)
+        {
+            ShowError = true;
+            CharaError = true;
+
+
+        }
+        else
+        {
+            ShowError = false;
+            StateHasChanged();
+            JSRuntime.InvokeVoidAsync("console.log", ShowError);
+
+            if (CloneData?.Name?.Length >= 5 || CloneData?.Model?.Length >= 5)
+            {
+                CharaError = true;
+
+            }
+            else
+            {
+
+                ShowError = false;
+                CharaError = false;
+                JSRuntime.InvokeVoidAsync("alert", "Successfully added");
+                if (OriginalData != null)
+                {
+                    OriginalData.Name = Name;
+                    OriginalData.Model = Model;
+                    OriginalData.Brand = Brand;
+                    OriginalData.Color = Color;
+                    OriginalData.NPerson = NPerson;
+                    OriginalData.Id = id;
+                }
+                CloneData.Name = ""; CloneData.Model = ""; CloneData.Brand = ""; CloneData.Color = ""; CloneData.Id = 0; CloneData.NPerson = 0;
+                StateHasChanged();
+            }
+        }
+
+    }
+    private void goBackHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
+
+        

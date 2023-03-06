@@ -8,12 +8,14 @@
     <CasFooComponent></CasFooComponent>
 </CascadingValue>
 
+@*Type*@
 <CascadingValue Value="@FruitName">
     <CascadingValue Value="@FruitCount">
         <CasTypeFruit></CasTypeFruit>
     </CascadingValue>
 </CascadingValue>
 
+@*Name*@
 <CascadingValue Name="FirstFruit" Value="@FirstFruit">
     <CascadingValue Name="SecondFruit" Value="@SecondFruit">
         <CasSameFruit></CasSameFruit>
@@ -26,6 +28,17 @@
     <CasIsFixed></CasIsFixed>
 </CascadingValue>
 
+@*Test Updating from Child*@
+<CascadingValue Value="@FruitName">
+    <UpC1></UpC1>
+    <UpC2></UpC2>
+</CascadingValue>
+
+@*Using Event to update from child to parent*@
+<CascadingValue Value="@Fruit">
+    <UpC3 OnClick="ChangeFruit"></UpC3>
+    <UpC2></UpC2>
+</CascadingValue>
 @code {
     int TheAnswer = 42;
 
@@ -34,4 +47,12 @@
 
     string FirstFruit { get; set; } = "Apple";
     string SecondFruit { get; set; } = "Banana";
+
+    private string Fruit { get; set; } = "Kiwi";
+
+    private void ChangeFruit(string newFruit)
+    {
+        Fruit = newFruit;
+        StateHasChanged();
+    }
 }

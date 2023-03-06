@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\StateContainer6323.props" />
+</Project>

@@ -1,0 +1,5 @@
+﻿<button @onclick="@( () => OnClick.InvokeAsync("Grape"))">C From p</button>
+
+@code {
+    [Parameter] public EventCallback<string> OnClick { get; set; }
+}

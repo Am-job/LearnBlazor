@@ -1,0 +1,133 @@
+﻿      @inject IJSRuntime JS
+  
+        @if (Data?.Name?.Length == 0 || Data?.Model?.Length == 0 || Data?.Name == null || Data?.Model == null && ShowError)
+        {
+            <div class="bg-warning px-2 rounded py-1">
+                <span class="oi oi-warning " aria-hidden="true"></span>Please Fill the required fields.
+            </div>
+        }
+        <div class="d-flex align-items-lg-center justify-content-between">
+            <div class="text-center text-white mx-2">Vehical's Name:</div>
+            <input @bind-value="Data.Name" class="my-3 rounded" required placeholder="required" />
+        </div>
+        @if (Data?.Name?.Length >= 50 && CharaError)
+        {
+            <div class="bg-warning px-2 py-1 rounded">
+                <span class="oi oi-warning " aria-hidden="true"></span>Maxium char for name is 50.
+            </div>
+        }
+        <div class="d-flex align-items-lg-center justify-content-between">
+            <div class="text-center text-white mx-2">Vechical's Model:</div>
+            <input @bind-value="Data.Model" class="my-3 rounded" required placeholder="required" />
+        </div>
+
+        @if (Data?.Model?.Length >= 50 && CharaError)
+        {
+            <div class="bg-warning px-2 py-1 rounded">
+                <span class="oi oi-warning " aria-hidden="true"></span> Maxium char for Model is 50.
+            </div>
+        }
+
+        <div class="d-flex align-items-lg-center justify-content-between">
+            <div class="text-center text-white mx-2">Vehical's Brand:</div>
+            <input @bind-value="Data.Brand" class="my-3 rounded" />
+        </div>
+
+        <div class="d-flex align-items-lg-center justify-content-between">
+            <div class="text-center text-white mx-2">Vehical's Color:</div>
+            <input @bind-value="Data.Color" class="my-3 rounded" />
+        </div>
+
+        <div class="d-flex align-items-lg-center justify-content-between">
+            <div class="text-center text-white mx-2">Num of Seater :</div>
+            <input @bind-value="Data.NPerson" class="my-3 rounded" />
+        </div>
+
+        <div class="d-flex align-items-lg-center justify-content-between mb-2">
+          <button @onclick="onSaveChange" class="btn btn-info text-white">@Btntitle</button>
+        </div>
+
+        @if (route)
+        {
+          <div class="d-flex align-items-lg-center justify-content-between">
+              <button @onclick="onBackHome" class="btn btn-light">Go Back Home</button>
+          </div>
+        }
+
+@code {
+    [Parameter]
+    public Cardata? Data { get; set; }
+
+    [Parameter]
+    public bool ShowError { get; set; }
+
+    [Parameter]
+    public bool CharaError { get; set; }
+
+    [Parameter]
+    public bool route { get; set; }
+
+    [Parameter]
+    public string? Btntitle { get; set; }
+
+    [Parameter]
+    public EventCallback onSaveChange { get; set; }
+
+    [Parameter]
+    public EventCallback onBackHome { get; set; }
+}
+
+
+ if (Selected == "0" && Searched == "")
+            {
+                carlist = TargetList;
+            }
+            else if (Selected != "0" && Searched == "")
+            {
+                carlist = TargetList?.FindAll(item => item.BrandId == Int64.Parse(Selected));
+            }
+            else if (Selected != "0" && Searched != "")
+            {
+                carlist = TargetList?.FindAll(item => item?.Name?.ToLower().Trim().Contains(Searched) == true ||
+                      item?.Model?.ToLower().Trim().Contains(Searched) == true).FindAll(item => item.BrandId == Int32.Parse(Selected));
+            }
+            else
+            {
+                carlist = TargetList?.FindAll(item => item?.Name?.ToLower().Trim().Contains(Searched) == true ||
+                      item?.Model?.ToLower().Trim().Contains(Searched) == true);
+
+            }
+
+             var TargetList = Carservice?.Carlist;
+
+        if (Searched != null && Selected !=null)
+        {
+            if (Selected == "0")
+            {
+                carlist = TargetList?.FindAll(item => item?.Name?.ToLower().Trim().Contains(Searched) == true ||
+                        item?.Model?.ToLower().Trim().Contains(Searched) == true);
+                        Console.WriteLine("5th");
+            }
+            else
+            {
+                carlist = TargetList?
+                       .FindAll(item => item?.Name?.ToLower().Trim().Contains(Searched) == true ||
+                       item?.Model?.ToLower().Trim().Contains(Searched) == true).FindAll(item => item.BrandId == Int32.Parse(Selected));
+                       Console.WriteLine("6TH");
+            }
+        }
+
+         private async void AddVechical()
+    {
+        if (LastItem != null)
+        {
+            await onAdd(LastItem);
+        }
+        else
+        { 
+            if (Data != null)
+            {
+                await onAdd(Data);
+            }
+        };
+    }

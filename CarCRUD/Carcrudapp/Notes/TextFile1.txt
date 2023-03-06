@@ -1,0 +1,148 @@
+﻿@page "/"
+
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<PageTitle>Home</PageTitle>
+
+<div class="d-flex flex-row mb-3 justify-content-between ">
+    <select @onchange="onSelectionChange" class="form-select bg-dark text-white">
+       
+        <option value="all">All</option>
+        @if (Carservice?.Carlist != null)
+        {
+            @foreach (var item in Carservice.Carlist)
+            {
+                <option value="@item.Brand">@item.Brand</option>
+            }
+        }
+    </select>
+
+   <div style="width : 900px;" class="d-flex flex-row rounded">
+        <input @onchange="onSearchChange" class="input-group  bg-secondary-subtle rounded" type="text" placeholder="Search..." />
+   </div>
+</div>
+
+
+@if (carlist?.Count == 0 )
+{
+    <p>No Car List</p>
+}
+else if (carlist == null)
+{
+    <p>Loading...</p>
+}
+else
+{  
+<div id="card-container"   class="row">
+
+    @foreach(var item in carlist)
+    {
+         <div class="col bg-dark m-3 pt-2 rounded">
+                <div id="card" style="height : 450px;" class="card text-white mb-3 bgb">
+                <p>No.@carlist.IndexOf(item)</p>
+                <img src="/car.jpg" class="card-img-top card-img bg-success text-white" style="height:100px; width:auto;" alt="@item.Name">
+
+                <div class="card-body ">
+                        <h5 style="width:200px;" class="card-title radbgb px-2 py-1 rounded">@item.Name</h5>
+                    <p>Model : @item.Model</p>
+                    <p>Color : @item.Color</p>
+                    <p>Brand : @item.Brand</p>
+                    <p>Person : @item.NPerson</p>
+                </div>
+                <div class="card-footer bg-secondary">
+                   @*<button @onclick="() =>UpdateCarData(item.Id)" class=" text-white btn edit">Edit</button>*@
+                     <button @onclick="() => EditHandler() " class=" text-white btn edit">Edit</button>
+                    <button @onclick="() =>DeleteCarList(item.Id)" class=" text-white btn del">Delete</button>
+                </div>
+                    
+                </div>
+
+               
+
+         </div>
+    }
+
+ </div>
+}
+
+<Carcrudapp.Component.Model @ref="ModelComponent" />
+
+@code {
+
+    [Inject]
+
+    Carservice? Carservice { get; set; }
+
+    public Carcrudapp.Component.Model? ModelComponent { get; set; }
+
+    public List<Cardata>? carlist;
+
+    public string? SelectBrand { get; set; }
+
+    public string? Search { get; set; }
+
+    public bool IsOpen { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        carlist = Carservice?.Carlist;
+    }
+
+    public void EditHandler ()
+    {
+        ModelComponent?.Open();
+    }
+    
+
+    private void onSelectionChange (ChangeEventArgs e)
+    {
+        SelectBrand = e?.Value?.ToString();
+
+        if(SelectBrand == "all")
+        {
+            carlist = Carservice?.Carlist.OrderByDescending(x => x.Name).ToList();
+        } else
+        {
+            carlist = Carservice?.Carlist.Where(item => item.Brand == SelectBrand).OrderByDescending(x => x.Name).ToList();
+        }
+
+
+        StateHasChanged();
+    }
+
+    private  void onSearchChange (ChangeEventArgs e)
+    {
+        Search = e?.Value?.ToString()?.ToLower();
+
+        if (Search != "")
+        {
+            if(Search != null)
+            {
+                carlist = Carservice?.Carlist.Where(item => item?.Model?.ToLower()?.Contains(Search) == true ||
+                item?.Name?.ToLower()?.Contains(Search) == true).OrderByDescending(x => x.Name).ToList();
+
+            }
+
+        } else
+        {
+            carlist = Carservice?.Carlist.OrderByDescending(x => x.Name).ToList();
+        }
+
+
+        StateHasChanged();
+    }
+
+    private void DeleteCarList (int Id)
+    {
+        Carservice?.DeleteCarlist(Id);
+    }
+
+    public void UpdateCarData(int Id)
+    {
+        NavigationManager.NavigateTo($"edit?Id={Id}");
+    }
+
+    
+
+}

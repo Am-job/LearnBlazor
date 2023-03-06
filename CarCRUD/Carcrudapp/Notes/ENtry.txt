@@ -1,0 +1,842 @@
+﻿@page "/entry"
+
+
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<div style="width : fit-content; height : fit-content " class="d-flex justify-content-center align-content-lg-center bgb rounded">
+    <div class=" p-5 d-flex flex-column just">
+
+        @if (CloneData == null)
+        {
+            @if (Name?.Length == 0 || Model?.Length == 0 || Name == null || Model == null && ShowError)
+            {
+                <div class="bg-warning px-2 rounded py-1">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Please Fill the required fields.
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Name:</div>
+                <input @bind-value="Name" class="my-3 rounded" required placeholder="required" />
+            </div>
+            @if (Name?.Length >= 50 && CharaError)
+            {
+                <div class="bg-warning px-2 py-1 rounded">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Maxium char for name is 50.
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vechical's Model:</div>
+                <input @bind-value="Model" class="my-3 rounded" required placeholder="required" />
+            </div>
+
+            @if (Model?.Length >= 50 && CharaError)
+            {
+                <div class="bg-warning px-2 py-1 rounded">
+                    <span class="oi oi-warning " aria-hidden="true"></span> Maxium char for Model is 50.
+                </div>
+            }
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Brand:</div>
+                <input @bind-value="Brand" class="my-3 rounded" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Color:</div>
+                <input @bind-value="Color" class="my-3 rounded" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Num of Seater :</div>
+                <input @bind-value="NPerson" class="my-3 rounded" />
+            </div>
+        }
+        else
+        {
+            @if (CloneData?.Name?.Length == 0 || CloneData?.Model?.Length == 0 || CloneData?.Name == null || CloneData?.Model == null && ShowError)
+            {
+                <div class="bg-warning px-2 rounded py-1">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Please Fill the required fields.
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Name:</div>
+                <input @bind-value="CloneData.Name" class="my-3 rounded" required placeholder="required" />
+            </div>
+            @if (CloneData?.Name?.Length >= 50 && CharaError)
+            {
+                <div class="bg-warning px-2 py-1 rounded">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Maxium char for name is 50.
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vechical's Model:</div>
+                <input @bind-value="CloneData.Model" class="my-3 rounded" required placeholder="required" />
+            </div>
+
+            @if (CloneData?.Model?.Length >= 50 && CharaError)
+            {
+                <div class="bg-warning px-2 py-1 rounded">
+                    <span class="oi oi-warning " aria-hidden="true"></span> Maxium char for Model is 50.
+                </div>
+            }
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Brand:</div>
+                <input @bind-value="CloneData.Brand" class="my-3 rounded" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Color:</div>
+                <input @bind-value="CloneData.Color" class="my-3 rounded" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Num of Seater :</div>
+                <input @bind-value="CloneData.NPerson" class="my-3 rounded" />
+            </div>
+        }
+
+
+        @if (CloneData == null)
+        {
+            <div class="d-flex align-items-lg-center justify-content-between mb-2">
+                <button @onclick="AddVechical" class="btn btn-info text-white">Add Vehical</button>
+            </div>
+
+            @if (route)
+            {
+                <div class="d-flex align-items-lg-center justify-content-between">
+                    <button @onclick="onBackHome" class="btn btn-light">Go Back Home</button>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="d-flex align-items-lg-center justify-content-between mb-2">
+                <button @onclick="onSaveChange" class="btn btn-info">Save Changes</button>
+            </div>
+
+            @if(route)
+            {
+                <div class="d-flex align-items-lg-center justify-content-between">
+                    <button @onclick="onBackHome" class="btn btn-light">Go Back Home</button>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    [Inject]
+    Carservice? Carservice { get; set; }
+
+    public string? Name, Model, Brand, Color;
+
+    public int  NPerson;
+
+    public int id { get; set; } = 0;
+
+    [Parameter]
+    public EventCallback<Cardata> onUpdate { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int ParaID { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public bool route { get; set; }
+
+    public Cardata? CloneData { get; set; }
+
+    public bool ShowError { get; set; } = false;
+
+    public string? OverlimitName { get; set; } = "";
+
+    public string? OverlimitModel { get; set; } = "";
+
+    public bool CharaError { get; set; } = false;
+
+    public Cardata? OriginalData { get; set; }
+
+    public Cardata? LastItem { get; set; } 
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        CloneData = Carservice?.Carlist.ConvertAll(item => (Cardata)item.Clone()).Find(item => item.Id == ParaID);
+        OriginalData = Carservice?.Carlist.Find(item => item.Id == ParaID);
+        JSRuntime.InvokeVoidAsync("console.log", Carservice?.Carlist);
+
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if(!firstRender && Carservice?.Carlist.Count != 0 )
+        {
+            LastItem = Carservice?.Carlist.Last();
+
+        }
+    }
+
+    private void AddVechical()
+    {
+        if(LastItem !=null)
+        {
+            onSave( LastItem.Id);
+
+        } else
+        {
+            onSave(id);
+        }
+        StateHasChanged();
+    }
+
+    public void onSaveChange()
+    {
+
+        if (CloneData?.Name?.Length == 0 || CloneData?.Model?.Length == 0 || CloneData?.Name == null || CloneData?.Model == null)
+        {
+            ShowError = true;
+            CharaError = true;
+
+
+        }
+        else
+        {
+            ShowError = false;
+            StateHasChanged();
+
+
+            if (CloneData?.Name?.Length >= 50 || CloneData?.Model?.Length >= 50)
+            {
+                CharaError = true;
+
+            } 
+            else if (route)
+            {
+
+                if (OriginalData != null && CloneData != null)
+                {
+                    OriginalData = CloneData;
+                }
+                JSRuntime.InvokeVoidAsync("alert", "Successfully Updated!!");
+                CloneData = new Cardata();
+
+            } else
+            {
+
+                ShowError = false;
+                CharaError = false;
+                onUpdate.InvokeAsync(CloneData);
+
+                JSRuntime.InvokeVoidAsync("alert", "Successfully Updated!!");
+                JSRuntime.InvokeVoidAsync("console.log", Carservice?.Carlist);
+            }
+        }
+    }
+
+    void onSave(int Id)
+    {
+        var setcardatas = new Cardata
+            {
+                Name = Name,
+                Model = Model,
+                Brand = Brand,
+                Color = Color,
+                NPerson = NPerson,
+                Id = Id + 1
+            };
+
+        if (Name?.Length == 0 || Model?.Length == 0 || Name == null || Model == null)
+        {
+            ShowError = true;
+            CharaError = true;
+
+
+        }
+        else
+        {
+            ShowError = false;
+
+
+
+            if (Name?.Length >= 50 || Model?.Length >= 50)
+            {
+                CharaError = true;
+
+            }
+            else
+            {
+
+                ShowError = false;
+                CharaError = false;
+                Name = ""; Model = ""; Brand = ""; Color = ""; NPerson = 0;
+                JSRuntime.InvokeVoidAsync("alert", "Successfully added");
+                Carservice?.AddCarList(setcardatas);
+                JSRuntime.InvokeVoidAsync("console.log", Carservice?.Carlist);
+
+            }
+
+        }
+    }
+
+    private void onBackHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
+
+
+
+
+<div class="d-flex align-items-lg-center justify-content-between" style="position:relative;">
+                                <input @bind-value="@BrandData.Name" class="my-3 rounded"/>
+                                <div @onclick="AddBrand"  class="bg-dark text-white px-1 rounded" style="position: absolute; right :25px; cursor : pointer;">Add</div>
+                                <div @onclick="CloseAdd" class="bg-success text-white px-1 rounded" style="position: absolute; right :5px; cursor : pointer;">></div>
+                            </div>
+
+
+                             @if (ShowChangeBrand)
+                {
+                    <div class="d-flex flex-column justify-content-between ">
+
+                        <div @onclick="onChangeBrand"
+                         style="cursor : pointer; font-size : 1rem;"
+                         class="px-2 rounded text-white bg-dark text-center my-1">
+                            @BrandBtnTitle
+                        </div>
+                        @if (showBrandError)
+                        {
+                            <div class="bg-warning px-2 rounded mt-1">
+                                <span class="oi oi-warning " aria-hidden="true"></span> Choose a Brand.
+                            </div>
+                        }
+                    </div>
+                } else
+                {
+                    @if (IsTrue)
+                    {
+                        @if(showAddBrand)
+                        {
+                           <div class="d-flex flex-column justify-content-center"> 
+                                <select @onchange="onBrandSelection" class="px-1 py-1 rounded">
+                                    @if( Select == null)
+                                    {
+                                      <option value="-1">Choose</option>
+                                    }
+                                    @if (Carservice?.carBrand != null)
+                                     {
+                                    @foreach (var item in Carservice.carBrand)
+                                      {
+                                        <option value="@item.Id">@item.Name</option>
+                                      }
+                                    }
+                                    <option class="bg-dark text-white px-1 py-1 mt-1 rounded" value="0"> + Add mew Brand</option>
+                                </select>
+                                @if (showBrandError)
+                                {
+                                    <div class="bg-warning px-2 rounded mt-1">
+                                        <span class="oi oi-warning " aria-hidden="true"></span> Choose a Brand.
+                                    </div>
+                                }
+                           </div>
+                        } 
+                        else
+                         {
+                            <div class="d-flex justify-content-end my-1">
+                                <input @bind-value="@BrandData.Name" class="rounded" style="width: 150px;" />
+                                <div @onclick="AddBrand" class="bg-dark text-white px-1 rounded " style=" cursor : pointer;margin-left : 0.1rem;">Add</div>
+                                <div @onclick="CloseAdd" class="bg-dark text-white px-1 rounded" style=" cursor : pointer; margin-left : 0.1rem;">></div>
+                            </div>
+                             @if (showBrandError)
+                                {
+                                    <div class="bg-warning px-2 rounded mt-1">
+                                        <span class="oi oi-warning " aria-hidden="true"></span> Choose a Brand.
+                                    </div>
+                                }
+                          }
+                    } 
+                    else
+                    {
+                        <select @onchange="onBrandSelection" class="px-1 py-1 my-1 rounded">
+                            @if (Carservice?.carBrand != null)
+                            {
+                                @foreach (var item in Carservice.carBrand)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    }
+                }
+
+
+
+
+
+                var targetList = Carservice?.Carlist.FindAll(item => item.BrandId == cardata.BrandId);
+
+            if (targetList?.Count <= 0 && brand != null)
+            {
+                Carservice?.DeleteBrand(brand);
+            }
+
+            //var brand = Carservice?.carBrand.Find(item => item.Id == cardata.BrandId);
+
+            @page "/entry"
+
+
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+@if (IsTrue)
+{
+ 
+}
+<div style="width : fit-content; height : fit-content " class="d-flex justify-content-center align-content-lg-center bgb rounded">
+    <div class=" p-5 d-flex flex-column just">
+        @if(IsTrue)
+        {
+            <h5 class="text-white" style="font-weight : bold;">Add new Vehical</h5>
+        }
+        <form @onsubmit="onSubmit">
+
+            @if (Data?.Name?.Length == 0 || Data?.Model?.Length == 0 || Data?.Name == null || Data?.Model == null @*&& ShowError*@ )
+            {
+                <div class="bg-warning px-2 rounded py-1">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Please Fill the required fields.
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Name:</div>
+                <input @bind-value="Data.Name" class="my-3 rounded" required placeholder="required" />
+            </div>
+            @if (Data?.Name?.Length >= 50 @*&& CharaError*@)
+            {
+                <div class="bg-warning px-2 py-1 rounded">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Maxium char for name is 50.
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vechical's Model:</div>
+                <input @bind-value="Data.Model" class="my-3 rounded" required placeholder="required" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                 <div class="text-center text-white mx-2">Vechical's Brand:</div>
+                 <div class="d-flex flex-column justify-content-center">
+                     <select  @onchange="onBrandSelection" class="px-1 py-1 rounded">
+                        
+                            @if (AddSelect == null && ChangeSelect == null)
+                            {
+                                <option selected>Choose</option>
+                            }
+                        
+                        @if (Carservice?.carBrand != null)
+                            {
+                                @foreach (var item in Carservice.carBrand)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            }
+                     </select>
+                </div>
+                
+            </div>
+            @if( ParaID == 0 )
+            {
+                @if (AddSelect == null)
+                {
+                    <div class="bg-warning px-2 py-1 rounded">
+                        <span class="oi oi-warning " aria-hidden="true"></span>Choose a Brand!
+                    </div>
+                }
+
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Vehical's Color:</div>
+                <input @bind-value="Data.Color" class="my-3 rounded" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <div class="text-center text-white mx-2">Num of Seater :</div>
+                <input @bind-value="Data.NPerson" class="my-3 rounded" />
+            </div>
+
+            <div class="d-flex align-items-lg-center justify-content-between mb-2">
+                <input type="submit" class="btn btn-info btn-sm text-white" value="@Btntitle" />
+            </div>
+        </form>
+
+        @if (route)
+        {
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <button @onclick="BackHome" class="btn btn-light btn-sm">Go Back Home</button>
+            </div>
+        }
+
+    </div>
+</div>
+   
+    @if(ParaID == 0)
+    {
+        
+     <div style="width : fit-content; height : fit-content;" class="d-flex justify-content-center align-content-lg-center bgb rounded my-1">
+        <div class=" p-5 d-flex flex-column just">
+
+            @if (!showAddBrand)
+            {
+                <button @onclick="toggleAddBrand" class="btn btn-info my-2"> Add New Brand</button>
+            } else
+            {
+               
+                <div class="d-flex align-items-lg-center justify-content-between">
+                    <div class="text-center text-white mx-2">New Brand : </div>
+                    <input @bind-value="BrandData.Name" style="outline:none; width : 200px;" class="my-3 rounded" required placeholder="Add New brand" />
+                    <button @onclick="AddNewBrand" class="bg-info btn-sm btn" style="border : none;">add</button>
+                </div>
+            }
+
+            @if(!showRemove)
+            {
+                <div>
+                    <button @onclick="toggleRemoveBrand" class="btn btn-danger "> <span class="oi oi-warning " aria-hidden="true"></span> Remove Brand</button>
+               </div>
+            } else
+            {
+                <div>
+                    <select @onchange="onRemoveselection" class="px-1 py-1 rounded">
+                        @if(removeSelect == null)
+                        {
+                           <option selected>Choose</option>
+                        }
+                        @if (Carservice?.carBrand != null)
+                        {
+                            @foreach (var item in Carservice.carBrand)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    </select>
+                    @if(removeSelect != null)
+                    {
+                        <button @onclick="()=>RemoveBrand(removeSelect)" class="btn btn-danger btn-sm" style="margin-left : 0.2rem;">
+                            <span class="oi oi-warning " aria-hidden="true"></span> 
+                            remove
+                            </button>
+                    }
+                </div>
+                @if (removeSelect == null)
+                {
+                    <div class="bg-warning px-2 py-1 rounded">
+                        <span class="oi oi-warning " aria-hidden="true"></span>Choose a Brand to remove!
+                    </div>
+                }
+            }
+        </div>
+     </div>
+    
+}
+
+@code {
+    [Inject]
+    Carservice? Carservice { get; set; }
+
+    [Parameter]
+    public EventCallback<Cardata> onUpdate { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int ParaID { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public bool route { get; set; }
+
+    public bool IsTrue { get; set; }
+
+    public Cardata? Data { get; set; }
+
+    public CarBrandObj? BrandData { get; set; }
+
+    public Cardata? OriginalData { get; set; }
+
+    public Cardata? LastItem { get; set; }
+
+    public CarBrandObj? LastBrand { get; set; }
+
+    //Selection variables
+    private string? AddSelect { get; set; }
+
+    private string? ChangeSelect { get; set; }
+
+    private string? removeSelect { get; set; }
+
+    //UI control variables
+    private bool showBrandError { get; set; } = true;
+
+    private bool ShowError { get; set; } = false;
+
+    private bool CharaError { get; set; } = false;
+
+    private string? Btntitle { get; set; }
+
+    private string? BrandBtnTitle { get; set; }
+
+    public bool showRemove { get; set; } = false;
+
+    public bool showAddBrand { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (ParaID == 0) 
+        { 
+            Data = new Cardata();
+            BrandData = new CarBrandObj();
+            Btntitle = "AddVehical";
+            BrandBtnTitle = "Add Brand";
+            IsTrue = true;
+        } 
+        else 
+        { 
+            Data = Carservice?.Carlist.ConvertAll(item => (Cardata)item.Clone()).Find(item => item.Id == ParaID);
+            Btntitle = "SaveChanges";
+            BrandBtnTitle = "Change Brand";
+            IsTrue = false;
+        }
+
+        OriginalData = Carservice?.Carlist.Find(item => item.Id == ParaID);
+
+        if( Carservice?.Carlist?.Count !=0 )
+        {
+            LastItem = Carservice?.Carlist.Last();
+        }
+        if( Carservice?.carBrand?.Count != 0)
+        {
+            LastBrand = Carservice?.carBrand.Last();
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (!firstRender)
+        {
+
+            if (Carservice?.Carlist?.Count != 0)
+            {
+                LastItem = Carservice?.Carlist.Last();
+            }
+            if (Carservice?.carBrand?.Count != 0)
+            {
+                LastBrand = Carservice?.carBrand.Last();
+            }
+        }
+    }
+
+
+    private void onSubmit()
+    {
+        if(ParaID == 0)
+        {
+            AddVechical();
+        } else
+        {
+            onSaveChange();
+        }
+    }
+
+    private void onBrandSelection ( ChangeEventArgs e )
+    {
+        if(IsTrue)
+        {
+            AddBrandSelection(e);
+        } else
+        {
+            ChangeBrandSelection(e);
+        }
+    }
+
+    private async Task onSaveChange()
+
+    {
+
+        if (route && Data != null )
+        {
+             int index = Carservice.Carlist.FindIndex(item => item.Id == Data.Id);
+             if( index >= 0)
+             {
+                 var result =await JSRuntime.InvokeAsync<bool>("confirm", "Update Information?");
+                 if(result)
+                 {
+                    Carservice.Carlist[index] = Data;
+                 }
+             }
+        }
+        else
+        {
+            var result = await JSRuntime.InvokeAsync<bool>("confirm", "Update Information?");
+            if ( result )
+            {
+                await onUpdate.InvokeAsync(Data);
+            }
+        }
+    }
+
+
+    private async void AddVechical()
+    {
+        if (LastItem != null)
+        {
+            await onAdd(LastItem);
+        }
+        else
+        { 
+            if (Data != null)
+            {
+               await onAdd(Data);
+            }
+        };
+    }
+
+    private async Task onAdd(Cardata data )
+    {
+    
+        if(Data != null && AddSelect != null )
+        {
+              var setcardata = new Cardata
+              {
+                 Id = data.Id + 1,
+                 Name = Data.Name,
+                 Model = Data.Model,
+                 BrandId = Data.BrandId,
+                 Color = Data.Color,
+                 NPerson = Data.NPerson,
+              };
+
+              var result = await JSRuntime.InvokeAsync<bool>("confirm", "Add New Vehicial?");
+              @if( !result )
+              {
+                AddSelect = "0";
+              } else
+              {
+                Carservice?.AddCarList(setcardata);
+                Data = new Cardata();
+                AddSelect = null;
+              }
+        }
+         StateHasChanged();
+    }
+
+    private void AddBrandSelection(ChangeEventArgs e)
+    {
+        AddSelect = e?.Value?.ToString();
+
+        if (AddSelect != null && AddSelect != "-1" && Data != null)
+        {
+            var Target = Carservice?.carBrand?.Find(item => item?.Id == Int32.Parse(AddSelect));
+
+            if(Target != null && BrandData != null )
+            {
+                Data.BrandId = Target.Id;
+            }
+        }
+    }
+
+    private void ChangeBrandSelection(ChangeEventArgs e)
+    {
+        ChangeSelect = e?.Value?.ToString();
+
+        if (ChangeSelect != null && Data != null)
+        {
+            var Target = Carservice?.carBrand?.Find(item => item?.Id == Int32.Parse(ChangeSelect));
+            if (Target != null)
+            {
+                Data.BrandId = Target.Id;
+            }
+        } 
+
+    }
+
+    private async Task AddNewBrand()
+    {
+        if (BrandData != null)
+        {
+            if(LastBrand !=null)
+            {
+                await onAddNB(LastBrand);
+            } else
+            {
+                await onAddNB(BrandData);
+            }
+        }
+        StateHasChanged();
+        await JSRuntime.InvokeVoidAsync("console.log", Carservice?.carBrand);
+    }
+
+    private async Task onAddNB (CarBrandObj Data)
+    {
+        var NewData = new CarBrandObj()
+            {
+                Name = BrandData.Name,
+                Id = Data.Id + 1
+            };
+
+        var result = await JSRuntime.InvokeAsync<bool>("confirm", $"Add New {BrandData.Name} Brand?");
+
+        @if (result)
+        {
+            Carservice?.AddBrand(NewData);
+            BrandData = new CarBrandObj();
+        }
+    }
+
+    private void onRemoveselection (ChangeEventArgs e)
+    {
+        removeSelect = (e?.Value?.ToString());
+        StateHasChanged();
+    }
+
+    private async Task RemoveBrand (string select )
+    {
+        var obj = Carservice?.carBrand.Find(item => item.Id == Int64.Parse(select));
+
+        if( obj != null )
+        {
+            var result = await JSRuntime.InvokeAsync<bool>("confirm", $"Delete {obj.Name} Brand?");
+            if(result)
+            {
+                Carservice?.DeleteBrand(obj);
+                removeSelect = null;
+            }
+        }
+    }
+
+    //UI Control Functions
+
+    private async Task toggleRemoveBrand ()
+    {
+        var result = await JSRuntime.InvokeAsync<bool>("confirm", "Removing a Brand may cause the individual product's brand removed, You want to proceed? ");
+        @if(result)
+        {
+          showRemove = !showRemove;
+        }
+    }
+    private void toggleAddBrand ()
+    {
+        showAddBrand = !showAddBrand;
+    }
+    //Navigate Functions
+    private void BackHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
+
+

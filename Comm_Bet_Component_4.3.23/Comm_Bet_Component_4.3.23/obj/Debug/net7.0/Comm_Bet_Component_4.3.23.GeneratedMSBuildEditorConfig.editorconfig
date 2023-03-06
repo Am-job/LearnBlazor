@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzQ2hpbGQxLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasComplex.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzQ29tcGxleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/CasFooComponent.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzRm9vQ29tcG9uZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -74,6 +78,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/UpC1.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBDMS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/UpC2.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBDMi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/UpC3.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBDMy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/UpC4.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBDNC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/Pages/UpC5.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBDNS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Server/source/repos/Comm_Bet_Component_4.3.23/Comm_Bet_Component_4.3.23/_Imports.razor]

@@ -1,0 +1,233 @@
+﻿@page "/setting"
+
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<div class="d-flex flex-row mb-3 justify-content-between ">
+    <select @onchange="onSelectionChange" class="form-select ">
+
+        <option value ="0">All</option>
+        @if (Carservice?.carBrand != null)
+        {
+            @foreach (var item in Carservice.carBrand )
+            {
+               <option value="@item.Id">@item.Name</option>
+            }
+        }
+    </select>
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" id="addon-wrapping">
+            <span style="color : grey;" class="oi  oi-magnifying-glass" aria-hidden="true"></span>
+        </span>
+        <input @onchange="onSearchChange"
+               type="text"
+               class="form-control"
+               placeholder="Search..."
+               aria-label="Search"
+               aria-describedby="addon-wrapping">
+    </div>
+</div>
+
+<div class="d-flex justify-content-between">
+   <div>
+        <button @onclick="()=>onNavigate(Createcar)" class="btn btn-info mb-2">Create Vechical</button>
+        <button @onclick="()=>onNavigate(Createbrand)" class="btn btn-success mb-2">Create Brand</button>
+    </div>
+</div>
+
+@if (carlist?.Count == 0)
+{
+        <p>No Car List</p>
+}
+else if (carlist == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+  
+}
+<table class="table rounded">
+    <thead>
+        <tr class="bg-warning">
+            @if (Tableheaders != null)
+            {
+                @foreach (var th in Tableheaders)
+                {
+                    <th class="px-2">@th</th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+             @if (carlist != null)
+            {
+                @foreach (var item in carlist)
+                {
+                   <tr class="bg-dark text-white">
+                        <td class="px-2 ">@carlist.IndexOf(item)</td>
+                        <td class="px-2 ">@item.Name</td>
+                        <td class="px-2 ">@item.Model</td>
+                        @if (brandList != null)
+                        {
+                            var obj = brandList.Find(brand => brand.Id == item.BrandId);
+                            <td>@obj?.Name</td>
+                        }
+                        <td class="px-2 ">@item.Color</td>
+                        <td class="px-2 ">@item.NPerson</td>
+                        <td class="px-2 ">
+                           <div class="d-flex flex-row">
+                            <button @onclick="() =>UpdateCarData(item.Id)" class="btn btn-info">RoutingEdit</button>
+                            <button @onclick="@(() =>ModelEdit( item.Id))" class=" btn btn-success mx-1">Edit</button>
+                            <button @onclick="() =>DeleteCarList(item)" class=" btn btn-danger mx-1">Delete</button>
+                           </div>
+                        </td>
+                   </tr>
+                }   
+            }   
+    </tbody>
+</table>
+
+@if(ShowModel)
+{
+   <div class="modal Show" tabindex="-1" role="dialog" style="display: block; margin-top:10rem;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Insert Update Infos</h5>
+            </div>
+            <div class="modal-body">
+               <Entry ParaID="IDforModel" 
+                onUpdate="onUpdateData"
+            />
+            </div>
+            <div class="modal-footer">
+                <button @onclick="onClose" class="btn btn-dark text-white">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+@code {
+
+    [Inject]
+    Carservice? Carservice { get; set; }
+
+    private List<Cardata>? carlist { get; set; }
+
+    private List<CarBrandObj>? brandList { get; set; }
+
+    private int IDforModel { get; set; }
+
+    private bool ShowModel { get; set; }
+
+    private string? Selected { get; set; }
+
+    private string? Searched { get; set; }
+
+    private List<string>? Tableheaders = new List<string>
+    {
+        "No.","Name","Model","Brand" ,"Color","Num.Seater","Setting"
+    };
+
+    protected override void OnInitialized()
+    {
+        carlist = Carservice?.Carlist;
+        brandList = Carservice?.carBrand;
+        
+    }
+
+    public void ModelEdit(int id)
+    {
+        IDforModel =id;
+        ShowModel = true;
+        ShowBackdrop = true;
+    }
+
+    private async void onUpdateData(Cardata data)
+    {
+        @if (carlist != null && Carservice?.Carlist != null)
+        {
+            var index = carlist.FindIndex(item => item.Id == data.Id);
+            if (index >= 0)
+            {
+               var response = await JSRuntime.InvokeAsync<bool>("confirm", "Update Information?");
+                if (response)
+                {
+                    Carservice.Carlist[index] = data;
+                }
+            }
+        }
+        onFilter();
+        StateHasChanged();
+    }
+
+    public void onClose()
+    {
+        ShowModel = false;
+        ShowBackdrop = false;
+    }
+    private void onSelectionChange(ChangeEventArgs e)
+    {
+        Selected = e?.Value?.ToString();
+
+        onFilter();
+    }
+    private void onSearchChange(ChangeEventArgs e)
+    {
+        Searched = e?.Value?.ToString()?.ToLower();
+
+        onFilter();
+
+    }
+    private void onFilter()
+    {
+        var result = Carservice?.Carlist;
+
+        // brand filter
+        if (!string.IsNullOrEmpty(Selected) && Int32.Parse(Selected) != 0)
+        {
+            result = result?.FindAll(x => x.BrandId == Int32.Parse(Selected));
+        }
+
+        // search filter
+        if (!string.IsNullOrEmpty(Searched))
+        {
+            result = result?.FindAll(item => item?.Name?.ToLower().Trim().Contains(Searched.ToLower()) == true ||
+                      item?.Model?.ToLower().Trim().Contains(Searched.ToLower()) == true);
+        }
+
+        carlist = result;
+    }
+
+    private void DeleteCarList(Cardata cardata)
+    {
+        var obj = Carservice?.Carlist.Find(item => item.Id == cardata.Id);
+
+        if( obj != null )
+        {
+            Carservice?.DeleteCarlist( obj );
+            onFilter();
+        }
+        StateHasChanged();
+    }
+
+    //Routing&Navigations
+    public void UpdateCarData(int Id)
+    {
+        NavigationManager.NavigateTo($"entry?ParaID={Id}&route=true");
+    }
+
+    private string Createcar = "/entry?ParaID=0&route=true";
+    private string Createbrand = "/create_category";
+    private void onNavigate(string link)
+    {
+        NavigationManager.NavigateTo(link);
+    }
+    public bool ShowBackdrop = false;
+
+}

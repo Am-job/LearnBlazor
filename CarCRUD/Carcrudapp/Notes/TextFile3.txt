@@ -1,0 +1,26 @@
+﻿public void EditHandler(Cardata item )
+    {
+        CopyedData = Carservice?.Carlist?.ConvertAll(x => (Cardata)x.Clone()).Find(x => x.Id == item.Id);
+
+        if(CopyedData != null)
+        {
+            DataForModel = new Cardata()
+            {
+                Id = CopyedData.Id,
+                Name = CopyedData.Name,
+                Model = CopyedData.Model,
+                Brand = CopyedData.Brand,
+                Color = CopyedData.Color,
+                NPerson = CopyedData.NPerson,
+            };
+        }
+        ShowModel = true;
+    }
+
+    void onCloseModel ()
+    {
+        ShowModel = false;
+        StateHasChanged();
+
+    }
+

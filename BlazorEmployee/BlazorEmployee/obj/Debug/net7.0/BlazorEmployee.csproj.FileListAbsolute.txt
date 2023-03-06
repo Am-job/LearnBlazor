@@ -1,0 +1,6 @@
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\BlazorEmployee.csproj.AssemblyReference.cache
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\BlazorEmployee.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\BlazorEmployee.AssemblyInfoInputs.cache
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\BlazorEmployee.AssemblyInfo.cs
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\BlazorEmployee.csproj.CoreCompileInputs.cache
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\BlazorEmployee.MvcApplicationPartsAssemblyInfo.cache

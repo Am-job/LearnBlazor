@@ -1,0 +1,14 @@
+﻿<p>UpC4 contains @CasComplex.Fruit</p>
+
+<button @onclick="ChangeFruit">Change Fruit</button>
+
+@code {
+
+    [CascadingParameter] CasComplex CasComplex { get; set; }
+
+    private void ChangeFruit()
+    {
+        CasComplex.ChangeFruit("Pineapple");
+    }
+
+}

@@ -1,0 +1,122 @@
+﻿@page "/"
+<PageTitle>Home</PageTitle>
+<div class="d-flex flex-row mb-3 justify-content-between ">
+    <select @onchange="onSelectionChange" class="form-select">
+
+        <option value="0">All</option>
+        @if (Carservice?.carBrand != null)
+        {
+            @foreach (var item in Carservice.carBrand)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        }
+    </select>
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" id="addon-wrapping">
+             <span style="color : grey;" class="oi  oi-magnifying-glass" aria-hidden="true"></span>
+        </span>
+        <input @onchange="onSearchChange" 
+            type="text" 
+            class="form-control" 
+            placeholder="Search..." 
+            aria-label="Search" 
+            aria-describedby="addon-wrapping">
+    </div>
+</div>
+
+
+@if (carlist?.Count == 0)
+{
+    <p>No Car List</p>
+}
+else if (carlist == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div id="card-container" class="row " style="  ">
+
+        @foreach (var item in carlist)
+        {
+            <div class="col-12 py-3 px-3 " style="width: 20rem;">
+                <div id="card" style="height : 450px; " class="card text-white mb-3 bgb px-2">
+                    <p>No.@carlist.IndexOf(item)</p>
+                    <div style="width : 270px; height : auto; " class="bg-dark card-image ">
+                        <img src="/car.jpg" class="card-img-top card-img bg-dark text-white d-inline" style="" alt="@item.Name">
+                    </div>
+                    <div class="card-body ">
+                        <div class="">
+                            <h5 style="width:200px;" class="card-title radbgb px-2 py-1 rounded text-white">@item.Name</h5>
+                            <p style="width : 250px;" class="overflow-hidden">Model : @item.Model</p>
+                            <p>Color : @item.Color</p>
+                            @if (brandList != null)
+                            {
+                                var obj = brandList.Find(brand => brand.Id == item.BrandId);
+                                <p> Brand : @obj?.Name</p>
+                            }
+                            <p>Person : @item.NPerson</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+}
+@code {
+    [Inject]
+    Carservice? Carservice { get; set; }
+    private List<Cardata>? carlist { get; set; }
+    private List<CarBrandObj>? brandList { get; set; }
+    private string? Selected { get; set; }
+    private string? Searched { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        carlist = Carservice?.Carlist;
+        brandList = Carservice?.carBrand;
+    }
+
+    private void onSelectionChange(ChangeEventArgs e)
+    {
+        Selected = e?.Value?.ToString();
+
+        onFilter();
+    }
+    private void onSearchChange(ChangeEventArgs e)
+    {
+        Searched = e?.Value?.ToString()?.ToLower();
+
+        onFilter();
+
+    }
+    private void onFilter()
+    {
+        var result = Carservice?.Carlist;
+
+        // brand filter
+        if (!string.IsNullOrEmpty(Selected) && Int32.Parse(Selected) != 0)
+        {
+            result = result?.FindAll(x => x.BrandId == Int32.Parse(Selected));
+
+            Console.WriteLine("FIRE1");
+        }
+
+        // search filter
+        if (!string.IsNullOrEmpty(Searched))
+        {
+            result = result?.FindAll(item => item?.Name?.ToLower().Trim().Contains(Searched.ToLower()) == true ||
+                      item?.Model?.ToLower().Trim().Contains(Searched.ToLower()) == true);
+
+            Console.WriteLine("FIRE2");
+        }
+
+        carlist = result;
+    }
+
+}

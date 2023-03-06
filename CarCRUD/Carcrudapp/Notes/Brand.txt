@@ -1,0 +1,89 @@
+﻿ <select @onchange="onBrandSelection">
+                    @if(Carservice?.carBrand !=null)
+                    {
+                        @foreach(var item in Carservice.carBrand)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+ </select><br/>
+
+ carlist = TargetList?.FindAll(item => item.BrandId == Int32.Parse(Selected))
+                    .FindAll(item => item?.Name?.ToLower().Trim().Contains(Searched) == true ||
+                    item?.Model?.ToLower().Trim().Contains(Searched) == true);
+
+                    private void onBrandSelection(ChangeEventArgs e)
+    {
+        if (ParaID == 0)
+        {
+            AddBrandSelection(e);
+        }
+        else
+        {
+            ChangeBrandSelection(e);
+        }
+    }
+    private void AddBrandSelection(ChangeEventArgs e)
+    {
+        AddSelect = e?.Value?.ToString();
+
+        if (AddSelect != null && AddSelect != "-1" && Data != null)
+        {
+            var result = Carservice?.carBrand?.Find(item => item?.Id == Int32.Parse(AddSelect));
+
+            if(result != null)
+            {
+                Data.BrandId = result.Id;
+            }
+        }
+    }
+
+    private void ChangeBrandSelection(ChangeEventArgs e)
+    {
+        ChangeSelect = e?.Value?.ToString();
+
+        if (ChangeSelect != null && Data != null)
+        {
+            var result = Carservice?.carBrand?.Find(item => item?.Id == Int32.Parse(ChangeSelect));
+            if (result != null)
+            {
+                Data.BrandId = result.Id;
+            }
+        } 
+    }
+
+    private async void AddVechical()
+    {
+        if(Carservice?.Carlist != null)
+        {
+            var maxId = Carservice.Carlist.Max(item => (int)item.GetType().GetProperty("Id").GetValue(item));
+
+            if (Data != null && AddSelect != null && Data?.Name?.Length <= 50 && Data?.Model?.Length <= 50)
+            {
+                var setcardata = new Cardata
+                    {
+                        Id = maxId + 1,
+                        Name = Data.Name,
+                        Model = Data.Model,
+                        BrandId = Data.BrandId,
+                        Color = Data.Color,
+                        NPerson = Data.NPerson,
+                    };
+
+                var result = await JSRuntime.InvokeAsync<bool>("confirm", "Add New Vehicial?");
+
+                @if (!result)
+                {
+                    AddSelect = "0";
+                }
+                else
+                {
+                    Carservice?.AddCarList(setcardata);
+                    Data = new Cardata();
+                    AddSelect = null;
+                }
+            }
+        }
+        await JSRuntime.InvokeVoidAsync("console.log", Carservice?.Carlist);
+        StateHasChanged();
+    }

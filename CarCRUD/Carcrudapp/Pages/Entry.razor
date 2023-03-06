@@ -1,0 +1,238 @@
+﻿@page "/entry"
+
+
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<div style="width : fit-content; height : fit-content " class="d-flex justify-content-center align-content-lg-center bgb rounded">
+    <div class=" p-5 d-flex flex-column just">
+        @if(ParaID == 0)
+        {
+            <h5 class="text-white" style="font-weight : bold;">Add new Vehical</h5>
+        }
+        <form @onsubmit="onSubmit">
+
+            @if (Data?.Name?.Length == 0 || Data?.Model?.Length == 0 || Data?.Name == null || Data?.Model == null )
+            {
+                <div class="bg-warning px-2 rounded py-1">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Please Fill the required fields.
+                </div>
+            }
+            @if(Data != null)
+            {
+                <div class="d-flex align-items-lg-center justify-content-between">
+                    <div class="text-center text-white mx-2">Vehical's Name:</div>
+                    <input @bind-value="Data.Name" class="my-3 rounded" required placeholder="required" />
+                </div>
+            }
+            @if (Data?.Name?.Length > 50)
+            {
+                <div class="bg-warning px-2 py-1 rounded">
+                    <span class="oi oi-warning " aria-hidden="true"></span>Maxium char for name is 50.
+                </div>
+            }
+            @if(Data !=null)
+            {
+                <div class="d-flex align-items-lg-center justify-content-between">
+                    <div class="text-center text-white mx-2">Vechical's Model:</div>
+                    <input @bind-value="Data.Model" class="my-3 rounded" required placeholder="required" />
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between">
+                 <div class="text-center text-white mx-2">Vechical's Brand:</div>
+                 <div class="d-flex flex-column justify-content-center">
+                     <select  @onchange="onBrandSelection" class="px-1 py-1 rounded">
+                        
+                            @if (AddSelect == null && ChangeSelect == null)
+                            {
+                                <option selected>Choose</option>
+                            }
+                        
+                        @if (Carservice?.carBrand != null)
+                            {
+                                @foreach (var item in Carservice.carBrand)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            }
+                     </select>
+                </div>
+            </div>
+            @if( ParaID == 0 )
+            {
+                @if (AddSelect == null)
+                {
+                    <div class="bg-warning px-2 py-1 rounded">
+                        <span class="oi oi-warning " aria-hidden="true"></span>Choose a Brand!
+                    </div>
+                }
+            }
+            @if(Data != null)
+            {
+                <div class="d-flex align-items-lg-center justify-content-between">
+                    <div class="text-center text-white mx-2">Vehical's Color:</div>
+                    <input @bind-value="Data.Color" class="my-3 rounded" />
+                </div>
+                <div class="d-flex align-items-lg-center justify-content-between">
+                    <div class="text-center text-white mx-2">Num of Seater :</div>
+                    <input @bind-value="Data.NPerson" class="my-3 rounded" />
+                </div>
+            }
+            <div class="d-flex align-items-lg-center justify-content-between mb-2">
+                <input type="submit" class="btn btn-info btn-sm text-white" value="@Btntitle" />
+            </div>
+        </form>
+
+      @*  @if (route)
+        {
+            <div class="d-flex align-items-lg-center justify-content-between">
+                <button @onclick="BackHome" class="btn btn-light btn-sm">Go Back Home</button>
+            </div>
+        }
+*@
+    </div>
+</div>
+   
+@code {
+    [Inject]
+    Carservice? Carservice { get; set; }
+
+    [Parameter]
+    public EventCallback<Cardata> onUpdate { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int ParaID { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public bool route { get; set; }
+
+    public Cardata? Data { get; set; }
+
+    private string? AddSelect { get; set; }
+
+    private string? ChangeSelect { get; set; }
+
+    private string? Btntitle { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (ParaID == 0) 
+        { 
+            Data = new Cardata();
+            Btntitle = "AddVehical";
+        } 
+        else 
+        {
+            var obj = Carservice?.Carlist.Find(item => item.Id == ParaID);
+            @if(obj != null)
+            {
+                Data = (Cardata)obj.Clone();
+            }
+            Btntitle = "SaveChanges";
+        }
+    }
+    private async void onSubmit()
+    {
+        if(ParaID == 0)
+        {
+            AddVechical();
+        } else
+        {
+          await onSaveChange();
+        }
+    }
+    private async Task onSaveChange()
+    {
+        if (route && Data != null)
+        {
+            int index = Carservice.Carlist.FindIndex(item => item.Id == Data.Id);
+            if (index >= 0)
+            {
+                var result = await JSRuntime.InvokeAsync<bool>("confirm", "Update Information?");
+                if (result)
+                {
+                    Carservice.Carlist[index] = Data;
+                }
+            }
+        }
+        else
+        {
+          await onUpdate.InvokeAsync(Data);
+        }
+    }
+
+    private async void AddVechical()
+    {
+        if(Carservice?.Carlist != null)
+        {
+            var maxId = 0;
+            if(Carservice.Carlist.Count != 0)
+            {
+                maxId = Carservice.Carlist.Max(item => (int)item.GetType().GetProperty("Id").GetValue(item));
+            }
+            if (Data != null && AddSelect != null && Data?.Name?.Length <= 50 && Data?.Model?.Length <= 50)
+            {
+                Data.Id = maxId + 1;
+                var result = await JSRuntime.InvokeAsync<bool>("confirm", "Add New Vehicial?");
+                @if (result)
+                {
+                    Carservice?.AddCarList((Cardata)Data.Clone());
+                    Data = new Cardata();
+                    AddSelect = null;
+                }
+            }
+        }   
+        StateHasChanged();
+    }
+    private void onBrandSelection(ChangeEventArgs e)
+    {
+        if (ParaID == 0)
+        {
+           AddBrandSelection(e);
+        }
+        else
+        {
+           ChangeBrandSelection(e);
+        }
+    }
+
+    private void AddBrandSelection(ChangeEventArgs e)
+    {
+        AddSelect = e?.Value?.ToString();
+        if(AddSelect != null)
+        {
+            onChange(AddSelect);
+        }
+    }
+
+    private void ChangeBrandSelection(ChangeEventArgs e)
+    {
+        ChangeSelect = e?.Value?.ToString();
+        if(ChangeSelect != null)
+        {
+            onChange(ChangeSelect);
+        }
+    }
+
+    private void onChange (string str)
+    {
+        if (str != null && Data != null)
+        {
+            var result = Carservice?.carBrand?.Find(item => item?.Id == Int32.Parse(str));
+            if (result != null)
+            {
+                Data.BrandId = result.Id;
+            }
+        }
+    }
+    private void BackHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
+
+

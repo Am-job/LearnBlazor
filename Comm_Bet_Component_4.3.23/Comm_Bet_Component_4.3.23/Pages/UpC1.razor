@@ -1,0 +1,12 @@
+﻿<p> UpC1 Bowl contains @FruitName <button @onclick="ChangeFruit">Change Fruit</button></p>
+
+
+
+@code{
+    [CascadingParameter] string? FruitName { get; set; }
+
+    private void ChangeFruit()
+    {
+        FruitName = "Pine";
+    }
+}

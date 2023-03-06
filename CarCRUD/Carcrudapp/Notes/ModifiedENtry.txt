@@ -1,0 +1,228 @@
+﻿@page "/entry"
+
+
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<div style="width : fit-content; height : fit-content " class="d-flex justify-content-center align-content-lg-center bgb rounded">
+    <div class=" p-5 d-flex flex-column just">
+
+        @if (EditData != null)
+        {
+            <Form Data="EditData"
+              route="route"
+              ShowError="ShowError"
+              CharaError="CharaError"
+              onSaveChange="onSaveChange"
+              onBackHome="BackHome"
+              Btntitle="SaveChanges" />
+
+           
+        }
+        else
+        {
+            <Form Data="InputData"
+              ShowError="ShowError"
+              CharaError="CharaError"
+              onSaveChange="AddVechical"
+              onBackHome="BackHome"
+              Btntitle="AddVechical"
+              route="route" />
+        }
+
+    </div>
+</div>
+
+@code {
+    [Inject]
+    Carservice? Carservice { get; set; }
+
+    public Cardata? InputData = new Cardata();
+
+    [Parameter]
+    public EventCallback<Cardata> onUpdate { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int ParaID { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public bool route { get; set; }
+
+    public Cardata? EditData { get; set; }
+
+    public bool ShowError { get; set; } = false;
+
+    public string? OverlimitName { get; set; } = "";
+
+    public string? OverlimitModel { get; set; } = "";
+
+    public bool CharaError { get; set; } = false;
+
+    public Cardata? OriginalData { get; set; }
+
+    public Cardata? LastItem { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        EditData = Carservice?.Carlist.ConvertAll(item => (Cardata)item.Clone()).Find(item => item.Id == ParaID);
+
+        OriginalData = Carservice?.Carlist.Find(item => item.Id == ParaID);
+
+        if( Carservice?.Carlist?.Count !=0 )
+        {
+            LastItem = Carservice?.Carlist.Last();
+        }
+
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (!firstRender)
+        {
+            LastItem = Carservice?.Carlist.Last();
+            JSRuntime.InvokeVoidAsync("console.log", LastItem?.Id);
+        }
+    }
+
+    private void AddVechical()
+    {
+        if (LastItem != null)
+        {
+            onSave(LastItem );
+        }
+        else
+        {
+            if (InputData != null)
+            {
+                onSave(InputData );
+            }
+        }
+        StateHasChanged();
+    }
+
+
+    public void onSaveChange()
+    {
+
+        if (EditData?.Name?.Length == 0 || EditData?.Model?.Length == 0 || EditData?.Name == null || EditData?.Model == null)
+        {
+            ShowError = true;
+            CharaError = true;
+
+
+        }
+        else
+        {
+            ShowError = false;
+
+            if (EditData?.Name?.Length >= 50 || EditData?.Model?.Length >= 50)
+            {
+                CharaError = true;
+
+            }
+            else
+            {
+                //THIS START
+                if (route)
+                {
+                    if (OriginalData != null && EditData != null)
+                    {
+                        OriginalData.Id = EditData.Id;
+                        OriginalData.Name = EditData.Name;
+                        OriginalData.Model = EditData.Model;
+                        OriginalData.Brand = EditData.Brand;
+                        OriginalData.Color = EditData.Color;
+                        OriginalData.NPerson = EditData.NPerson;
+                    }
+                    JSRuntime.InvokeVoidAsync("console.log", OriginalData);
+                    JSRuntime.InvokeVoidAsync("alert", "Successfully Updated!!");
+
+                }
+                else
+                {
+
+                    ShowError = false;
+
+                    CharaError = false;
+
+                    onUpdate.InvokeAsync(EditData);
+
+                    JSRuntime.InvokeVoidAsync("console.log", OriginalData);
+
+                    JSRuntime.InvokeVoidAsync("alert", "Successfully Updated!!");
+
+                }
+
+                //THIS END
+            }
+
+        }
+    }
+
+
+    void onSave(Cardata Data )
+    {
+
+
+
+        if (InputData?.Name?.Length == 0 || InputData?.Model?.Length == 0 || InputData?.Name == null || InputData?.Model == null)
+        {
+            ShowError = true;
+            CharaError = true;
+
+
+        }
+        else
+        {
+            ShowError = false;
+
+
+
+            if (InputData?.Name?.Length >= 50 || InputData?.Model?.Length >= 50)
+            {
+                CharaError = true;
+
+            }
+            else
+            {
+                //THIS START
+                ShowError = false;
+
+                CharaError = false;
+
+                JSRuntime.InvokeVoidAsync("alert", "Successfully added");
+
+                var setcardata = new Cardata
+                    {
+                        Name = InputData.Name,
+                        Model = InputData.Model,
+                        Brand = InputData.Brand,
+                        Color = InputData.Color,
+                        NPerson = InputData.NPerson,
+                        Id = Data.Id + 1
+               };
+
+                Carservice?.AddCarList(setcardata);
+
+                InputData = new Cardata();
+
+                //THIS END
+
+
+            }
+
+        }
+    }
+
+    private void BackHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
+
+

@@ -1,0 +1,106 @@
+﻿carlist = Carservice?.Carlist.FindAll(item => item?.Model?.ToLower()?.Contains(Search) == true ||
+                    item?.Name?.ToLower()?.Contains(Search) == true);
+
+Search >> 
+
+
+        if(SelectBrand == null)
+        {
+
+            if (Search != "")
+            {
+                if (Search != null)
+                {
+                    carlist = Carservice?.Carlist.FindAll(item => item?.Model?.ToLower()?.Contains(Search) == true ||
+                    item?.Name?.ToLower()?.Contains(Search) == true);
+
+                }
+
+            }
+            else
+            {
+                carlist = Carservice?.Carlist;
+
+            }
+        }
+        else
+        {
+            if (Search != "")
+            {
+                if (Search != null)
+                {
+                    carlist = carlist?.FindAll(item => item?.Model?.ToLower()?.Contains(Search) == true ||
+                    item?.Name?.ToLower()?.Contains(Search) == true);
+
+                }
+
+            }
+            else if (SelectBrand != null && Search == "" )
+            {
+                carlist = Carservice?.Carlist.FindAll(item => item.Brand == SelectBrand);
+
+            }
+            else
+            {
+                carlist = carlist?.FindAll(item => item.Brand == SelectBrand);
+            }
+        }
+
+
+        Selection >> 
+
+        
+        if (SelectBrand == "all" && Search =="" )
+        {
+            carlist = Carservice?.Carlist;
+
+        }
+        else
+        {
+            carlist = Carservice?.Carlist.FindAll(item => item.Brand == SelectBrand);
+        }
+
+        private void Filtering(string TargetStr)
+
+    {
+        JSRuntime.InvokeVoidAsync("console.log", TargetStr);
+        if( SelectBrand == "all" && Search != "" )
+        {
+            carlist = Carservice?.Carlist.FindAll(item => item?.Model?.ToLower()?.Contains(TargetStr) == true ||
+                     item?.Name?.ToLower()?.Contains(TargetStr) == true);
+
+            JSRuntime.InvokeVoidAsync("console.log", "FIRSTONE");
+
+            JSRuntime.InvokeVoidAsync("console.log", carlist);
+        }
+        else if ( SelectBrand !="all" && Search =="" )
+        {
+            JSRuntime.InvokeVoidAsync("console.log", TargetStr);
+
+            carlist = Carservice?.Carlist.FindAll(item => item?.Brand?.ToLower() == TargetStr);
+
+            JSRuntime.InvokeVoidAsync("console.log", "SECONDONE");
+            JSRuntime.InvokeVoidAsync("console.log", carlist);
+        } 
+        else if ( SelectBrand == Search )
+        {
+            carlist = Carservice?.Carlist.Where(item => item.Brand == TargetStr).ToList()
+            .FindAll(item => item?.Brand?.ToLower()?.Contains(TargetStr) == true);
+            JSRuntime.InvokeVoidAsync("console.log", "THIRDONE");
+        }
+        else if ( SelectBrand == "all" && Search == "")
+        {
+            carlist = Carservice?.Carlist;
+            JSRuntime.InvokeVoidAsync("console.log", "FOURTHONE");
+        } 
+        else if( SelectBrand != "all" && Search !="" )
+        {
+            carlist = Carservice?.Carlist.FindAll(item => item?.Brand?.ToLower() == TargetStr);
+            JSRuntime.InvokeVoidAsync("console.log", "FITHONE");
+        }
+        //else 
+        // {
+        //    carlist = new List<Cardata>();
+        //    JSRuntime.InvokeVoidAsync("console.log", "NULLONE");
+        // }
+    }

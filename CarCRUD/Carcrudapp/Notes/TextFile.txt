@@ -1,0 +1,127 @@
+﻿<h3>Table</h3>
+<table class="table">
+    <thead>
+        <tr>
+            @foreach (var item in TableHeaders)
+            {
+                <th>@item</th>
+
+            }
+        </tr>
+
+    </thead>
+    <tbody>
+        @if (carlist == null)
+        {
+            <tr>Loading...</tr>
+        }
+        else
+        {
+            @foreach (var item in carlist)
+            {
+                <tr>
+                    <td>@carlist.IndexOf(item)</td>
+                    <td>@item.Name</td>
+                    <td>@item.Model</td>
+                    <td>@item.Color</td>
+                    <td>@item.Brand</td>
+                    <td>@item.NPerson</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+
+@if (IsOpen)
+{
+    <div class="bg-dark" @Model="updateCar">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        @if (updateCar != null)
+        {
+            <div>
+                <label>Name:</label>
+                <InputText @bind-Value="updateCar.Name" />
+            </div>
+        }
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+}
+
+Carservice.AddCarList(setcardatas);
+
+                     @if(Name.Length >= 5)
+                    {
+                    <div class="bg-warning px-1">
+                       Maxium char for name is 4
+                       </div>
+                      }
+
+                       @if (Model.Length >= 5)
+                    {
+                        <div class="bg-warning px-1">
+                            Maxium char for Model is 4
+                        </div>
+                    }
+
+                    <button type="button" class="btn btn-primary">Save changes</button>
+
+
+                    
+ var updatecar = new Cardata
+        {
+            Name = Name,
+            Model = Model,
+            Brand = Brand,
+            Color = Color,
+            NPerson = NPerson,
+            Id = Id
+        };
+
+        Carservice.UpdateCarList(Id, updatecar);
+
+        NavigationManager.NavigateTo("/");
+
+
+        , item.Name, item.Model, item.Brand, item.Color, item.NPerson
+
+        , string? name, string? model, string? brand, string? color, int nperson
+
+        //modelCardata = new Cardata
+        //    {
+        //        Id = Id,
+        //        Name = name,
+        //        Model = model,
+        //        Brand = brand,
+        //        Color = color,
+        //        NPerson = nperson
+
+        //    };
+
+          JSRuntime.InvokeVoidAsync("console.log", name, model, brand, color, nperson);
+        JSRuntime.InvokeVoidAsync("console.log", modelCardataList );
+
+         modelCardataList = Carservice.Carlist.ConvertAll(item => (Cardata)item.Clone()).Where(item => item.Id == Id).ToList();
+
+          JSRuntime.InvokeVoidAsync("console.log", Para1, Para2, Para3, Para4, Para5, Para6);
+           modelCardataList = Carservice.Carlist.ConvertAll(item => (Cardata)item.C
+           
+           lone()).Where(item => item.Id == Para1).ToList();
+
+           string? Name, string? Model, string? Brand, string? Color, int NPerson, int Id
+
+          SaveChange >  item.Name, item.Model, item.Brand, item.Color, item.NPerson, item.Id
+
+           Cardata = Carservice?.Carlist.ConvertAll(item => (Cardata)item.Clone()).Where(item => item.Id == Id).ToList();
+
+           item.Id,item.Name, item.Model, item.Brand, item.Color, item.NPerson
+
+<div style="width : fit-content; height : fit-content " class="d-flex justify-content-center align-content-lg-center bgb rounded">
+    <div class=" p-5 d-flex flex-column just">
+
+       
+
+    </div>
+</div>

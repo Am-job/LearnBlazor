@@ -1,0 +1,81 @@
+﻿@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay; margin-top:10rem;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Insert Update Infos</h5>
+            </div>
+            <div class="modal-body">
+
+                @if(Data !=null)
+                {
+                    <Entry ParaID="Data.Id"/>
+                } 
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-dark text-white" @onclick="onclose">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+@code {
+    [Inject]
+    Carservice? Carservice { get; set; }
+
+    [Parameter]
+    public Cardata? Data { get; set; }
+
+    [Parameter]
+    public EventCallback onclose { get; set; }
+
+    //Model On/OFF Toggle PAth
+    public string ModalDisplay = "block";
+    public string ModalClass = "Show";
+    public bool ShowBackdrop = true;
+
+}
+
+@*  <div id="card-container" class="row " style="  ">
+
+            @foreach (var item in carlist )
+            {
+            <div class="col-12 py-3 px-3 " style="width: 20rem;">
+                    <div id="card" style="height : 520px; " class="card text-white mb-3 bgb px-2">
+                        <p>No.@carlist.IndexOf(item)</p>
+                           <div style="width : 270px; height : auto; " class="bg-dark card-image ">
+                                 <img src="/car.jpg" class="card-img-top card-img bg-dark text-white d-inline" style="" alt="@item.Name">
+                           </div>
+                        <div class="card-body ">
+                        <div class="">
+                                <h5 style="width:200px;" class="card-title radbgb px-2 py-1 rounded text-white">@item.Name</h5>
+                                <p style="width : 250px;" class="overflow-hidden">Model : @item.Model</p>
+                                <p>Color : @item.Color</p>
+                                @if(brandList !=null)
+                                {
+                                    var obj = brandList.Find( brand => brand.Id == item.BrandId );
+                                        <p> Brand : @obj?.Name</p>
+                                }   
+                            <p>Person : @item.NPerson</p>
+                             </div>
+                            
+                        </div>
+                        <div class="card-footer bg-secondary mb-1 rounded d-flex flex-row justify-content-between">
+                            <button @onclick="() =>UpdateCarData(item.Id)" class=" text-white btn edit fw-bold">RoutingEdit</button>
+                            <button @onclick="@(() =>ModelEdit( item.Id))" class=" text-white btn edit fw-bold">Edit</button>
+                            <button @onclick="() =>DeleteCarList(item)" class=" text-white btn del fw-bold">Delete</button>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        
+    </div>*@

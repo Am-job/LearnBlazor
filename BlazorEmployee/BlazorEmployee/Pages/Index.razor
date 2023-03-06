@@ -1,0 +1,35 @@
+﻿@page "/"
+@inject AppData AppData
+
+<PageTitle>Employee Status</PageTitle>
+<table class="table caption-top">
+  <caption>List of users</caption>
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">Salary</th>
+      <th scope="col">age</th>
+      <th scope="col">Join Date</th>
+    </tr>
+  </thead>
+  <tbody>
+        @foreach (Employee in EmployeeData)
+        {
+        <tr>
+          <th scope="row">@Employee.id</th>
+          <td>@Employee.id</td>
+          <td>@Employee.Name</td>
+          <td>@Employee.position</td>
+          <td>@Employee.salary</td>
+          <td>@Employee.age</td>
+          <td>@Employee.joinDate</td>
+        </tr>
+        }
+  </tbody>
+</table>
+
+@code{
+   
+}

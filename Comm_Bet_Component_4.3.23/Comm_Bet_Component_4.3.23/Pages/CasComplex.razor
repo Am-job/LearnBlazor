@@ -1,0 +1,25 @@
+﻿@page "/complex"
+
+@*Passing Component Instance*@
+<CascadingValue Value="this">
+    <UpC4></UpC4>
+    <UpC5></UpC5>
+</CascadingValue>
+
+@code{
+    int TheAnswer = 42;
+
+    string FruitName { get; set; } = "Apple";
+    int FruitCount { get; set; } = 111;
+
+    string FirstFruit { get; set; } = "Apple";
+    string SecondFruit { get; set; } = "Banana";
+
+    public string Fruit { get; set; } = "Kiwi";
+
+    public void ChangeFruit(string newFruit)
+    {
+        Fruit = newFruit;
+        StateHasChanged();
+    }
+}
