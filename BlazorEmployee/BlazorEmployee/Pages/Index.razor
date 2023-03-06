@@ -1,5 +1,6 @@
 ﻿@page "/"
-@inject AppData AppData
+@inject GetData GetData
+@using BlazorEmployee.Modals
 
 <PageTitle>Employee Status</PageTitle>
 <table class="table caption-top">
@@ -15,21 +16,27 @@
     </tr>
   </thead>
   <tbody>
-        @foreach (Employee in EmployeeData)
+        @foreach (var Employee in Employees)
         {
         <tr>
-          <th scope="row">@Employee.id</th>
-          <td>@Employee.id</td>
+          <th scope="row">@Employee.ID</th>
           <td>@Employee.Name</td>
-          <td>@Employee.position</td>
-          <td>@Employee.salary</td>
-          <td>@Employee.age</td>
-          <td>@Employee.joinDate</td>
+          <td>@Employee.Position</td>
+          <td>@Employee.Salary</td>
+          <td>@Employee.Dob</td>
+          <td>@Employee.Age</td>
         </tr>
         }
   </tbody>
 </table>
 
 @code{
-   
+    [Inject]
+    private GetData? data { get; set; }
+    private List<Employee> Employees { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Employees = GetData.EmployeeData();
+    }
 }
