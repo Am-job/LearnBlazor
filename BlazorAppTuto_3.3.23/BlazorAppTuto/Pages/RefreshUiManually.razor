@@ -1,19 +1,23 @@
 ﻿@page "/refreshUi"
-@using System.Threading;
+@using Microsoft.AspNetCore.Components
 
+<h1>Counter</h1>
 
-<h3>RefreshUiManually</h3>
-<p>@Count</p>
-<button @onclick="StartCountDown">Start Countdown</button>
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
-    private int Count { get; set; } = 10;
+    private int currentCount = 0;
 
-    private void StartCountDown()
+    private void IncrementCount()
     {
-        if (Count <= 0) return;
-        Count--; 
-        StateHasChanged();
+        currentCount++;
+        StateHasChanged(); // Notify Blazor that the component state has changed
     }
-
 }
+
+
+
+
+

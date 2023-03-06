@@ -1,4 +1,5 @@
 ﻿@page "/twoWay"
+@using Microsoft.JSInterop
 
 <h3>TwoWayData</h3>
 
@@ -12,12 +13,23 @@
 
     Are you a manager? <input type="checkbox" @bind="IsManager"/><br />
 
+    @* Select *@
     <select id="select-box" @bind="TypeOfEmployee">
         <option value=@EmployeeType.Employee>@EmployeeType.Employee.ToString()</option>
         <option value=@EmployeeType.Contractor>@EmployeeType.Contractor.ToString()</option>
         <option value=@EmployeeType.Intern>@EmployeeType.Intern.ToString()</option>
     </select>
 
+    @* Checkbox *@
+    <input type="checkbox" @bind="IsChecked" /> <br/>
+
+    @* Radio *@
+    <input type="radio" name="color" value="red" @onchange="@(() => SelectedColor = "red")" checked="@(SelectedColor == "red")" /> Red
+    <input type="radio" name="color" value="blue" @onchange="@(() => SelectedColor = "blue")" checked="@(SelectedColor == "blue")"/> Blue
+    
+    <br/>
+
+    <button @onclick="showData">Submit</button>
 </p>
 
 <h2>Hello, @Name!</h2>
@@ -31,14 +43,28 @@
 
 <p>Your salary is $@Salary</p>
 
+<p>@IsChecked</p>
+
+<p>@SelectedColor</p>
+
 @code {
     private enum EmployeeType { Employee, Contractor, Intern };
     private EmployeeType TypeOfEmployee { get; set; } = EmployeeType.Employee;
 
     private string? Name { get; set; }
     private bool IsManager { get; set; } = false;
+    private bool IsChecked { get; set; } = false;
     private static int Age { get; set; } = 26;
+    private string SelectedColor { get; set; } = string.Empty;
     public DateTime Birthday { get; set; } = DateTime.Today.AddYears(-Age);
 
     public decimal Salary { get; set; } = (decimal) 2800.5;
+
+    [Inject]
+    private IJSRuntime jsRuntime { get; set; }
+
+    protected async Task showData()
+    {
+        await jsRuntime.InvokeVoidAsync("console.log", $"{Name}, {IsManager}, {Age}, {SelectedColor}, {Birthday}, {Salary}");
+    }
 }
