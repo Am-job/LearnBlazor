@@ -15,6 +15,6 @@ function UpdateWindowWidth(objReference) {
     objReference.invokeMethodAsync("UpdateWindowWidth", window.innerWidth);
 }
 
-function GetInitialWidthFromJs() {
-    DotNet.invokeMethodAsync("GetInitialWidth", window.innerWidth);
+function GetInitalWidthJS(objReference) {
+    objReference.invokeMethodAsync("GetInitalWidthCS", window.innerWidth);
 }

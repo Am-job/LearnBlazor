@@ -4,11 +4,9 @@ namespace BlazorEmployee.Services
 {
     public class GetData
     {
-        public List<Employee> Employees = new List<Employee>();
-        
-        public void EmployeeData()
+        public List<Employee> Employees = new()
         {
-            Employees.Add(new Employee()
+            new Employee()
             {
                 Name = "Aung",
                 Age = 23,
@@ -17,8 +15,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Manager",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Hla",
                 Age = 25,
@@ -27,8 +25,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Senior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Test",
                 Age = 23,
@@ -37,8 +35,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Su",
                 Age = 23,
@@ -47,8 +45,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Senior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Htet",
                 Age = 23,
@@ -57,8 +55,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Manager",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Kyaw",
                 Age = 23,
@@ -67,8 +65,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "San",
                 Age = 23,
@@ -77,8 +75,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Senior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Mg",
                 Age = 23,
@@ -87,8 +85,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Aung",
                 Age = 23,
@@ -97,8 +95,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Manager",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Hla",
                 Age = 23,
@@ -107,8 +105,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Test",
                 Age = 23,
@@ -117,8 +115,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Senior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Su",
                 Age = 23,
@@ -127,8 +125,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Htet",
                 Age = 23,
@@ -137,8 +135,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Manager",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Kyaw",
                 Age = 23,
@@ -147,8 +145,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "San",
                 Age = 23,
@@ -157,8 +155,8 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Senior",
                 Salary = 3
-            });
-            Employees.Add(new Employee()
+            },
+            new Employee()
             {
                 Name = "Mg",
                 Age = 23,
@@ -167,7 +165,12 @@ namespace BlazorEmployee.Services
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Manager",
                 Salary = 3
-            });
+            }
+        };
+
+        public void AddEmployee(Employee employee)
+        {
+            Employees.Add(employee);
         }
     }
 }

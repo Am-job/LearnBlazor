@@ -1,6 +1,8 @@
 ﻿@page "/"
 @inject GetData GetData
 @implements IAsyncDisposable
+@inject IJSRuntime JSRuntime
+
 
 
 <link />
@@ -97,25 +99,34 @@
     //Get Data From Local Database
     [Inject]
     public GetData? Data { get; set; } // ServiceFile
-    private List<Employee> FilterEmployee { get; set; }
+    private List<Employee>? FilterEmployee { get; set; }
 
     //Declare Varaiable
-    private string SearchString { get; set;  }
-    private string SelectPosition { get; set; }
+    private string? SearchString { get; set;  }
+    private string? SelectPosition { get; set; }
 
     //for Browser Resize
-    private DotNetObjectReference<Index> _objectReference;
-    public static int WindowWidth { get; set; }
+    private DotNetObjectReference<Index>? _objectReference;
+    public int WindowWidth { get; set; }
 
     //Initialize Project
     protected async override void OnInitialized()
     {
-        Data.EmployeeData(); // modify
         SearchTable();
 
         //for Browser Resize
         _objectReference = DotNetObjectReference.Create(this);
-        await JSRuntime.InvokeVoidAsync("GetInitialWidthFromJs");
+        await IntialWidthListener();
+    }
+
+    //After Render
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await ResizeWindowWidthListener();
+            StateHasChanged();
+        }
     }
 
     //Search and filter Function
@@ -140,7 +151,6 @@
         SearchTable();
     }
 
-
     //for Browser Resize
     [JSInvokable]
     public void UpdateWindowWidth(int windowWidth)
@@ -148,21 +158,26 @@
         WindowWidth = windowWidth;
         StateHasChanged();
     }
-    [Inject]
-    public IJSRuntime JSRuntime { get; set; }
+    [JSInvokable]
+    public void GetInitalWidthCS(int windowWidth)
+    {
+        WindowWidth = windowWidth;
+        StateHasChanged();
+    }
 
-    private async Task InitWindowWidthListener()
+    // Listen Resize and Dispose
+    private async Task IntialWidthListener()
+    {
+        await JSRuntime.InvokeVoidAsync("GetInitalWidthJS", _objectReference);
+    }
+    private async Task ResizeWindowWidthListener()
     {
         await JSRuntime.InvokeVoidAsync("AddWindowWidthListener", _objectReference);
     }
-
     public async ValueTask DisposeAsync()
     {
         await JSRuntime.InvokeVoidAsync("RemoveWindowWidthListener", _objectReference);
         _objectReference?.Dispose();
     }
-    public static void GetInitialWidth(int data)
-    {
-        WindowWidth = data;
-    }
+    
 }
