@@ -1,6 +1,6 @@
 ﻿@page "/"
 @inject GetData GetData
-@inject IJSRuntime jsRuntime
+@implements IAsyncDisposable
 
 
 <link />
@@ -27,39 +27,8 @@
     </div>
 </div>
 
-<div class="d-md-block d-none">
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">No</th>
-      <th scope="col">Name</th>
-      <th scope="col">Position</th>
-      <th scope="col">Salary</th>
-      <th scope="col">Age</th>
-      <th scope="col">Date of birth</th>
-      <th scope="col">Join Date</th>
-    </tr>
-  </thead>
-  <tbody>
-
-  @for (var i = 0; i < FilterEmployee.Count; i++)
-        {
-        <tr>
-          <th scope="row">@(i+1)</th>
-           <td>@FilterEmployee[i].Name</td>
-           <td>@FilterEmployee[i].Position</td>
-           <td>@FilterEmployee[i].Salary</td>
-           <td>@FilterEmployee[i].Age</td>
-           <td>@FilterEmployee[i].Dob</td>
-           <td>@FilterEmployee[i].JoinDate</td>
-        </tr>
-       }
-  </tbody>
-</table>
-</div>
-
-
-<div class="d-md-none d-block">
+@if (WindowWidth < 768)
+{
     <table class="table">
         <thead>
             <tr>
@@ -68,12 +37,12 @@
             </tr>
         </thead>
         <tbody>
-            @for (var i = 0; i< FilterEmployee.Count; i++)
+            @for (var i = 0; i < FilterEmployee.Count; i++)
             {
                 <tr>
                     <td scope="row">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">@(i+1)</li>
+                            <li class="list-group-item">@(i + 1)</li>
                         </ul>
                     </td>
                     <td>
@@ -90,7 +59,39 @@
             }
         </tbody>
     </table>
-</div>
+} else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Position</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Age</th>
+                <th scope="col">Date of birth</th>
+                <th scope="col">Join Date</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (var i = 0; i < FilterEmployee.Count; i++)
+            {
+                <tr>
+                    <th scope="row">@(i + 1)</th>
+                    <td>@FilterEmployee[i].Name</td>
+                    <td>@FilterEmployee[i].Position</td>
+                    <td>@FilterEmployee[i].Salary</td>
+                    <td>@FilterEmployee[i].Age</td>
+                    <td>@FilterEmployee[i].Dob</td>
+                    <td>@FilterEmployee[i].JoinDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
 
 @code{
     //Get Data From Local Database
@@ -102,13 +103,20 @@
     private string SearchString { get; set;  }
     private string SelectPosition { get; set; }
 
-    //Initialize Project
-    protected override void OnInitialized()
-    {
-        Data.EmployeeData();
-        SearchTable();
-    }
+    //for Browser Resize
+    private DotNetObjectReference<Index> _objectReference;
+    public static int WindowWidth { get; set; }
 
+    //Initialize Project
+    protected async override void OnInitialized()
+    {
+        Data.EmployeeData(); // modify
+        SearchTable();
+
+        //for Browser Resize
+        _objectReference = DotNetObjectReference.Create(this);
+        await JSRuntime.InvokeVoidAsync("GetInitialWidthFromJs");
+    }
 
     //Search and filter Function
     private void SearchTable()
@@ -126,11 +134,35 @@
         }
 
         FilterEmployee = result;
-        jsRuntime.InvokeVoidAsync("console.log", result);
     }
-
     private void HandleSearch()
     {
         SearchTable();
+    }
+
+
+    //for Browser Resize
+    [JSInvokable]
+    public void UpdateWindowWidth(int windowWidth)
+    {
+        WindowWidth = windowWidth;
+        StateHasChanged();
+    }
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    private async Task InitWindowWidthListener()
+    {
+        await JSRuntime.InvokeVoidAsync("AddWindowWidthListener", _objectReference);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await JSRuntime.InvokeVoidAsync("RemoveWindowWidthListener", _objectReference);
+        _objectReference?.Dispose();
+    }
+    public static void GetInitialWidth(int data)
+    {
+        WindowWidth = data;
     }
 }

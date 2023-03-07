@@ -65,8 +65,8 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\wwwroot\\sample-data\\weather.json",
-      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+      "Id": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\wwwroot\\js\\browserResize.js",
+      "PackagePath": "staticwebassets\\js\\browserResize.js"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.BlazorEmployee.Microsoft.AspNetCore.StaticWebAssets.props",

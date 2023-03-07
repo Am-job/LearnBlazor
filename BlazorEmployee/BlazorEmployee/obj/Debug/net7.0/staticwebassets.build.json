@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EsO78HNUydFWa75PFnPGDDf8SwC5qshavB/tbjMGgl0=",
+  "Hash": "dAx+CfzCxDxebniqvsHWuQXV0HnrBhrBhf8ybEpdDK8=",
   "Source": "BlazorEmployee",
   "BasePath": "/",
   "Mode": "Root",
@@ -7123,12 +7123,12 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\wwwroot\\sample-data\\weather.json",
+      "Identity": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\wwwroot\\js\\browserResize.js",
       "SourceId": "BlazorEmployee",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\wwwroot\\",
       "BasePath": "/",
-      "RelativePath": "sample-data/weather.json",
+      "RelativePath": "js/browserResize.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -7137,7 +7137,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\sample-data\\weather.json"
+      "OriginalItemSpec": "wwwroot\\js\\browserResize.js"
     }
   ]
 }
