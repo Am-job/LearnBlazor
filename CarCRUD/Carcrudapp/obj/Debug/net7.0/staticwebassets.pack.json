@@ -1,87 +1,87 @@
 {
   "Files": [
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\bin\\Debug\\net7.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\bin\\Debug\\net7.0\\wwwroot\\_framework\\blazor.webassembly.js",
       "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\obj\\Debug\\net7.0\\build-gz\\ZMaBa3pF.gz",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\obj\\Debug\\net7.0\\build-gz\\ZMaBa3pF.gz",
       "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\obj\\Debug\\net7.0\\scopedcss\\bundle\\Carcrudapp.styles.css",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\obj\\Debug\\net7.0\\scopedcss\\bundle\\Carcrudapp.styles.css",
       "PackagePath": "staticwebassets\\Carcrudapp.styles.css"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\car.jpg",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\car.jpg",
       "PackagePath": "staticwebassets\\car.jpg"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\car1.jpg",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\car1.jpg",
       "PackagePath": "staticwebassets\\car1.jpg"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\app.css",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "PackagePath": "staticwebassets\\css\\open-iconic"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "PackagePath": "staticwebassets\\css\\open-iconic"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\README.md",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\README.md",
       "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\icon-192.png",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\icon-192.png",
       "PackagePath": "staticwebassets\\icon-192.png"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\index.html",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "\\\\192.168.3.99\\Shared\\Blazor Testing\\MoeMyintZaw\\CarCRUD\\Carcrudapp\\wwwroot\\sample-data\\weather.json",
+      "Id": "C:\\Users\\Server\\source\\repos\\CarCRUD\\Carcrudapp\\wwwroot\\sample-data\\weather.json",
       "PackagePath": "staticwebassets\\sample-data\\weather.json"
     },
     {

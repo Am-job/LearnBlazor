@@ -329,7 +329,7 @@
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Alternative</AssetRole>
-      <RelatedAsset>\\192.168.3.99\Shared\Blazor Testing\MoeMyintZaw\CarCRUD\Carcrudapp\bin\Debug\net7.0\wwwroot\_framework\blazor.webassembly.js</RelatedAsset>
+      <RelatedAsset>C:\Users\Server\source\repos\CarCRUD\Carcrudapp\bin\Debug\net7.0\wwwroot\_framework\blazor.webassembly.js</RelatedAsset>
       <AssetTraitName>Content-Encoding</AssetTraitName>
       <AssetTraitValue>gzip</AssetTraitValue>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

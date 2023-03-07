@@ -1,42 +1,136 @@
 ﻿@page "/"
 @inject GetData GetData
-@using BlazorEmployee.Modals
+@inject IJSRuntime jsRuntime
 
+
+<link />
 <PageTitle>Employee Status</PageTitle>
-<table class="table caption-top">
-  <caption>List of users</caption>
+
+<h3>List of User</h3>
+<div class="row">
+    <div class="form-group col-md-5 col-sm-10 mx-sm-auto m-1">
+        <div class="input-group">
+            <input type="text" class="form-control" @onfocusout="HandleSearch" @bind="@SearchString" placeholder="Search...">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" @onclick="HandleSearch"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-5 col-sm-10 mx-sm-auto m-1">
+        <select @onclick="HandleSearch" class="form-control" id="position" @bind="SelectPosition">
+            <option value="" disabled selected>-- Select Employee' Position --</option>
+            <option value="">All</option>
+            <option value="Manager">Manager</option>
+            <option value="Senior">Senior</option>
+            <option value="Junior">Junior</option>
+        </select>
+    </div>
+</div>
+
+<div class="d-md-block d-none">
+    <table class="table">
   <thead>
     <tr>
-      <th scope="col">id</th>
+      <th scope="col">No</th>
       <th scope="col">Name</th>
       <th scope="col">Position</th>
       <th scope="col">Salary</th>
-      <th scope="col">age</th>
+      <th scope="col">Age</th>
+      <th scope="col">Date of birth</th>
       <th scope="col">Join Date</th>
     </tr>
   </thead>
   <tbody>
-        @foreach (var Employee in Employees)
+
+  @for (var i = 0; i < FilterEmployee.Count; i++)
         {
         <tr>
-          <th scope="row">@Employee.ID</th>
-          <td>@Employee.Name</td>
-          <td>@Employee.Position</td>
-          <td>@Employee.Salary</td>
-          <td>@Employee.Dob</td>
-          <td>@Employee.Age</td>
+          <th scope="row">@(i+1)</th>
+           <td>@FilterEmployee[i].Name</td>
+           <td>@FilterEmployee[i].Position</td>
+           <td>@FilterEmployee[i].Salary</td>
+           <td>@FilterEmployee[i].Age</td>
+           <td>@FilterEmployee[i].Dob</td>
+           <td>@FilterEmployee[i].JoinDate</td>
         </tr>
-        }
+       }
   </tbody>
 </table>
+</div>
+
+
+<div class="d-md-none d-block">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i< FilterEmployee.Count; i++)
+            {
+                <tr>
+                    <td scope="row">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">@(i+1)</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Name: @FilterEmployee[i].Name</li>
+                            <li class="list-group-item">Position: @FilterEmployee[i].Position</li>
+                            <li class="list-group-item">Salary: @FilterEmployee[i].Salary</li>
+                            <li class="list-group-item">Age: @FilterEmployee[i].Age</li>
+                            <li class="list-group-item">Date of Birth: @FilterEmployee[i].Dob</li>
+                            <li class="list-group-item">JoinDate: @FilterEmployee[i].JoinDate</li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @code{
+    //Get Data From Local Database
     [Inject]
-    private GetData? data { get; set; }
-    private List<Employee> Employees { get; set; }
+    public GetData? Data { get; set; } // ServiceFile
+    private List<Employee> FilterEmployee { get; set; }
 
+    //Declare Varaiable
+    private string SearchString { get; set;  }
+    private string SelectPosition { get; set; }
+
+    //Initialize Project
     protected override void OnInitialized()
     {
-        Employees = GetData.EmployeeData();
+        Data.EmployeeData();
+        SearchTable();
+    }
+
+
+    //Search and filter Function
+    private void SearchTable()
+    {
+        var result = Data.Employees;
+
+        if (!string.IsNullOrWhiteSpace(SearchString))
+        {
+            result = result.FindAll(d => d.Name.Contains(SearchString, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(SelectPosition))
+        {
+            result = result.FindAll(d => d.Position.Contains(SelectPosition, StringComparison.OrdinalIgnoreCase));
+        }
+
+        FilterEmployee = result;
+        jsRuntime.InvokeVoidAsync("console.log", result);
+    }
+
+    private void HandleSearch()
+    {
+        SearchTable();
     }
 }
