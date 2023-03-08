@@ -1,10 +1,10 @@
-﻿@page "/editEmployee/{id:int}"
+﻿@page "/detailView/{id:int}"
 @inject GetData data
 @inject NavigationManager navigate
 
 
-<HeaderBackComponent ButtonTitle="Back">Edit Employee</HeaderBackComponent>
-<FormComponent Data="Employee" Submit="HandleEdit" ButtonTitle="Submit" IsDisabled="false"></FormComponent>
+<HeaderBackComponent ButtonTitle="Back">Detail View</HeaderBackComponent>
+<FormComponent Data="Employee" Submit="HandleClose" ButtonTitle="Close" IsDisabled="true"></FormComponent>
 
 @code {
     [Parameter]
@@ -17,9 +17,8 @@
         Employee = data.Employees.Find(p => p.ID == Id);
     }
 
-    public void HandleEdit(Employee employee)
+    public void HandleClose(Employee employee)
     {
-        data.UpdateEmployee(employee);
         navigate.NavigateTo("/");
     }
 }

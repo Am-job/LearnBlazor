@@ -65,6 +65,22 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
+      "Id": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\wwwroot\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\wwwroot\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\wwwroot\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\js\\bootstrap.min.js.map"
+    },
+    {
       "Id": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\wwwroot\\js\\browserResize.js",
       "PackagePath": "staticwebassets\\js\\browserResize.js"
     },

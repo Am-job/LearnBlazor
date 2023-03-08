@@ -3,7 +3,7 @@
 @inject NavigationManager navigate
 
 <HeaderBackComponent ButtonTitle="Back">Add Employee</HeaderBackComponent>
-<FormComponent Data="Employee" Submit="HandleAddEmployee" IsDisabled="false"></FormComponent>
+<FormComponent Data="Employee" Submit="HandleAddEmployee" ButtonTitle="Submit" IsDisabled="false"></FormComponent>
 
 @code {
     public Employee? Employee { get; set; } = new Employee()

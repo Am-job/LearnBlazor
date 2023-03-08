@@ -19,3 +19,10 @@ function GetInitalWidthJS(objReference) {
     objReference.invokeMethodAsync("GetInitalWidthCS", window.innerWidth);
 }
 
+//For Modal
+const modal1 = new bootstrap.Modal(document.getElementById('modal'))
+
+function toggleModal1() {
+    // Toggle Modal
+    modal1.toggle();
+}

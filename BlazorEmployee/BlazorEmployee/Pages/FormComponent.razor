@@ -38,8 +38,11 @@
         <input type="datetime-local" readonly="@IsDisabled" class="form-control" id="JoinDate" @bind-value="Data.JoinDate">
         <ValidationMessage For="@(() => Data.JoinDate)" />
     </div>
-  <button type="submit" class="btn btn-outline-primary">Submit</button>
-</EditForm>
+        @if (!IsDisabled)
+        {
+            <button type="submit" class="btn btn-outline-primary">@ButtonTitle</button>
+        }
+    </EditForm>
 </div>
 
 @code {
@@ -51,6 +54,9 @@
 
     [Parameter]
     public bool IsDisabled { get; set; }
+
+    [Parameter]
+    public string? ButtonTitle { get; set; }
 
     public async void HandleSubmit()
     {

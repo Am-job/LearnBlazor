@@ -102,10 +102,10 @@
                     <td>@employee.JoinDate.ToString("d-MMM-yyyy h:mm:ss")</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button @onclick="() => EditEmployee(employee.ID)" type="button" class="btn btn-primary">
+                            <button @onclick="() => EditEmployee(employee.ID)" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-title="Edit">
                                 Edit <i class="fas fa-user-edit"></i>
                             </button>
-                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Detail View">
+                            <button @onclick="() => Detail(employee.ID)" type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Detail View">
                                 Explore <i class="fas fa-binoculars"></i>
                             </button>
                             <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete">
@@ -119,6 +119,10 @@
     </table>
 }
 
+@if (DeleteView)
+{
+    <Modal></Modal>
+}
 
 
 @code{
@@ -131,6 +135,7 @@
     private string? SearchString { get; set;  }
     private string? SelectPosition { get; set; }
     public int idx { get; set; }
+    protected bool DeleteView { get; set; } = false;
 
     //for Browser Resize
     private DotNetObjectReference<Index>? _objectReference;
@@ -220,5 +225,11 @@
     public void EditEmployee(int Id)
     {
         navigate.NavigateTo($"/editEmployee/{Id}");
+    }
+
+    //Detail View Function
+    public void Detail(int Id)
+    {
+        navigate.NavigateTo($"/detailView/{Id}");
     }
 }
