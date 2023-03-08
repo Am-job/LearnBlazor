@@ -62,7 +62,7 @@
                                     <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Detail View">
                                         Explore <i class="fas fa-binoculars"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete">
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                         Delete <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -102,13 +102,13 @@
                     <td>@employee.JoinDate.ToString("d-MMM-yyyy h:mm:ss")</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button @onclick="() => EditEmployee(employee.ID)" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-title="Edit">
+                            <button @onclick="() => EditEmployee(employee.ID)" type="button" class="btn btn-primary">
                                 Edit <i class="fas fa-user-edit"></i>
                             </button>
-                            <button @onclick="() => Detail(employee.ID)" type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Detail View">
+                            <button @onclick="() => Detail(employee.ID)" type="button" class="btn btn-success">
                                 Explore <i class="fas fa-binoculars"></i>
                             </button>
-                            <button @onclick="() => DeleteOpen(employee)" type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete">
+                            <button @onclick="() => DeleteOpen(employee)" type="button" class="btn btn-danger">
                                 Delete <i class="fas fa-trash"></i>
                             </button>
                         </div>
@@ -258,14 +258,16 @@
     protected bool DeleteView { get; set; } = false;
     private Employee DeleteEmployee { get; set; }
 
-    public async void DeleteOpen(Employee employee)
+    public void DeleteOpen(Employee employee)
     {
         DeleteView = true;
         DeleteEmployee = employee;
-        await JSRuntime.InvokeVoidAsync("toggleModal", _objectReference);
+        idx = 0;
     }
     public void DeleteClose()
     {
         DeleteView = false;
+        idx = 0;
+        StateHasChanged();
     }
 }

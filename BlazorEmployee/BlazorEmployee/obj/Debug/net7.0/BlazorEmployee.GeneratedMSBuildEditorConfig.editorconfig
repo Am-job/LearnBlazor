@@ -9,53 +9,53 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = BlazorEmployee
 build_property.RootNamespace = BlazorEmployee
-build_property.ProjectDir = C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\
+build_property.ProjectDir = C:\Users\aungm\OneDrive\Desktop\LearnBlazor\LearnBlazor\BlazorEmployee\BlazorEmployee\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee
+build_property.MSBuildProjectDirectory = C:\Users\aungm\OneDrive\Desktop\LearnBlazor\LearnBlazor\BlazorEmployee\BlazorEmployee
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/App.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/Pages/AddEmployee.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/Pages/AddEmployee.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkRW1wbG95ZWUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/Pages/DetailView.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/Pages/DetailView.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlsVmlldy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/Pages/EditEmployee.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/Pages/EditEmployee.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdEVtcGxveWVlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/Pages/FormComponent.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/Pages/FormComponent.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9ybUNvbXBvbmVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/Pages/HeaderBackComponent.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/Pages/HeaderBackComponent.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGVhZGVyQmFja0NvbXBvbmVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/Pages/Index.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/Pages/Modal.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/Pages/Modal.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/_Imports.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/Shared/MainLayout.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-iwzpc2rb61
 
-[C:/Users/Server/source/repos/BlazorEmployee/BlazorEmployee/Shared/NavMenu.razor]
+[C:/Users/aungm/OneDrive/Desktop/LearnBlazor/LearnBlazor/BlazorEmployee/BlazorEmployee/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-4341z40usc
