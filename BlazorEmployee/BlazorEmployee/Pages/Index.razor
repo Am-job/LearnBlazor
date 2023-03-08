@@ -108,7 +108,7 @@
                             <button @onclick="() => Detail(employee.ID)" type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Detail View">
                                 Explore <i class="fas fa-binoculars"></i>
                             </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete">
+                            <button @onclick="() => DeleteOpen(employee)" type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete">
                                 Delete <i class="fas fa-trash"></i>
                             </button>
                         </div>
@@ -121,7 +121,16 @@
 
 @if (DeleteView)
 {
-    <Modal></Modal>
+    <Modal ButtonTitle="Delete" Close="DeleteClose" ButtonColor="btn-danger">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Name: @DeleteEmployee.Name</li>
+            <li class="list-group-item">Position: @DeleteEmployee.Position</li>
+            <li class="list-group-item">Salary: @DeleteEmployee.Salary</li>
+            <li class="list-group-item">Age: @DeleteEmployee.Age</li>
+            <li class="list-group-item">Date of Birth: @DeleteEmployee.Dob.ToString("d-MMM-yyyy")</li>
+            <li class="list-group-item">JoinDate: @DeleteEmployee.JoinDate.ToString("d-MMM-yyyy h:m:s")</li>
+        </ul>
+    </Modal>
 }
 
 
@@ -129,13 +138,12 @@
     //Get Data From Local Database
     [Inject]
     public GetData? Data { get; set; } // ServiceFile
-    private List<Employee>? FilterEmployee { get; set; }
 
     //Declare Varaiable
+    private List<Employee>? FilterEmployee { get; set; }
     private string? SearchString { get; set;  }
     private string? SelectPosition { get; set; }
     public int idx { get; set; }
-    protected bool DeleteView { get; set; } = false;
 
     //for Browser Resize
     private DotNetObjectReference<Index>? _objectReference;
@@ -162,6 +170,47 @@
         }
     }
 
+
+
+
+
+    //for Browser Resize
+    [JSInvokable]
+    public void UpdateWindowWidth(int windowWidth)
+    {
+        WindowWidth = windowWidth;
+        idx = 0;
+        StateHasChanged();
+    }
+    [JSInvokable]
+    public void GetInitalWidthCS(int windowWidth)
+    {
+        WindowWidth = windowWidth;
+        idx = 0;
+        StateHasChanged();
+    }
+    // Listen Resize and Dispose
+    private async Task IntialWidthListener()
+    {
+        await JSRuntime.InvokeVoidAsync("GetInitalWidthJS", _objectReference);
+    }
+    private async Task ResizeWindowWidthListener()
+    {
+        await JSRuntime.InvokeVoidAsync("AddWindowWidthListener", _objectReference);
+    }
+    public async ValueTask DisposeAsync()
+    {
+        await JSRuntime.InvokeVoidAsync("RemoveWindowWidthListener", _objectReference);
+        _objectReference?.Dispose();
+    }
+
+
+
+
+
+
+
+
     //Search and filter Function
     private void SearchTable()
     {
@@ -184,36 +233,7 @@
         SearchTable();
     }
 
-    //for Browser Resize
-    [JSInvokable]
-    public void UpdateWindowWidth(int windowWidth)
-    {
-        WindowWidth = windowWidth;
-        idx = 0;
-        StateHasChanged();
-    }
-    [JSInvokable]
-    public void GetInitalWidthCS(int windowWidth)
-    {
-        WindowWidth = windowWidth;
-        idx = 0;
-        StateHasChanged();
-    }
 
-    // Listen Resize and Dispose
-    private async Task IntialWidthListener()
-    {
-        await JSRuntime.InvokeVoidAsync("GetInitalWidthJS", _objectReference);
-    }
-    private async Task ResizeWindowWidthListener()
-    {
-        await JSRuntime.InvokeVoidAsync("AddWindowWidthListener", _objectReference);
-    }
-    public async ValueTask DisposeAsync()
-    {
-        await JSRuntime.InvokeVoidAsync("RemoveWindowWidthListener", _objectReference);
-        _objectReference?.Dispose();
-    }
 
     //Navigate
     public void AddEmployee()
@@ -231,5 +251,21 @@
     public void Detail(int Id)
     {
         navigate.NavigateTo($"/detailView/{Id}");
+    }
+
+
+    //Delete Modal
+    protected bool DeleteView { get; set; } = false;
+    private Employee DeleteEmployee { get; set; }
+
+    public async void DeleteOpen(Employee employee)
+    {
+        DeleteView = true;
+        DeleteEmployee = employee;
+        await JSRuntime.InvokeVoidAsync("toggleModal", _objectReference);
+    }
+    public void DeleteClose()
+    {
+        DeleteView = false;
     }
 }

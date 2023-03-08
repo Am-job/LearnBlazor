@@ -22,7 +22,7 @@ function GetInitalWidthJS(objReference) {
 //For Modal
 const modal1 = new bootstrap.Modal(document.getElementById('modal'))
 
-function toggleModal1() {
+function toggleModal() {
     // Toggle Modal
     modal1.toggle();
 }
