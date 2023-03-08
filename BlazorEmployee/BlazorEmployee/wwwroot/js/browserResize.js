@@ -1,4 +1,4 @@
-﻿// Manages the registered event listeners so they can be disposed later
+﻿// Manages the registered resize event listeners so they can be disposed later
 let windowEventListeners = {};
 
 function AddWindowWidthListener(objReference) {
@@ -18,3 +18,4 @@ function UpdateWindowWidth(objReference) {
 function GetInitalWidthJS(objReference) {
     objReference.invokeMethodAsync("GetInitalWidthCS", window.innerWidth);
 }
+

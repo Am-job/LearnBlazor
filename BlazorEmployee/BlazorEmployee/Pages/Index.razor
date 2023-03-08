@@ -2,14 +2,14 @@
 @inject GetData GetData
 @implements IAsyncDisposable
 @inject IJSRuntime JSRuntime
-
-
-
-<link />
+@inject NavigationManager navigate
 <PageTitle>Employee Status</PageTitle>
 
 <h3>List of User</h3>
 <div class="row">
+    <div class="col-md-1 col-sm-10 mx-sm-auto m-1 d-grid">
+        <button @onclick="AddEmployee" class="btn btn-outline-success">Add</button>
+    </div>
     <div class="form-group col-md-5 col-sm-10 mx-sm-auto m-1">
         <div class="input-group">
             <input type="text" class="form-control" @onfocusout="HandleSearch" @bind="@SearchString" placeholder="Search...">
@@ -53,8 +53,21 @@
                             <li class="list-group-item">Position: @FilterEmployee[i].Position</li>
                             <li class="list-group-item">Salary: @FilterEmployee[i].Salary</li>
                             <li class="list-group-item">Age: @FilterEmployee[i].Age</li>
-                            <li class="list-group-item">Date of Birth: @FilterEmployee[i].Dob</li>
-                            <li class="list-group-item">JoinDate: @FilterEmployee[i].JoinDate</li>
+                            <li class="list-group-item">Date of Birth: @FilterEmployee[i].Dob.ToString("d-MMM-yyyy")</li>
+                            <li class="list-group-item">JoinDate: @FilterEmployee[i].JoinDate.ToString("d-MMM-yyyy h:m:s")</li>
+                            <li class="list-group-item">
+                                <div class="btn-group" role="group">
+                                    <button @onclick="() => EditEmployee(FilterEmployee[i])" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-title="Edit">
+                                        Edit <i class="fas fa-user-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Detail View">
+                                        Explore <i class="fas fa-binoculars"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete">
+                                        Delete <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -73,6 +86,7 @@
                 <th scope="col">Age</th>
                 <th scope="col">Date of birth</th>
                 <th scope="col">Join Date</th>
+                <th scope="col">Settings</th>
             </tr>
         </thead>
         <tbody>
@@ -85,8 +99,21 @@
                     <td>@FilterEmployee[i].Position</td>
                     <td>@FilterEmployee[i].Salary</td>
                     <td>@FilterEmployee[i].Age</td>
-                    <td>@FilterEmployee[i].Dob</td>
-                    <td>@FilterEmployee[i].JoinDate</td>
+                    <td>@FilterEmployee[i].Dob.ToString("d-MMM-yyyy")</td>
+                    <td>@FilterEmployee[i].JoinDate.ToString("d-MMM-yyyy h:mm:ss")</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <button @onclick="() => EditEmployee(FilterEmployee[i])" type="button" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-title="Edit">
+                                Edit <i class="fas fa-user-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Detail View">
+                                Explore <i class="fas fa-binoculars"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete">
+                                Delete <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -179,5 +206,16 @@
         await JSRuntime.InvokeVoidAsync("RemoveWindowWidthListener", _objectReference);
         _objectReference?.Dispose();
     }
-    
+
+    //Navigate
+    public void AddEmployee()
+    {
+        navigate.NavigateTo("/addEmployee");
+    }
+
+    //EditEmployee
+    public void EditEmployee(Employee employee)
+    {
+        navigate.NavigateTo($"/editEmployee/{employee}");
+    }
 }
