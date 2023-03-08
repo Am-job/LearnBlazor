@@ -1,18 +1,23 @@
 ﻿@*Form Control and Handle Submit*@
 
 <div class="row">
-    <EditForm Model="@Data" OnSubmit="@HandleSubmit" class="mx-auto col-md-6 col-12 my-2">
+    <EditForm Model="@Data" OnValidSubmit="@HandleSubmit" class="mx-auto col-md-6 col-12 my-2">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
     <div class="mb-3">
         <label for="Name" class="form-label">Name</label>
         <input type="text" readonly="@IsDisabled" class="form-control" id="Name" @bind-value="Data.Name">
+        <ValidationMessage For="@(() => Data.Name)" />
     </div>
     <div class="mb-3">
         <label for="Age" class="form-label">Age</label>
         <input type="number" readonly="@IsDisabled" class="form-control" id="Age" @bind-value="Data.Age">
+            <ValidationMessage For="@(() => Data.Age)" />
     </div>
     <div class="mb-3">
         <label for="Dob" class="form-label">Date Of Birth</label>
         <input type="date" readonly="@IsDisabled" class="form-control" id="Dob" @bind-value="Data.Dob">
+            <ValidationMessage For="@(() => Data.Dob)" />
     </div>
     <div class="mb-3">
         <select class="form-control" @bind="Data.Position" disabled="@IsDisabled">
@@ -21,14 +26,17 @@
                 <option value="Senior">Senior</option>
                 <option value="Junior">Junior</option>
         </select>
+            <ValidationMessage For="@(() => Data.Position)" />
     </div>
     <div class="mb-3">
         <label for="Salary" class="form-label">Salary</label>
         <input type="number" readonly="@IsDisabled" class="form-control" id="Salary" @bind-value="Data.Salary">
+            <ValidationMessage For="@(() => Data.Salary)" />
     </div>
     <div class="mb-3">
         <label for="JoinDate" class="form-label">Join Date</label>
         <input type="datetime-local" readonly="@IsDisabled" class="form-control" id="JoinDate" @bind-value="Data.JoinDate">
+        <ValidationMessage For="@(() => Data.JoinDate)" />
     </div>
   <button type="submit" class="btn btn-outline-primary">Submit</button>
 </EditForm>

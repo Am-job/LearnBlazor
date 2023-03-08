@@ -1,5 +1,4 @@
 ﻿@page "/"
-@inject GetData GetData
 @implements IAsyncDisposable
 @inject IJSRuntime JSRuntime
 @inject NavigationManager navigate
@@ -39,25 +38,25 @@
             </tr>
         </thead>
         <tbody>
-            @for (var i = 0; i < FilterEmployee.Count; i++)
+            @foreach (var employee in FilterEmployee)
             {
                 <tr>
                     <td scope="row">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">@(i + 1)</li>
+                            <li class="list-group-item">@(++idx)</li>
                         </ul>
                     </td>
                     <td>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Name: @FilterEmployee[i].Name</li>
-                            <li class="list-group-item">Position: @FilterEmployee[i].Position</li>
-                            <li class="list-group-item">Salary: @FilterEmployee[i].Salary</li>
-                            <li class="list-group-item">Age: @FilterEmployee[i].Age</li>
-                            <li class="list-group-item">Date of Birth: @FilterEmployee[i].Dob.ToString("d-MMM-yyyy")</li>
-                            <li class="list-group-item">JoinDate: @FilterEmployee[i].JoinDate.ToString("d-MMM-yyyy h:m:s")</li>
+                            <li class="list-group-item">Name: @employee.Name</li>
+                            <li class="list-group-item">Position: @employee.Position</li>
+                            <li class="list-group-item">Salary: @employee.Salary</li>
+                            <li class="list-group-item">Age: @employee.Age</li>
+                            <li class="list-group-item">Date of Birth: @employee.Dob.ToString("d-MMM-yyyy")</li>
+                            <li class="list-group-item">JoinDate: @employee.JoinDate.ToString("d-MMM-yyyy h:m:s")</li>
                             <li class="list-group-item">
                                 <div class="btn-group" role="group">
-                                    <button @onclick="() => EditEmployee(FilterEmployee[i])" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-title="Edit">
+                                    <button @onclick="() => EditEmployee(employee.ID)" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-title="Edit">
                                         Edit <i class="fas fa-user-edit"></i>
                                     </button>
                                     <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Detail View">
@@ -91,19 +90,19 @@
         </thead>
         <tbody>
 
-            @for (var i = 0; i < FilterEmployee.Count; i++)
+            @foreach (var employee in FilterEmployee)
             {
                 <tr>
-                    <th scope="row">@(i + 1)</th>
-                    <td>@FilterEmployee[i].Name</td>
-                    <td>@FilterEmployee[i].Position</td>
-                    <td>@FilterEmployee[i].Salary</td>
-                    <td>@FilterEmployee[i].Age</td>
-                    <td>@FilterEmployee[i].Dob.ToString("d-MMM-yyyy")</td>
-                    <td>@FilterEmployee[i].JoinDate.ToString("d-MMM-yyyy h:mm:ss")</td>
+                    <th scope="row">@(++idx)</th>
+                    <td>@employee.Name</td>
+                    <td>@employee.Position</td>
+                    <td>@employee.Salary</td>
+                    <td>@employee.Age</td>
+                    <td>@employee.Dob.ToString("d-MMM-yyyy")</td>
+                    <td>@employee.JoinDate.ToString("d-MMM-yyyy h:mm:ss")</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button @onclick="() => EditEmployee(FilterEmployee[i])" type="button" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-title="Edit">
+                            <button @onclick="() => EditEmployee(employee.ID)" type="button" class="btn btn-primary">
                                 Edit <i class="fas fa-user-edit"></i>
                             </button>
                             <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Detail View">
@@ -131,6 +130,7 @@
     //Declare Varaiable
     private string? SearchString { get; set;  }
     private string? SelectPosition { get; set; }
+    public int idx { get; set; }
 
     //for Browser Resize
     private DotNetObjectReference<Index>? _objectReference;
@@ -152,6 +152,7 @@
         if (firstRender)
         {
             await ResizeWindowWidthListener();
+            idx = 0;
             StateHasChanged();
         }
     }
@@ -183,12 +184,14 @@
     public void UpdateWindowWidth(int windowWidth)
     {
         WindowWidth = windowWidth;
+        idx = 0;
         StateHasChanged();
     }
     [JSInvokable]
     public void GetInitalWidthCS(int windowWidth)
     {
         WindowWidth = windowWidth;
+        idx = 0;
         StateHasChanged();
     }
 
@@ -214,8 +217,8 @@
     }
 
     //EditEmployee
-    public void EditEmployee(Employee employee)
+    public void EditEmployee(int Id)
     {
-        navigate.NavigateTo($"/editEmployee/{employee}");
+        navigate.NavigateTo($"/editEmployee/{Id}");
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BlazorEmployee.Modals;
+using System.Net.Http.Headers;
 
 namespace BlazorEmployee.Services
 {
@@ -11,7 +12,7 @@ namespace BlazorEmployee.Services
                 Name = "Aung",
                 Age = 23,
                 Dob = new DateOnly(1998, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0,  100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Manager",
                 Salary = 3
@@ -21,7 +22,7 @@ namespace BlazorEmployee.Services
                 Name = "Hla",
                 Age = 25,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0,  100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Senior",
                 Salary = 3
@@ -31,7 +32,7 @@ namespace BlazorEmployee.Services
                 Name = "Test",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0,  100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
@@ -41,7 +42,7 @@ namespace BlazorEmployee.Services
                 Name = "Su",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Senior",
                 Salary = 3
@@ -51,7 +52,7 @@ namespace BlazorEmployee.Services
                 Name = "Htet",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Manager",
                 Salary = 3
@@ -61,7 +62,7 @@ namespace BlazorEmployee.Services
                 Name = "Kyaw",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
@@ -71,7 +72,7 @@ namespace BlazorEmployee.Services
                 Name = "San",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Senior",
                 Salary = 3
@@ -81,7 +82,7 @@ namespace BlazorEmployee.Services
                 Name = "Mg",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
@@ -91,7 +92,7 @@ namespace BlazorEmployee.Services
                 Name = "Aung",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Manager",
                 Salary = 3
@@ -101,7 +102,7 @@ namespace BlazorEmployee.Services
                 Name = "Hla",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
@@ -111,7 +112,7 @@ namespace BlazorEmployee.Services
                 Name = "Test",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Senior",
                 Salary = 3
@@ -121,7 +122,7 @@ namespace BlazorEmployee.Services
                 Name = "Su",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
@@ -131,7 +132,7 @@ namespace BlazorEmployee.Services
                 Name = "Htet",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Manager",
                 Salary = 3
@@ -141,7 +142,7 @@ namespace BlazorEmployee.Services
                 Name = "Kyaw",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Junior",
                 Salary = 3
@@ -151,7 +152,7 @@ namespace BlazorEmployee.Services
                 Name = "San",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Senior",
                 Salary = 3
@@ -161,7 +162,7 @@ namespace BlazorEmployee.Services
                 Name = "Mg",
                 Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
-                ID = Guid.NewGuid().GetHashCode(),
+                ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
                 Position = "Manager",
                 Salary = 3
@@ -171,6 +172,12 @@ namespace BlazorEmployee.Services
         public void AddEmployee(Employee employee)
         {
             Employees.Add(employee);
+        }
+
+        public void UpdateEmployee(Employee employee)
+        {
+            var idx = Employees.IndexOf(employee);
+            Employees[idx] = employee;
         }
     }
 }

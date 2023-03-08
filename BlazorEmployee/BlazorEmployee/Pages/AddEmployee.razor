@@ -7,17 +7,17 @@
 
 @code {
     public Employee? Employee { get; set; } = new Employee()
-    {
-            Name = string.Empty,
+        {
+            Name = "",
             Age = 0,
             Dob = DateOnly.FromDateTime(DateTime.Now),
-            ID = Guid.NewGuid().GetHashCode(),
+            ID = new Random().Next(0, 100000000),
             JoinDate = DateTime.Now,
-            Position = string.Empty,
+            Position = "",
             Salary = 0
-    };
+        };
 
-    public async void HandleAddEmployee(Employee employee)
+    public void HandleAddEmployee(Employee employee)
     {
         data.AddEmployee(employee);
         navigate.NavigateTo("/");

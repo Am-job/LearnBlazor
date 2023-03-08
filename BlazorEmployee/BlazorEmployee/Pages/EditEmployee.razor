@@ -1,0 +1,25 @@
+﻿@page "/editEmployee/{id:int}"
+@inject GetData data
+@inject NavigationManager navigate
+
+
+<HeaderBackComponent ButtonTitle="Back">Edit Employee</HeaderBackComponent>
+<FormComponent Data="Employee" Submit="HandleEdit" IsDisabled="false"></FormComponent>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    public Employee? Employee { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Employee = data.Employees.Find(p => p.ID == Id);
+    }
+
+    public void HandleEdit(Employee employee)
+    {
+        data.UpdateEmployee(employee);
+        navigate.NavigateTo("/");
+    }
+}
