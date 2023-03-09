@@ -1,9 +1,8 @@
 ﻿@*Form Control and Handle Submit*@
 
 <div class="row">
-    <EditForm Model="@Data" OnValidSubmit="@HandleSubmit" class="mx-auto col-md-6 col-12 my-2">
+    <EditForm Model="@Data" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalid" class="mx-auto col-md-6 col-12 my-2">
         <DataAnnotationsValidator />
-        <ValidationSummary />
     <div class="mb-3">
         <label for="Name" class="form-label">Name</label>
         <input type="text" readonly="@IsDisabled" class="form-control" id="Name" @bind-value="Data.Name">
@@ -53,6 +52,9 @@
     public EventCallback<Employee> Submit { get; set; }
 
     [Parameter]
+    public EventCallback<Employee> Invalid { get; set; }
+
+    [Parameter]
     public bool IsDisabled { get; set; }
 
     [Parameter]
@@ -61,5 +63,10 @@
     public async void HandleSubmit()
     {
         await Submit.InvokeAsync(Data);
+    }
+
+    public async void HandleInvalid()
+    {
+        await Invalid.InvokeAsync();
     }
 }

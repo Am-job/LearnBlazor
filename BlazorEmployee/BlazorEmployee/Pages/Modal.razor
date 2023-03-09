@@ -1,22 +1,22 @@
-﻿@inject IJSRuntime JSRuntime
+﻿@inject GetData data
 
-<div class="modal fade show" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
-    <div class="modal-dialog">
+<div class="modal-backdrop" style="background:rgba(0,0,0,0.6)">
+    <div class="modal fade show" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5">@ButtonTitle</h1>
                 <button type="button" class="btn-close" @onclick="HandleClose" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                @ChildContent
-            </div>
-            <div class="modal-footer">
-                <button type="button" @onclick="HandleClose" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn @ButtonColor">@ButtonTitle</button>
+            <div class="modal-body d-flex justify-content-end">
+                <button type="button" @onclick="HandleClose" class="btn btn-secondary mx-1">Close</button>
+                <button type="button" class="btn @ButtonColor" @onclick="HandleDelete">@ButtonTitle</button>
             </div>
         </div>
     </div>
 </div>
+</div>
+
 
 
 @code {
@@ -27,13 +27,22 @@
     public string? ButtonColor { get; set; }
 
     [Parameter]
+    public int ID { get; set; }
+
+    [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
-    public Action Close { get; set; }
+    public Action? Close { get; set; }
 
     private void HandleClose()
     {
+        Close?.Invoke();
+    }
+
+    public void HandleDelete()
+    {
+        data.DeleteEmployee(ID);
         Close?.Invoke();
     }
 }

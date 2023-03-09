@@ -11,14 +11,11 @@
     </div>
     <div class="form-group col-md-5 col-sm-10 mx-sm-auto m-1">
         <div class="input-group">
-            <input type="text" class="form-control" @onfocusout="HandleSearch" @bind="@SearchString" placeholder="Search...">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" @onclick="HandleSearch"><i class="fas fa-search"></i></button>
-            </div>
+            <input class="form-control" @onchange="HandleSearch" placeholder="Search..." />
         </div>
     </div>
     <div class="form-group col-md-5 col-sm-10 mx-sm-auto m-1">
-        <select @onclick="HandleSearch" class="form-control" id="position" @bind="SelectPosition">
+        <select @onclick="HandleSelect" class="form-control" id="position" @bind="SelectPosition">
             <option value="" disabled selected>-- Select Employee' Position --</option>
             <option value="">All</option>
             <option value="Manager">Manager</option>
@@ -38,31 +35,31 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var employee in FilterEmployee)
+            @foreach (var employee in FilterEmployee.Select((data, index) => (data, index)))
             {
                 <tr>
                     <td scope="row">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">@(++idx)</li>
+                            <li class="list-group-item">@(employee.index + 1)</li>
                         </ul>
                     </td>
                     <td>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Name: @employee.Name</li>
-                            <li class="list-group-item">Position: @employee.Position</li>
-                            <li class="list-group-item">Salary: @employee.Salary</li>
-                            <li class="list-group-item">Age: @employee.Age</li>
-                            <li class="list-group-item">Date of Birth: @employee.Dob.ToString("d-MMM-yyyy")</li>
-                            <li class="list-group-item">JoinDate: @employee.JoinDate.ToString("d-MMM-yyyy h:m:s")</li>
+                            <li class="list-group-item">Name: @employee.data.Name</li>
+                            <li class="list-group-item">Position: @employee.data.Position</li>
+                            <li class="list-group-item">Salary: @employee.data.Salary</li>
+                            <li class="list-group-item">Age: @employee.data.Age</li>
+                            <li class="list-group-item">Date of Birth: @employee.data.Dob.ToString("d-MMM-yyyy")</li>
+                            <li class="list-group-item">JoinDate: @employee.data.JoinDate.ToString("d-MMM-yyyy h:mm tt")</li>
                             <li class="list-group-item">
                                 <div class="btn-group" role="group">
-                                    <button @onclick="() => EditEmployee(employee.ID)" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-title="Edit">
+                                    <button @onclick="() => EditEmployee(employee.data.ID)" type="button" class="btn btn-primary">
                                         Edit <i class="fas fa-user-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Detail View">
+                                    <button @onclick="() => Detail(employee.data.ID)" type="button" class="btn btn-success">
                                         Explore <i class="fas fa-binoculars"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                            <button @onclick="() => DeleteOpen(employee.data)" type="button" class="btn btn-danger">
                                         Delete <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -90,25 +87,25 @@
         </thead>
         <tbody>
 
-            @foreach (var employee in FilterEmployee)
+            @foreach (var employee in FilterEmployee.Select((data, index) => (data, index)))
             {
                 <tr>
-                    <th scope="row">@(++idx)</th>
-                    <td>@employee.Name</td>
-                    <td>@employee.Position</td>
-                    <td>@employee.Salary</td>
-                    <td>@employee.Age</td>
-                    <td>@employee.Dob.ToString("d-MMM-yyyy")</td>
-                    <td>@employee.JoinDate.ToString("d-MMM-yyyy h:mm:ss")</td>
+                    <th scope="row">@(employee.index + 1)</th>
+                    <td>@employee.data.Name</td>
+                    <td>@employee.data.Position</td>
+                    <td>@employee.data.Salary</td>
+                    <td>@employee.data.Age</td>
+                    <td>@employee.data.Dob.ToString("d-MMM-yyyy")</td>
+                            <td>@employee.data.JoinDate.ToString("d-MMM-yyyy h:mm tt")</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button @onclick="() => EditEmployee(employee.ID)" type="button" class="btn btn-primary">
+                            <button @onclick="() => EditEmployee(employee.data.ID)" type="button" class="btn btn-primary">
                                 Edit <i class="fas fa-user-edit"></i>
                             </button>
-                            <button @onclick="() => Detail(employee.ID)" type="button" class="btn btn-success">
+                            <button @onclick="() => Detail(employee.data.ID)" type="button" class="btn btn-success">
                                 Explore <i class="fas fa-binoculars"></i>
                             </button>
-                            <button @onclick="() => DeleteOpen(employee)" type="button" class="btn btn-danger">
+                            <button @onclick="() => DeleteOpen(employee.data)" type="button" class="btn btn-danger">
                                 Delete <i class="fas fa-trash"></i>
                             </button>
                         </div>
@@ -121,15 +118,8 @@
 
 @if (DeleteView)
 {
-    <Modal ButtonTitle="Delete" Close="DeleteClose" ButtonColor="btn-danger">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Name: @DeleteEmployee.Name</li>
-            <li class="list-group-item">Position: @DeleteEmployee.Position</li>
-            <li class="list-group-item">Salary: @DeleteEmployee.Salary</li>
-            <li class="list-group-item">Age: @DeleteEmployee.Age</li>
-            <li class="list-group-item">Date of Birth: @DeleteEmployee.Dob.ToString("d-MMM-yyyy")</li>
-            <li class="list-group-item">JoinDate: @DeleteEmployee.JoinDate.ToString("d-MMM-yyyy h:m:s")</li>
-        </ul>
+    <Modal ButtonTitle="Delete" Close="DeleteClose" ID="@DeleteEmployee.ID" ButtonColor="btn-danger">
+        
     </Modal>
 }
 
@@ -143,7 +133,6 @@
     private List<Employee>? FilterEmployee { get; set; }
     private string? SearchString { get; set;  }
     private string? SelectPosition { get; set; }
-    public int idx { get; set; }
 
     //for Browser Resize
     private DotNetObjectReference<Index>? _objectReference;
@@ -165,7 +154,6 @@
         if (firstRender)
         {
             await ResizeWindowWidthListener();
-            idx = 0;
             StateHasChanged();
         }
     }
@@ -179,14 +167,13 @@
     public void UpdateWindowWidth(int windowWidth)
     {
         WindowWidth = windowWidth;
-        idx = 0;
         StateHasChanged();
     }
+
     [JSInvokable]
     public void GetInitalWidthCS(int windowWidth)
     {
         WindowWidth = windowWidth;
-        idx = 0;
         StateHasChanged();
     }
     // Listen Resize and Dispose
@@ -218,7 +205,7 @@
 
         if (!string.IsNullOrWhiteSpace(SearchString))
         {
-            result = result.FindAll(d => d.Name.Contains(SearchString, StringComparison.OrdinalIgnoreCase));
+            result = result.FindAll(d => d.Name.Contains(SearchString.Trim(), StringComparison.OrdinalIgnoreCase));
         }
 
         if (!string.IsNullOrWhiteSpace(SelectPosition))
@@ -228,11 +215,15 @@
 
         FilterEmployee = result;
     }
-    private void HandleSearch()
+    private void HandleSearch(ChangeEventArgs e)
+    {
+        SearchString = e?.Value?.ToString();
+        SearchTable();
+    }
+    private void HandleSelect()
     {
         SearchTable();
     }
-
 
 
     //Navigate
@@ -262,12 +253,10 @@
     {
         DeleteView = true;
         DeleteEmployee = employee;
-        idx = 0;
     }
     public void DeleteClose()
     {
         DeleteView = false;
-        idx = 0;
         StateHasChanged();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BlazorEmployee.Modals;
 using System.Net.Http.Headers;
+using System.Runtime.Serialization.Formatters;
 
 namespace BlazorEmployee.Services
 {
@@ -178,6 +179,15 @@ namespace BlazorEmployee.Services
         {
             var idx = Employees.IndexOf(employee);
             Employees[idx] = employee;
+        }
+
+        public void DeleteEmployee(int Id)
+        {
+            var EmployeeToDelete = Employees.FirstOrDefault(d => d.ID == Id);
+            if(EmployeeToDelete != null)
+            {
+                Employees.Remove(EmployeeToDelete); 
+            }
         }
     }
 }

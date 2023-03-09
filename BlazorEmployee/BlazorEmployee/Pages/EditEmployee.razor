@@ -1,25 +1,34 @@
 ﻿@page "/editEmployee/{id:int}"
 @inject GetData data
 @inject NavigationManager navigate
+@using BlazorEmployee.Modals
 
 
-<HeaderBackComponent ButtonTitle="Back">Edit Employee</HeaderBackComponent>
-<FormComponent Data="Employee" Submit="HandleEdit" ButtonTitle="Submit" IsDisabled="false"></FormComponent>
+<HeaderBackComponent IsBackAble="IsBackAble" ButtonTitle="Back">Edit Employee</HeaderBackComponent>
+<FormComponent Data="Employee" Invalid="Invalid" Submit="HandleEdit" ButtonTitle="Submit" IsDisabled="false"></FormComponent>
 
 @code {
     [Parameter]
     public int Id { get; set; }
 
-    public Employee? Employee { get; set; }
+    public bool IsBackAble { get; set; } = true;
+
+    public Employee? Employee { get; set; } = new Employee();
 
     protected override void OnInitialized()
     {
-        Employee = data.Employees.Find(p => p.ID == Id);
+        List<Employee> CloneEmployees = new List<Employee>(data.Employees);
+        Employee = CloneEmployees.Find(p => p.ID == Id);
     }
 
     public void HandleEdit(Employee employee)
     {
         data.UpdateEmployee(employee);
         navigate.NavigateTo("/");
+    }
+
+    public void Invalid()
+    {
+        IsBackAble = !IsBackAble;
     }
 }

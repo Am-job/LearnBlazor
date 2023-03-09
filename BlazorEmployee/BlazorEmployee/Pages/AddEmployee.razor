@@ -2,8 +2,8 @@
 @inject GetData data
 @inject NavigationManager navigate
 
-<HeaderBackComponent ButtonTitle="Back">Add Employee</HeaderBackComponent>
-<FormComponent Data="Employee" Submit="HandleAddEmployee" ButtonTitle="Submit" IsDisabled="false"></FormComponent>
+<HeaderBackComponent IsBackAble="true" ButtonTitle="Back">Add Employee</HeaderBackComponent>
+<FormComponent Data="Employee" Invalid="Invalid" Submit="HandleAddEmployee" ButtonTitle="Submit" IsDisabled="false"></FormComponent>
 
 @code {
     public Employee? Employee { get; set; } = new Employee()
@@ -19,7 +19,17 @@
 
     public void HandleAddEmployee(Employee employee)
     {
-        data.AddEmployee(employee);
-        navigate.NavigateTo("/");
+        if (IsValid)
+        {
+            data.AddEmployee(employee);
+            navigate.NavigateTo("/");
+        }
+    }
+
+    public bool IsValid { get; set; } = true;
+
+    public void Invalid()
+    {
+        IsValid = !IsValid;
     }
 }

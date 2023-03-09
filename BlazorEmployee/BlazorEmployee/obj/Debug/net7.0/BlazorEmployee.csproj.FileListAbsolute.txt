@@ -834,6 +834,7 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\Blaz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\BlazorEmployee.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\blazor.boot.json
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\blazor.webassembly.js
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Blazored.Typeahead.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\BlazorEmployee.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\BlazorEmployee.pdb
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\dotnet.7.0.3.x6iwr4q7gx.js
@@ -1038,6 +1039,7 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwr
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Text.Encoding.CodePages.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Formats.Asn1.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.ObjectModel.dll.gz
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Blazored.Typeahead.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\dotnet.7.0.3.x6iwr4q7gx.js.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Reflection.Emit.ILGeneration.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\dotnet.timezones.blat.gz
@@ -1238,6 +1240,7 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwr
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\BlazorEmployee.staticwebassets.runtime.json
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\BlazorEmployee.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\BlazorEmployee.pdb
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\Blazored.Typeahead.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\Microsoft.AspNetCore.Authorization.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\Microsoft.AspNetCore.Components.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\Microsoft.AspNetCore.Components.Forms.dll
@@ -1436,6 +1439,7 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\icud
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\icudt_CJK.dat
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\icudt_EFIGS.dat
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\icudt_no_CJK.dat
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\+MnVn3mH.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\sooq5M+k.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\QfuLWSzt.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\EIvKe+qG.gz

@@ -2,6 +2,25 @@
   "version": 3,
   "targets": {
     "net7.0": {
+      "Blazored.Typeahead/4.7.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "6.0.3",
+          "Microsoft.AspNetCore.Components.Web": "6.0.3"
+        },
+        "compile": {
+          "lib/net6.0/Blazored.Typeahead.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Blazored.Typeahead.dll": {}
+        },
+        "build": {
+          "buildTransitive/Blazored.Typeahead.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Blazored.Typeahead.props": {}
+        }
+      },
       "FontAwesome/4.7.0": {
         "type": "package"
       },
@@ -481,6 +500,25 @@
       }
     },
     "net7.0/browser-wasm": {
+      "Blazored.Typeahead/4.7.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "6.0.3",
+          "Microsoft.AspNetCore.Components.Web": "6.0.3"
+        },
+        "compile": {
+          "lib/net6.0/Blazored.Typeahead.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Blazored.Typeahead.dll": {}
+        },
+        "build": {
+          "buildTransitive/Blazored.Typeahead.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Blazored.Typeahead.props": {}
+        }
+      },
       "FontAwesome/4.7.0": {
         "type": "package"
       },
@@ -955,6 +993,25 @@
     }
   },
   "libraries": {
+    "Blazored.Typeahead/4.7.0": {
+      "sha512": "fTN4Bt9rwEE/d33FXFd+h/DBjVtsFJLRf9B8mu0zJWMWG5Mk2tU2il3aK0+laUxNgBNBgEL0jW/831I+oapd6A==",
+      "type": "package",
+      "path": "blazored.typeahead/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "blazored.typeahead.4.7.0.nupkg.sha512",
+        "blazored.typeahead.nuspec",
+        "build/Blazored.Typeahead.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "buildMultiTargeting/Blazored.Typeahead.props",
+        "buildTransitive/Blazored.Typeahead.props",
+        "icon.png",
+        "lib/net6.0/Blazored.Typeahead.dll",
+        "staticwebassets/blazored-typeahead.css",
+        "staticwebassets/blazored-typeahead.js"
+      ]
+    },
     "FontAwesome/4.7.0": {
       "sha512": "n4H/brfszElyoZ4kmGh8E75uqvLzLvFr3h2PFVdPH1LwUmWIpeqdaW2pcC4oZAhg7sESyObh0IZpAI8COCNeUg==",
       "type": "package",
@@ -1823,25 +1880,31 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Blazored.Typeahead >= 4.7.0",
       "FontAwesome >= 4.7.0",
       "Microsoft.AspNetCore.Components.WebAssembly >= 7.0.3",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 7.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aungm\\.nuget\\packages\\": {}
+    "C:\\Users\\Server\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aungm\\OneDrive\\Desktop\\LearnBlazor\\LearnBlazor\\BlazorEmployee\\BlazorEmployee\\BlazorEmployee.csproj",
+      "projectUniqueName": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\BlazorEmployee.csproj",
       "projectName": "BlazorEmployee",
-      "projectPath": "C:\\Users\\aungm\\OneDrive\\Desktop\\LearnBlazor\\LearnBlazor\\BlazorEmployee\\BlazorEmployee\\BlazorEmployee.csproj",
-      "packagesPath": "C:\\Users\\aungm\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aungm\\OneDrive\\Desktop\\LearnBlazor\\LearnBlazor\\BlazorEmployee\\BlazorEmployee\\obj\\",
+      "projectPath": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\BlazorEmployee.csproj",
+      "packagesPath": "C:\\Users\\Server\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Server\\source\\repos\\BlazorEmployee\\BlazorEmployee\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\aungm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Server\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1849,6 +1912,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1867,6 +1931,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "Blazored.Typeahead": {
+            "target": "Package",
+            "version": "[4.7.0, )"
+          },
           "FontAwesome": {
             "target": "Package",
             "version": "[4.7.0, )"
@@ -1903,7 +1971,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
