@@ -11,7 +11,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Aung",
-                Age = 23,
                 Dob = new DateOnly(1998, 9, 3),
                 ID = new Random().Next(0,  100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -21,7 +20,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Hla",
-                Age = 25,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0,  100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -31,7 +29,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Test",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0,  100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -41,7 +38,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Su",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -51,7 +47,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Htet",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -61,7 +56,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Kyaw",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -71,7 +65,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "San",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -81,7 +74,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Mg",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -91,7 +83,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Aung",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -101,7 +92,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Hla",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -111,7 +101,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Test",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -121,7 +110,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Su",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -131,7 +119,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Htet",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -141,7 +128,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Kyaw",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -151,7 +137,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "San",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -161,7 +146,6 @@ namespace BlazorEmployee.Services
             new Employee()
             {
                 Name = "Mg",
-                Age = 23,
                 Dob = new DateOnly(2010, 9, 3),
                 ID = new Random().Next(0, 100000000),
                 JoinDate = new DateTime(2010, 9, 3),
@@ -175,9 +159,9 @@ namespace BlazorEmployee.Services
             Employees.Add(employee);
         }
 
-        public void UpdateEmployee(Employee employee)
+        public void UpdateEmployee(Employee employee, int Id)
         {
-            var idx = Employees.IndexOf(employee);
+            var idx = Employees.FindIndex(data => data.ID == Id);
             Employees[idx] = employee;
         }
 
@@ -188,6 +172,20 @@ namespace BlazorEmployee.Services
             {
                 Employees.Remove(EmployeeToDelete); 
             }
+        }
+
+        public List<Employee> clone()
+        {
+            List<Employee> cloneEmployee = Employees.Select(x => new Employee()
+            {
+                Name = x.Name,
+                Dob = x.Dob,
+                ID = x.ID,
+                JoinDate = x.JoinDate,
+                Position = x.Position,
+                Salary = x.Salary,
+            }).ToList();
+            return cloneEmployee;
         }
     }
 }

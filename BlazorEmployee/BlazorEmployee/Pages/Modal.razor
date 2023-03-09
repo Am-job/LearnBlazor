@@ -8,9 +8,8 @@
                 <h1 class="modal-title fs-5">@ButtonTitle</h1>
                 <button type="button" class="btn-close" @onclick="HandleClose" aria-label="Close"></button>
             </div>
-            <div class="modal-body d-flex justify-content-end">
-                <button type="button" @onclick="HandleClose" class="btn btn-secondary mx-1">Close</button>
-                <button type="button" class="btn @ButtonColor" @onclick="HandleDelete">@ButtonTitle</button>
+            <div class="modal-body d-flex justify-content-center">
+                @ChildContent
             </div>
         </div>
     </div>
@@ -37,12 +36,6 @@
 
     private void HandleClose()
     {
-        Close?.Invoke();
-    }
-
-    public void HandleDelete()
-    {
-        data.DeleteEmployee(ID);
         Close?.Invoke();
     }
 }

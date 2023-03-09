@@ -14,10 +14,6 @@ namespace BlazorEmployee.Modals
         public string Name { get; set; } = string.Empty;
 
 
-        [Required(ErrorMessage = "Please enter your age.")]
-        [Range(14, 100, ErrorMessage = "Please enter a valid age.")]
-        public int Age { get; set; }
-
         public DateOnly Dob { get; set; }      
 
 

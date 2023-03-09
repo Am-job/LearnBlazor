@@ -2,6 +2,8 @@
 @implements IAsyncDisposable
 @inject IJSRuntime JSRuntime
 @inject NavigationManager navigate
+
+
 <PageTitle>Employee Status</PageTitle>
 
 <h3>List of User</h3>
@@ -25,6 +27,9 @@
     </div>
 </div>
 
+@if (FilterEmployee == null){
+    <p>Loading ....</p>
+} else {
 @if (WindowWidth < 768)
 {
     <table class="table">
@@ -48,19 +53,15 @@
                             <li class="list-group-item">Name: @employee.data.Name</li>
                             <li class="list-group-item">Position: @employee.data.Position</li>
                             <li class="list-group-item">Salary: @employee.data.Salary</li>
-                            <li class="list-group-item">Age: @employee.data.Age</li>
                             <li class="list-group-item">Date of Birth: @employee.data.Dob.ToString("d-MMM-yyyy")</li>
                             <li class="list-group-item">JoinDate: @employee.data.JoinDate.ToString("d-MMM-yyyy h:mm tt")</li>
                             <li class="list-group-item">
                                 <div class="btn-group" role="group">
-                                    <button @onclick="() => EditEmployee(employee.data.ID)" type="button" class="btn btn-primary">
-                                        Edit <i class="fas fa-user-edit"></i>
+                                     <button @onclick="() => EditEmployee(employee.data.ID)" type="button" class="btn btn-outline-primary">
+                                        <i class="fas fa-user-edit"></i>
                                     </button>
-                                    <button @onclick="() => Detail(employee.data.ID)" type="button" class="btn btn-success">
-                                        Explore <i class="fas fa-binoculars"></i>
-                                    </button>
-                                            <button @onclick="() => DeleteOpen(employee.data)" type="button" class="btn btn-danger">
-                                        Delete <i class="fas fa-trash"></i>
+                                    <button @onclick="() => DeleteOpen(employee.data)" type="button" class="btn btn-outline-danger">
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
                             </li>
@@ -70,7 +71,8 @@
             }
         </tbody>
     </table>
-} else
+}
+else
 {
     <table class="table">
         <thead>
@@ -79,7 +81,6 @@
                 <th scope="col">Name</th>
                 <th scope="col">Position</th>
                 <th scope="col">Salary</th>
-                <th scope="col">Age</th>
                 <th scope="col">Date of birth</th>
                 <th scope="col">Join Date</th>
                 <th scope="col">Settings</th>
@@ -94,19 +95,15 @@
                     <td>@employee.data.Name</td>
                     <td>@employee.data.Position</td>
                     <td>@employee.data.Salary</td>
-                    <td>@employee.data.Age</td>
                     <td>@employee.data.Dob.ToString("d-MMM-yyyy")</td>
-                            <td>@employee.data.JoinDate.ToString("d-MMM-yyyy h:mm tt")</td>
+                    <td>@employee.data.JoinDate.ToString("d-MMM-yyyy h:mm tt")</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button @onclick="() => EditEmployee(employee.data.ID)" type="button" class="btn btn-primary">
-                                Edit <i class="fas fa-user-edit"></i>
+                            <button @onclick="() => EditEmployee(employee.data.ID)" type="button" class="btn btn-outline-primary">
+                                <i class="fas fa-user-edit"></i>
                             </button>
-                            <button @onclick="() => Detail(employee.data.ID)" type="button" class="btn btn-success">
-                                Explore <i class="fas fa-binoculars"></i>
-                            </button>
-                            <button @onclick="() => DeleteOpen(employee.data)" type="button" class="btn btn-danger">
-                                Delete <i class="fas fa-trash"></i>
+                            <button @onclick="() => DeleteOpen(employee.data)" type="button" class="btn btn-outline-danger">
+                                <i class="fas fa-trash"></i>
                             </button>
                         </div>
                     </td>
@@ -115,30 +112,34 @@
         </tbody>
     </table>
 }
+}
 
 @if (DeleteView)
 {
-    <Modal ButtonTitle="Delete" Close="DeleteClose" ID="@DeleteEmployee.ID" ButtonColor="btn-danger">
-        
+    <Modal Close="DeleteClose" ID="@DeleteEmployee.ID">
+        <button type="button" @onclick="DeleteClose" class="btn btn-primary mx-1">Close</button>
+        <button type="button" class="btn btn-danger" @onclick="HandleDelete">Delete</button>
     </Modal>
 }
-
+@if (EditView)
+{
+    
+}
 
 @code{
-    //Get Data From Local Database
+    //Project Setup
     [Inject]
-    public GetData? Data { get; set; } // ServiceFile
-
-    //Declare Varaiable
+    public GetData? Data { get; set; } 
     private List<Employee>? FilterEmployee { get; set; }
     private string? SearchString { get; set;  }
     private string? SelectPosition { get; set; }
+    protected bool DeleteView { get; set; } = false;
+    private Employee DeleteEmployee { get; set; }
+    private bool EditView { get; set; } = false;
 
     //for Browser Resize
     private DotNetObjectReference<Index>? _objectReference;
     public int WindowWidth { get; set; }
-
-    //Initialize Project
     protected async override void OnInitialized()
     {
         SearchTable();
@@ -147,8 +148,6 @@
         _objectReference = DotNetObjectReference.Create(this);
         await IntialWidthListener();
     }
-
-    //After Render
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -194,10 +193,6 @@
 
 
 
-
-
-
-
     //Search and filter Function
     private void SearchTable()
     {
@@ -226,29 +221,22 @@
     }
 
 
+
     //Navigate
+    //AddEmployee
     public void AddEmployee()
     {
-        navigate.NavigateTo("/addEmployee");
+        navigate.NavigateTo("/editEmployee");
     }
-
     //EditEmployee
     public void EditEmployee(int Id)
     {
-        navigate.NavigateTo($"/editEmployee/{Id}");
+        navigate.NavigateTo($"/editEmployee?id={Id}");
     }
 
-    //Detail View Function
-    public void Detail(int Id)
-    {
-        navigate.NavigateTo($"/detailView/{Id}");
-    }
 
 
     //Delete Modal
-    protected bool DeleteView { get; set; } = false;
-    private Employee DeleteEmployee { get; set; }
-
     public void DeleteOpen(Employee employee)
     {
         DeleteView = true;
@@ -258,5 +246,10 @@
     {
         DeleteView = false;
         StateHasChanged();
+    }
+    public void HandleDelete()
+    {
+        Data.DeleteEmployee(DeleteEmployee.ID);
+        DeleteClose();
     }
 }

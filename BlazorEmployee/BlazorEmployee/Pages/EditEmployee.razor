@@ -1,30 +1,57 @@
-﻿@page "/editEmployee/{id:int}"
+﻿@page "/editEmployee"
 @inject GetData data
 @inject NavigationManager navigate
 @using BlazorEmployee.Modals
 
-
-<HeaderBackComponent IsBackAble="IsBackAble" ButtonTitle="Back">Edit Employee</HeaderBackComponent>
-<FormComponent Data="Employee" Invalid="Invalid" Submit="HandleEdit" ButtonTitle="Submit" IsDisabled="false"></FormComponent>
+<HeaderBackComponent IsBackAble="@IsBackAble" ButtonTitle="Back">@Title Employee</HeaderBackComponent>
+<FormComponent Data="@EmployeeForm" Invalid="Invalid" Submit="HandleSubmit" PageTitle="@Title" IsDisabled="@IsDisabled"></FormComponent>
 
 @code {
+    [SupplyParameterFromQuery]
     [Parameter]
-    public int Id { get; set; }
+    public int Id { get; set; } 
 
     public bool IsBackAble { get; set; } = true;
+    public bool IsDisabled { get; set; } = false;
+    public string? Title { get; set; }
 
-    public Employee? Employee { get; set; } = new Employee();
+    public Employee? EmployeeForm { get; set; } = new Employee()
+        {
+            Name = "",
+            Dob = DateOnly.FromDateTime(DateTime.Now),
+            ID = new Random().Next(0, 100000000),
+            JoinDate = DateTime.Now,
+            Position = "",
+            Salary = 0
+        };
 
     protected override void OnInitialized()
     {
-        List<Employee> CloneEmployees = new List<Employee>(data.Employees);
-        Employee = CloneEmployees.Find(p => p.ID == Id);
+        if(Id >= 1)
+        {
+            EmployeeForm = data.clone().Find(p => p.ID == Id); // find , clone
+            IsDisabled = true;
+            Title = "Edit";
+        }
+        else
+        {
+            Title = "Add";
+        }
+
     }
 
-    public void HandleEdit(Employee employee)
+    public void HandleSubmit(Employee employee)
     {
-        data.UpdateEmployee(employee);
-        navigate.NavigateTo("/");
+        if(Id >= 1)
+        {
+            data.UpdateEmployee(employee, employee.ID);
+            navigate.NavigateTo("/");
+        }
+        else
+        {
+            data.UpdateEmployee(employee, employee.ID);
+            navigate.NavigateTo("/");
+        }
     }
 
     public void Invalid()
