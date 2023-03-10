@@ -27,5 +27,11 @@ namespace BlazorEmployee.Modals
 
         [Required(ErrorMessage = "Please enter your Join Date.")]
         public DateTime JoinDate { get; set; } 
+
+
+        public Employee ShallowCopy()
+        {
+            return (Employee) this.MemberwiseClone();
+        }
     }
 }

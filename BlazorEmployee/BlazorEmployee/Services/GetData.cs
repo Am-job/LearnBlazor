@@ -154,38 +154,28 @@ namespace BlazorEmployee.Services
             }
         };
 
-        public void AddEmployee(Employee employee)
+        public void UpdateEmployee(Employee employee)
         {
-            Employees.Add(employee);
-        }
-
-        public void UpdateEmployee(Employee employee, int Id)
-        {
-            var idx = Employees.FindIndex(data => data.ID == Id);
-            Employees[idx] = employee;
+            var idx = Employees.FindIndex(data => data.ID == employee?.ID);
+            if(idx >= 0)
+            {
+                Employees[idx] = employee;
+            }
+            else
+            {
+                Employees.Add(employee);
+            }
         }
 
         public void DeleteEmployee(int Id)
         {
-            var EmployeeToDelete = Employees.FirstOrDefault(d => d.ID == Id);
-            if(EmployeeToDelete != null)
+            var idx = Employees.FindIndex(d => d.ID == Id);
+            if(idx >= 0)
             {
-                Employees.Remove(EmployeeToDelete); 
+                Employees.RemoveAt(idx);
             }
         }
 
-        public List<Employee> clone()
-        {
-            List<Employee> cloneEmployee = Employees.Select(x => new Employee()
-            {
-                Name = x.Name,
-                Dob = x.Dob,
-                ID = x.ID,
-                JoinDate = x.JoinDate,
-                Position = x.Position,
-                Salary = x.Salary,
-            }).ToList();
-            return cloneEmployee;
-        }
+        
     }
 }

@@ -2,14 +2,22 @@
 @inject GetData data
 @inject NavigationManager navigate
 @using BlazorEmployee.Modals
+@inject ModalService editEvent
 
-<HeaderBackComponent IsBackAble="@IsBackAble" ButtonTitle="Back">@Title Employee</HeaderBackComponent>
+@if(isEditView == true)
+{
+    <HeaderBackComponent IsBackAble="@IsBackAble" ButtonTitle="Back">@Title Employee</HeaderBackComponent>
+}
+
 <FormComponent Data="@EmployeeForm" Invalid="Invalid" Submit="HandleSubmit" PageTitle="@Title" IsDisabled="@IsDisabled"></FormComponent>
 
 @code {
     [SupplyParameterFromQuery]
     [Parameter]
-    public int Id { get; set; } 
+    public int Id { get; set; }
+
+    [Parameter]
+    public bool isEditView { get; set; } = true;
 
     public bool IsBackAble { get; set; } = true;
     public bool IsDisabled { get; set; } = false;
@@ -29,7 +37,8 @@
     {
         if(Id >= 1)
         {
-            EmployeeForm = data.clone().Find(p => p.ID == Id); // find , clone
+            var employee = data.Employees.Find(p => p.ID == Id);
+            EmployeeForm = employee!.ShallowCopy();
             IsDisabled = true;
             Title = "Edit";
         }
@@ -42,16 +51,10 @@
 
     public void HandleSubmit(Employee employee)
     {
-        if(Id >= 1)
-        {
-            data.UpdateEmployee(employee, employee.ID);
-            navigate.NavigateTo("/");
-        }
-        else
-        {
-            data.UpdateEmployee(employee, employee.ID);
-            navigate.NavigateTo("/");
-        }
+
+        data.UpdateEmployee(employee);
+        navigate.NavigateTo("/");
+        editEvent.NotifyStateChanged("Edit", employee);
     }
 
     public void Invalid()

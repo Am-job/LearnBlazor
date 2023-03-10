@@ -1,8 +1,7 @@
 ﻿@*Form Control and Handle Submit*@
-@inject IJSRuntime JsRunTime
 
 <div class="row">
-<EditForm Model="@Data" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalid" class="mx-auto col-md-10 col-lg-8 col-12 my-2 row">
+<EditForm Model="@Data" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalid" class="mx-auto col-md-10 col-12 my-2 row">
     <DataAnnotationsValidator />
     <div class="mb-3 col-lg-6 col-12">
         <label for="Name" class="form-label">Name</label>
@@ -86,6 +85,5 @@ else
     public void HandleToggle()
     {
         IsDisabled = !IsDisabled;
-        JsRunTime.InvokeVoidAsync("console.log", Id);
     }
 }

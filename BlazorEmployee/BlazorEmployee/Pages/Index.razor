@@ -2,6 +2,8 @@
 @implements IAsyncDisposable
 @inject IJSRuntime JSRuntime
 @inject NavigationManager navigate
+@inject ModalService modal
+@implements IDisposable
 
 
 <PageTitle>Employee Status</PageTitle>
@@ -57,6 +59,9 @@
                             <li class="list-group-item">JoinDate: @employee.data.JoinDate.ToString("d-MMM-yyyy h:mm tt")</li>
                             <li class="list-group-item">
                                 <div class="btn-group" role="group">
+                                    <button @onclick="() => EditModal(employee.data.ID)" type="button" class="btn btn-outline-success">
+                                        <i class="fas fa-binoculars"></i>
+                                    </button>
                                      <button @onclick="() => EditEmployee(employee.data.ID)" type="button" class="btn btn-outline-primary">
                                         <i class="fas fa-user-edit"></i>
                                     </button>
@@ -99,6 +104,9 @@ else
                     <td>@employee.data.JoinDate.ToString("d-MMM-yyyy h:mm tt")</td>
                     <td>
                         <div class="btn-group" role="group">
+                            <button @onclick="() => EditModal(employee.data.ID)" type="button" class="btn btn-outline-success">
+                                <i class="fas fa-binoculars"></i>
+                            </button>
                             <button @onclick="() => EditEmployee(employee.data.ID)" type="button" class="btn btn-outline-primary">
                                 <i class="fas fa-user-edit"></i>
                             </button>
@@ -116,28 +124,35 @@ else
 
 @if (DeleteView)
 {
-    <Modal Close="DeleteClose" ID="@DeleteEmployee.ID">
+    <Modal Close="DeleteClose" ButtonTitle="Delete Employee">
         <button type="button" @onclick="DeleteClose" class="btn btn-primary mx-1">Close</button>
         <button type="button" class="btn btn-danger" @onclick="HandleDelete">Delete</button>
     </Modal>
 }
 @if (EditView)
 {
-    
+    <Modal Close="EditClose" ButtonTitle="Edit Employee">
+        <EditEmployee isEditView="false" Id="EditEmployeeId"></EditEmployee>
+    </Modal>
 }
 
 @code{
     //Project Setup
     [Inject]
-    public GetData? Data { get; set; } 
+    public GetData? Data { get; set; } // move to import.razor
     private List<Employee>? FilterEmployee { get; set; }
+
     private string? SearchString { get; set;  }
     private string? SelectPosition { get; set; }
-    protected bool DeleteView { get; set; } = false;
-    private Employee DeleteEmployee { get; set; }
-    private bool EditView { get; set; } = false;
 
-    //for Browser Resize
+    protected bool DeleteView { get; set; } = false;
+    private Employee? DeleteEmployee { get; set; }
+
+    private bool EditView { get; set; } = false;
+    private int EditEmployeeId { get; set; }
+
+
+    //for Browser Resize and lifeCycle
     private DotNetObjectReference<Index>? _objectReference;
     public int WindowWidth { get; set; }
     protected async override void OnInitialized()
@@ -147,6 +162,15 @@ else
         //for Browser Resize
         _objectReference = DotNetObjectReference.Create(this);
         await IntialWidthListener();
+        modal.modalClick += ABC;
+
+    }
+
+    private void ABC(string key, object obj )
+    {
+        SearchTable();
+        EditClose();
+        StateHasChanged();
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -155,6 +179,12 @@ else
             await ResizeWindowWidthListener();
             StateHasChanged();
         }
+    }
+    public async ValueTask DisposeAsync()
+    {
+        await JSRuntime.InvokeVoidAsync("RemoveWindowWidthListener", _objectReference);
+        _objectReference?.Dispose();
+        modal.modalClick -= ABC;
     }
 
 
@@ -184,12 +214,6 @@ else
     {
         await JSRuntime.InvokeVoidAsync("AddWindowWidthListener", _objectReference);
     }
-    public async ValueTask DisposeAsync()
-    {
-        await JSRuntime.InvokeVoidAsync("RemoveWindowWidthListener", _objectReference);
-        _objectReference?.Dispose();
-    }
-
 
 
 
@@ -245,11 +269,28 @@ else
     public void DeleteClose()
     {
         DeleteView = false;
+        SearchTable();
         StateHasChanged();
     }
     public void HandleDelete()
     {
         Data.DeleteEmployee(DeleteEmployee.ID);
         DeleteClose();
+    }
+
+    //Edit Modal 
+    public void EditModal(int Id)
+    {
+        EditView = true;
+        EditEmployeeId = Id;
+    }
+    public void EditClose()
+    {
+        EditView = false;
+        StateHasChanged();
+    }
+    public void Dispose()
+    {
+        modal.modalClick -= ABC;
     }
 }
