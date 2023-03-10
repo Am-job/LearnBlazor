@@ -826,11 +826,6 @@ C:\Users\aungm\OneDrive\Desktop\LearnBlazor\LearnBlazor\BlazorEmployee\BlazorEmp
 C:\Users\aungm\OneDrive\Desktop\LearnBlazor\LearnBlazor\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\refint\BlazorEmployee.dll
 C:\Users\aungm\OneDrive\Desktop\LearnBlazor\LearnBlazor\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\BlazorEmployee.pdb
 C:\Users\aungm\OneDrive\Desktop\LearnBlazor\LearnBlazor\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\ref\BlazorEmployee.dll
-C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Private.Xml.dll
-C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.ValueTuple.dll.gz
-C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\icudt_EFIGS.dat.gz
-C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\pSdHtHTa.gz
-C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\s7tUdkge.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\blazor.boot.json
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\blazor.webassembly.js
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Blazored.Typeahead.dll
@@ -956,6 +951,7 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwr
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Private.CoreLib.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Private.DataContractSerialization.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Private.Uri.dll
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Private.Xml.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Private.Xml.Linq.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Reflection.DispatchProxy.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Reflection.dll
@@ -1134,6 +1130,7 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwr
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.IO.Pipelines.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Threading.Timer.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Win32.Primitives.dll.gz
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.ValueTuple.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Runtime.Serialization.Formatters.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Binder.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.AspNetCore.Metadata.dll.gz
@@ -1168,6 +1165,7 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwr
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Formats.Tar.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Linq.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Diagnostics.FileVersionInfo.dll.gz
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\icudt_EFIGS.dat.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.Primitives.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.VisualBasic.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Runtime.InteropServices.RuntimeInformation.dll.gz
@@ -1492,6 +1490,7 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\buil
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\7aJ7IeQW.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\oFGxpuOS.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\vtRTS7t9.gz
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\pSdHtHTa.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\b2fBIyGi.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\gQpkvrKX.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\igCKzBS8.gz
@@ -1504,6 +1503,7 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\buil
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\+JN9Raf9.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\PMoE1Scu.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\XwNLeLMt.gz
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\s7tUdkge.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\t41Ea6V+.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\IvX+bnfM.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\build-gz\sQeqz5ui.gz

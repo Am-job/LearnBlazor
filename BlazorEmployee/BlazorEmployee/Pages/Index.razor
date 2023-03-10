@@ -1,10 +1,6 @@
 ﻿@page "/"
 @implements IAsyncDisposable
 @inject IJSRuntime JSRuntime
-@inject NavigationManager navigate
-@inject ModalService modal
-@implements IDisposable
-
 
 <PageTitle>Employee Status</PageTitle>
 
@@ -139,13 +135,13 @@ else
 @code{
     //Project Setup
     [Inject]
-    public GetData? Data { get; set; } // move to import.razor
+    private GetData? Data { get; set; } // move to import.razor
     private List<Employee>? FilterEmployee { get; set; }
 
     private string? SearchString { get; set;  }
     private string? SelectPosition { get; set; }
 
-    protected bool DeleteView { get; set; } = false;
+    private bool DeleteView { get; set; } = false;
     private Employee? DeleteEmployee { get; set; }
 
     private bool EditView { get; set; } = false;
@@ -154,7 +150,7 @@ else
 
     //for Browser Resize and lifeCycle
     private DotNetObjectReference<Index>? _objectReference;
-    public int WindowWidth { get; set; }
+    private int WindowWidth { get; set; }
     protected async override void OnInitialized()
     {
         SearchTable();
@@ -162,7 +158,7 @@ else
         //for Browser Resize
         _objectReference = DotNetObjectReference.Create(this);
         await IntialWidthListener();
-        modal.modalClick += ABC;
+        service.modalClick += ABC;
 
     }
 
@@ -184,7 +180,7 @@ else
     {
         await JSRuntime.InvokeVoidAsync("RemoveWindowWidthListener", _objectReference);
         _objectReference?.Dispose();
-        modal.modalClick -= ABC;
+        service.modalClick -= ABC;
     }
 
 
@@ -206,11 +202,11 @@ else
         StateHasChanged();
     }
     // Listen Resize and Dispose
-    private async Task IntialWidthListener()
+    public async Task IntialWidthListener()
     {
         await JSRuntime.InvokeVoidAsync("GetInitalWidthJS", _objectReference);
     }
-    private async Task ResizeWindowWidthListener()
+    public async Task ResizeWindowWidthListener()
     {
         await JSRuntime.InvokeVoidAsync("AddWindowWidthListener", _objectReference);
     }
@@ -248,12 +244,12 @@ else
 
     //Navigate
     //AddEmployee
-    public void AddEmployee()
+    private void AddEmployee()
     {
         navigate.NavigateTo("/editEmployee");
     }
     //EditEmployee
-    public void EditEmployee(int Id)
+    private void EditEmployee(int Id)
     {
         navigate.NavigateTo($"/editEmployee?id={Id}");
     }
@@ -261,36 +257,39 @@ else
 
 
     //Delete Modal
-    public void DeleteOpen(Employee employee)
+    private void DeleteOpen(Employee employee)
     {
         DeleteView = true;
         DeleteEmployee = employee;
     }
-    public void DeleteClose()
+    private void DeleteClose()
     {
         DeleteView = false;
         SearchTable();
         StateHasChanged();
     }
-    public void HandleDelete()
+    private void HandleDelete()
     {
         Data.DeleteEmployee(DeleteEmployee.ID);
         DeleteClose();
     }
 
     //Edit Modal 
-    public void EditModal(int Id)
+    public async void EditModal(int Id)
     {
         EditView = true;
+        await ToggleModal();
         EditEmployeeId = Id;
     }
-    public void EditClose()
+    public async void EditClose()
     {
         EditView = false;
+        await ToggleModal();
         StateHasChanged();
     }
-    public void Dispose()
+
+    public async Task ToggleModal()
     {
-        modal.modalClick -= ABC;
+        await JSRuntime.InvokeVoidAsync("AddBodyStyle", "Hello");
     }
 }

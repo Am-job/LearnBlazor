@@ -18,3 +18,7 @@ function UpdateWindowWidth(objReference) {
 function GetInitalWidthJS(objReference) {
     objReference.invokeMethodAsync("GetInitalWidthCS", window.innerWidth);
 }
+
+function AddBodyStyle(data) {
+    document.querySelector("body").classList.toggle("bodyModal");
+}

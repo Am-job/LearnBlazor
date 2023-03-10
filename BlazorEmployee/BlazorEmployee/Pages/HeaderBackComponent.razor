@@ -1,20 +1,12 @@
 ﻿@*Title Header and Back to Home Route*@
-@inject NavigationManager navigate
 
 <div class="row pb-2 border-bottom">
     <div class="col-md-6 col-12 mx-auto d-flex justify-content-center align-items-center">
-        @if (IsBackAble)
-        {
-            <div class="col mx-auto">
-                <button class="btn btn-outline-dark" @onclick="Back">
-                    @ButtonTitle
-                </button>
-            </div>
-        }
-        else
-        {
-            <h4 class="py-2 mb-0">Please Fill Full Form To Back</h4>
-        }
+        <div class="col mx-auto">
+            <button class="btn btn-outline-dark" @onclick="Back">
+               @ButtonTitle
+            </button>
+        </div>
         <div class="col mx-auto mt-md-0 mt-2">
             <h4 class="py-2 text-center mb-0">@ChildContent</h4>
         </div>
@@ -34,6 +26,4 @@
     [Parameter]
     public string? ButtonTitle { get; set; }
 
-    [Parameter]
-    public bool IsBackAble { get; set; }
 }
