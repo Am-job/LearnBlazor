@@ -3,10 +3,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">@ButtonTitle</h1>
+                    <h1 class="modal-title fs-5">@buttonTitle</h1>
                 <button type="button" class="btn-close" @onclick="HandleClose" aria-label="Close"></button>
             </div>
-                @if (ButtonTitle == "Delete Employee")
+                @if (buttonTitle == "Delete Employee")
                 {
                     <div class="modal-body d-flex justify-content-center">
                         @ChildContent
@@ -27,7 +27,7 @@
 
 @code {
     [Parameter]
-    public string? ButtonTitle { get; set; }
+    public string? buttonTitle { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }

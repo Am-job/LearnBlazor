@@ -1,6 +1,5 @@
 ﻿@page "/"
 @implements IAsyncDisposable
-@inject IJSRuntime JSRuntime
 
 <PageTitle>Employee Status</PageTitle>
 
@@ -15,7 +14,7 @@
         </div>
     </div>
     <div class="form-group col-md-5 col-sm-10 mx-sm-auto m-1">
-        <select @onclick="HandleSelect" class="form-control" id="position" @bind="SelectPosition">
+        <select @onclick="HandleSelect" class="form-control" id="position" @bind="selectPosition">
             <option value="" disabled selected>-- Select Employee' Position --</option>
             <option value="">All</option>
             <option value="Manager">Manager</option>
@@ -25,7 +24,8 @@
     </div>
 </div>
 
-@if (FilterEmployee == null){
+@if (filterEmployee == null)
+{
     <p>Loading ....</p>
 } else {
 @if (WindowWidth < 768)
@@ -38,7 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var employee in FilterEmployee.Select((data, index) => (data, index)))
+                @foreach (var employee in filterEmployee.Select((data, index) => (data, index)))
             {
                 <tr>
                     <td scope="row">
@@ -61,7 +61,7 @@
                                      <button @onclick="() => EditEmployee(employee.data.ID)" type="button" class="btn btn-outline-primary">
                                         <i class="fas fa-user-edit"></i>
                                     </button>
-                                    <button @onclick="() => DeleteOpen(employee.data)" type="button" class="btn btn-outline-danger">
+                                    <button @onclick="() => DeleteOpen(employee.data.ID)" type="button" class="btn btn-outline-danger">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -89,7 +89,7 @@ else
         </thead>
         <tbody>
 
-            @foreach (var employee in FilterEmployee.Select((data, index) => (data, index)))
+                @foreach (var employee in filterEmployee.Select((data, index) => (data, index)))
             {
                 <tr>
                     <th scope="row">@(employee.index + 1)</th>
@@ -106,7 +106,7 @@ else
                             <button @onclick="() => EditEmployee(employee.data.ID)" type="button" class="btn btn-outline-primary">
                                 <i class="fas fa-user-edit"></i>
                             </button>
-                            <button @onclick="() => DeleteOpen(employee.data)" type="button" class="btn btn-outline-danger">
+                            <button @onclick="() => DeleteOpen(employee.data.ID)" type="button" class="btn btn-outline-danger">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
@@ -118,39 +118,36 @@ else
 }
 }
 
-@if (DeleteView)
+@if (deleteModal)
 {
     <Modal Close="DeleteClose" ButtonTitle="Delete Employee">
-        <button type="button" @onclick="DeleteClose" class="btn btn-primary mx-1">Close</button>
-        <button type="button" class="btn btn-danger" @onclick="HandleDelete">Delete</button>
+        <button type="button" class="btn btn-outline-danger" @onclick="HandleDelete">Delete</button>
+        <button type="button" @onclick="DeleteClose" class="btn btn-outline-dark mx-1">Close</button>
     </Modal>
 }
-@if (EditView)
+@if (editModal)
 {
     <Modal Close="EditClose" ButtonTitle="Edit Employee">
-        <EditEmployee isEditView="false" Id="EditEmployeeId"></EditEmployee>
+        <EditEmployee isEditView="false" Id="selectId"></EditEmployee>
     </Modal>
 }
 
 @code{
     //Project Setup
-    [Inject]
-    private GetData? Data { get; set; } // move to import.razor
-    private List<Employee>? FilterEmployee { get; set; }
+    private List<Employee>? filterEmployee { get; set; }
 
-    private string? SearchString { get; set;  }
-    private string? SelectPosition { get; set; }
+    private string? searchString { get; set;  }
+    private string? selectPosition { get; set; }
 
-    private bool DeleteView { get; set; } = false;
-    private Employee? DeleteEmployee { get; set; }
-
-    private bool EditView { get; set; } = false;
-    private int EditEmployeeId { get; set; }
+    private bool deleteModal { get; set; } = false;
+    private bool editModal { get; set; } = false;
+    private int selectId { get; set; } = 0;
 
 
-    //for Browser Resize and lifeCycle
     private DotNetObjectReference<Index>? _objectReference;
     private int WindowWidth { get; set; }
+
+    //for Browser Resize and lifeCycle
     protected async override void OnInitialized()
     {
         SearchTable();
@@ -216,23 +213,23 @@ else
     //Search and filter Function
     private void SearchTable()
     {
-        var result = Data.Employees;
+        var result = data.employees;
 
-        if (!string.IsNullOrWhiteSpace(SearchString))
+        if (!string.IsNullOrWhiteSpace(searchString))
         {
-            result = result.FindAll(d => d.Name.Contains(SearchString.Trim(), StringComparison.OrdinalIgnoreCase));
+            result = result.FindAll(d => d.Name.Contains(searchString.Trim(), StringComparison.OrdinalIgnoreCase));
         }
 
-        if (!string.IsNullOrWhiteSpace(SelectPosition))
+        if (!string.IsNullOrWhiteSpace(selectPosition))
         {
-            result = result.FindAll(d => d.Position.Contains(SelectPosition, StringComparison.OrdinalIgnoreCase));
+            result = result.FindAll(d => d.Position.Contains(selectPosition, StringComparison.OrdinalIgnoreCase));
         }
 
-        FilterEmployee = result;
+        filterEmployee = result;
     }
     private void HandleSearch(ChangeEventArgs e)
     {
-        SearchString = e?.Value?.ToString();
+        searchString = e?.Value?.ToString();
         SearchTable();
     }
     private void HandleSelect()
@@ -257,39 +254,45 @@ else
 
 
     //Delete Modal
-    private void DeleteOpen(Employee employee)
+    private void DeleteOpen(int id)
     {
-        DeleteView = true;
-        DeleteEmployee = employee;
+        deleteModal = true;
+        selectId = id;
     }
     private void DeleteClose()
     {
-        DeleteView = false;
+        deleteModal = false;
         SearchTable();
+        selectId = 0;
         StateHasChanged();
     }
     private void HandleDelete()
     {
-        Data.DeleteEmployee(DeleteEmployee.ID);
+        data.DeleteEmployee(selectId);
         DeleteClose();
     }
+
 
     //Edit Modal 
     public async void EditModal(int Id)
     {
-        EditView = true;
-        await ToggleModal();
-        EditEmployeeId = Id;
+        selectId = Id;
+        editModal = true;
+        ToggleModal();
     }
     public async void EditClose()
     {
-        EditView = false;
-        await ToggleModal();
+        editModal = false;
+        ToggleModal();
         StateHasChanged();
+        selectId = 0;
     }
 
+
+    //Toggle Body class for modal
+    [JSInvokable]
     public async Task ToggleModal()
     {
-        await JSRuntime.InvokeVoidAsync("AddBodyStyle", "Hello");
+        await JSRuntime.InvokeVoidAsync("AddBodyStyle");
     }
 }

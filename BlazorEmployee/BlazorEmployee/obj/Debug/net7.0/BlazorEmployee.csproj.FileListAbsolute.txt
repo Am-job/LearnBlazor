@@ -826,6 +826,9 @@ C:\Users\aungm\OneDrive\Desktop\LearnBlazor\LearnBlazor\BlazorEmployee\BlazorEmp
 C:\Users\aungm\OneDrive\Desktop\LearnBlazor\LearnBlazor\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\refint\BlazorEmployee.dll
 C:\Users\aungm\OneDrive\Desktop\LearnBlazor\LearnBlazor\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\BlazorEmployee.pdb
 C:\Users\aungm\OneDrive\Desktop\LearnBlazor\LearnBlazor\BlazorEmployee\BlazorEmployee\obj\Debug\net7.0\ref\BlazorEmployee.dll
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Private.Xml.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\blazor.boot.json
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\blazor.webassembly.js
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Blazored.Typeahead.dll
@@ -845,13 +848,11 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwr
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.AspNetCore.Components.WebAssembly.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.AspNetCore.Metadata.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.CSharp.dll
-C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Binder.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.Configuration.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.Configuration.FileExtensions.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Json.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.FileProviders.Physical.dll
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Extensions.FileSystemGlobbing.dll
@@ -1089,7 +1090,6 @@ C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwr
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Security.AccessControl.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Xml.XPath.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Security.Cryptography.OpenSsl.dll.gz
-C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Private.Xml.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.IO.Pipes.AccessControl.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Net.WebHeaderCollection.dll.gz
 C:\Users\Server\source\repos\BlazorEmployee\BlazorEmployee\bin\Debug\net7.0\wwwroot\_framework\System.Runtime.Handles.dll.gz

@@ -2,7 +2,7 @@
 
 @if(isEditView == true)
 {
-    <HeaderBackComponent ButtonTitle="Back">@Title Employee</HeaderBackComponent>
+    <HeaderBackComponent ButtonTitle="Back">@title Employee</HeaderBackComponent>
 }
 
 <div class="row">
@@ -10,12 +10,12 @@
         <DataAnnotationsValidator />
         <div class="mb-3 col-lg-6 col-12">
             <label for="Name" class="form-label">Name</label>
-            <input type="text" readonly="@IsDisabled" class="form-control" id="Name" @bind-value="EmployeeForm.Name">
+            <input type="text" readonly="@isDisabled" class="form-control" id="Name" @bind-value="EmployeeForm.Name">
             <ValidationMessage For="@(() => EmployeeForm.Name)" />
         </div>
         <div class="mb-3 col-lg-6 col-12 d-lg-block d-none">
             <label for="Position" class="form-label">Position</label>
-            <select class="form-control" @bind="EmployeeForm.Position" disabled="@IsDisabled">
+            <select class="form-control" @bind="EmployeeForm.Position" disabled="@isDisabled">
                 <option value="" disabled selected>-- Select Employee' Position --</option>
                 <option value="Manager">Manager</option>
                 <option value="Senior">Senior</option>
@@ -25,22 +25,22 @@
         </div>
         <div class="mb-3 col-lg-6 col-12">
             <label for="Dob" class="form-label">Date Of Birth</label>
-            <input type="date" readonly="@IsDisabled" class="form-control" id="Dob" @bind-value="EmployeeForm.Dob">
+            <input type="date" readonly="@isDisabled" class="form-control" id="Dob" @bind-value="EmployeeForm.Dob">
             <ValidationMessage For="@(() => EmployeeForm.Dob)" />
         </div>
         <div class="mb-3 col-lg-6 col-12 d-lg-block d-none">
             <label for="Salary" class="form-label">Salary</label>
-            <input type="number" readonly="@IsDisabled" class="form-control" id="Salary" @bind-value="EmployeeForm.Salary">
+            <input type="number" readonly="@isDisabled" class="form-control" id="Salary" @bind-value="EmployeeForm.Salary">
             <ValidationMessage For="@(() => EmployeeForm.Salary)" />
         </div>
         <div class="mb-3 col-lg-8 mx-auto col-12">
             <label for="JoinDate" class="form-label">Join Date</label>
-            <input type="datetime-local" readonly="@IsDisabled" class="form-control" id="JoinDate" @bind-value="EmployeeForm.JoinDate">
+            <input type="datetime-local" readonly="@isDisabled" class="form-control" id="JoinDate" @bind-value="EmployeeForm.JoinDate">
             <ValidationMessage For="@(() => EmployeeForm.JoinDate)" />
         </div>
         <div class="mb-3 col-12 d-lg-none d-block">
             <label for="Position" class="form-label">Position</label>
-            <select class="form-control" @bind="EmployeeForm.Position" disabled="@IsDisabled">
+            <select class="form-control" @bind="EmployeeForm.Position" disabled="@isDisabled">
                 <option value="" disabled selected>-- Select Employee' Position --</option>
                 <option value="Manager">Manager</option>
                 <option value="Senior">Senior</option>
@@ -50,23 +50,23 @@
         </div>
         <div class="mb-3 col-12 d-lg-none d-block">
             <label for="Salary" class="form-label">Salary</label>
-            <input type="number" readonly="@IsDisabled" class="form-control" id="Salary" @bind-value="EmployeeForm.Salary">
+            <input type="number" readonly="@isDisabled" class="form-control" id="Salary" @bind-value="EmployeeForm.Salary">
             <ValidationMessage For="@(() => EmployeeForm.Salary)" />
         </div>
-        @if (!IsDisabled)
+        @if (!isDisabled)
         {
             <div class="mb-3 col-md-8 col-6 mt-3 mx-auto d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary px-4 me-2">Submit</button>
-                @if (Title == "Edit")
+                <button type="submit" class="btn btn-outline-primary px-4 me-2">Submit</button>
+                @if (title == "Edit")
                 {
-                    <button @onclick="HandleToggle" class="btn btn-dark px-4">Cancel</button>
+                    <button @onclick="HandleCancel" class="btn btn-outline-dark px-4">Cancel</button>
                 }
             </div>
         }
         else
         {
             <div class="mb-3 col-md-8 col-6 mt-3 mx-auto d-flex justify-content-center">
-                <button @onclick="HandleToggle" class="btn btn-dark px-5">Edit</button>
+                <button @onclick="HandleCancel" class="btn btn-outline-dark px-5">Edit</button>
             </div>
         }
 
@@ -76,12 +76,12 @@
 @code {
     [SupplyParameterFromQuery]
     [Parameter]
-    public long Id { get; set; }
+    public int Id { get; set; }
 
     [Parameter]
     public bool isEditView { get; set; } = true;
-    private bool IsDisabled { get; set; } = false;
-    private string? Title { get; set; }
+    private bool isDisabled { get; set; } = false;
+    private string? title { get; set; }
 
     private Employee? EmployeeForm { get; set; } = new Employee()
         {
@@ -93,58 +93,37 @@
             Salary = 0
         };
 
+
+    //Life Cycle
     protected override void OnInitialized()
     {
-        if(!(Id is long))
+        if (Id >= 1)
+        {
+            var employee = data.employees.Find(p => p.ID == Id);
+            if(employee == null)
+            {
+                navigate.NavigateTo("/");
+            }
+            else
+            {
+                EmployeeForm = employee!.ShallowCopy();
+                title = "Edit";
+
+                isDisabled = isEditView == true ? false : true;
+            }
+        }
+        else if (Id < 0)
         {
             navigate.NavigateTo("/");
         }
-
-        navigate.LocationChanged += routeChange;
-        if(Id >= 1)
-        {
-            var employee = data.Employees.Find(p => p.ID == Id);
-            if(employee == null)
-            {
-                //navigate.NavigateTo("/");
-            }
-            else
-            {
-                EmployeeForm = employee!.ShallowCopy();
-                Title = "Edit";
-
-                IsDisabled = isEditView == true ? false : true;
-            }
-        }
         else
         {
-            Title = "Add";
+            title = "Add";
         }
     }
-    public void Dispose()
-    {
-        navigate.LocationChanged -= routeChange;
-    }
+    
 
-
-    private void routeChange(object? sender, LocationChangedEventArgs e) // instead of route change listen
-    {
-        if(Id != 0)
-        {
-            var employee = data.Employees.Find(p => p.ID == Id);
-            if (employee == null)
-            {
-                //navigate.NavigateTo("/");
-                StateHasChanged();
-            }
-            else
-            {
-                EmployeeForm = employee!.ShallowCopy();
-            }
-
-        }
-    }
-
+    // Add or Edit 
     private void HandleSubmit()
     {
         if(EmployeeForm!.Name != "")
@@ -154,23 +133,23 @@
             service.NotifyStateChanged("Edit", EmployeeForm);
         }
     }
-
     private void Invalid()
     {
-
+        // Do something when validation fail
     }
 
-    private void HandleToggle()
+    //Edit mode open or not
+    private void HandleCancel()
     {
         if (isEditView == false)
         {
-            var employee = data.Employees.Find(p => p.ID == Id);
+            var employee = data.employees.Find(p => p.ID == Id);
             if (employee == null)
             {
                 navigate.NavigateTo("/");
             }
             EmployeeForm = employee!.ShallowCopy();
-            IsDisabled = !IsDisabled;
+            isDisabled = !isDisabled;
         }
         else
         {

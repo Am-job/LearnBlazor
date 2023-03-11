@@ -6,7 +6,7 @@ namespace BlazorEmployee.Services
 {
     public class GetData
     {
-        public List<Employee> Employees = new()
+        public List<Employee> employees = new()
         {
             new Employee()
             {
@@ -156,23 +156,23 @@ namespace BlazorEmployee.Services
 
         public void UpdateEmployee(Employee employee)
         {
-            var idx = Employees.FindIndex(data => data.ID == employee?.ID);
+            var idx = employees.FindIndex(data => data.ID == employee?.ID);
             if(idx >= 0)
             {
-                Employees[idx] = employee;
+                employees[idx] = employee;
             }
             else
             {
-                Employees.Add(employee);
+                employees.Add(employee);
             }
         }
 
         public void DeleteEmployee(int Id)
         {
-            var idx = Employees.FindIndex(d => d.ID == Id);
+            var idx = employees.FindIndex(d => d.ID == Id);
             if(idx >= 0)
             {
-                Employees.RemoveAt(idx);
+                employees.RemoveAt(idx);
             }
         }
 
