@@ -22,7 +22,6 @@ namespace BlazorEmployee.Modals
         public string Position { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Please enter your salary.")]
-        [Range(1, 1000000000000, ErrorMessage = "Please enter a valid age.")]
         public decimal Salary { get; set; }
 
         [Required(ErrorMessage = "Please enter your Join Date.")]

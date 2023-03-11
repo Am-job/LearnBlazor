@@ -1,4 +1,5 @@
-﻿@page "/editEmployee"
+﻿@*For Edit and Add*@
+@page "/editEmployee"
 
 @if(isEditView == true)
 {
@@ -16,7 +17,7 @@
         <div class="mb-3 col-lg-6 col-12 d-lg-block d-none">
             <label for="Position" class="form-label">Position</label>
             <select class="form-control" @bind="EmployeeForm.Position" disabled="@isDisabled">
-                <option value="" disabled selected>-- Select Employee' Position --</option>
+                <option value="" disabled selected>-- Select Position --</option>
                 <option value="Manager">Manager</option>
                 <option value="Senior">Senior</option>
                 <option value="Junior">Junior</option>
@@ -41,7 +42,7 @@
         <div class="mb-3 col-12 d-lg-none d-block">
             <label for="Position" class="form-label">Position</label>
             <select class="form-control" @bind="EmployeeForm.Position" disabled="@isDisabled">
-                <option value="" disabled selected>-- Select Employee' Position --</option>
+                <option value="" disabled selected>-- Select Position --</option>
                 <option value="Manager">Manager</option>
                 <option value="Senior">Senior</option>
                 <option value="Junior">Junior</option>
@@ -83,15 +84,7 @@
     private bool isDisabled { get; set; } = false;
     private string? title { get; set; }
 
-    private Employee? EmployeeForm { get; set; } = new Employee()
-        {
-            Name = "",
-            Dob = DateOnly.FromDateTime(DateTime.Now),
-            ID = new Random().Next(0, 100000000),
-            JoinDate = DateTime.Now,
-            Position = "",
-            Salary = 0
-        };
+    private Employee? EmployeeForm { get; set; }
 
 
     //Life Cycle
@@ -99,7 +92,7 @@
     {
         if (Id >= 1)
         {
-            var employee = data.employees.Find(p => p.ID == Id);
+            var employee = DataService.employees.Find(p => p.ID == Id);
             if(employee == null)
             {
                 navigate.NavigateTo("/");
@@ -119,6 +112,15 @@
         else
         {
             title = "Add";
+            EmployeeForm = new Employee()
+                {
+                    Name = "",
+                    Dob = DateOnly.FromDateTime(DateTime.Now),
+                    ID = DataService.employees.Count + 1,
+                    JoinDate = DateTime.Now,
+                    Position = "",
+                    Salary = 0
+                };
         }
     }
     
@@ -128,9 +130,9 @@
     {
         if(EmployeeForm!.Name != "")
         {
-            data.UpdateEmployee(EmployeeForm);
+            DataService.UpdateEmployee(EmployeeForm);
             navigate.NavigateTo("/");
-            service.NotifyStateChanged("Edit", EmployeeForm);
+            ModalService.NotifyStateChanged("Edit", EmployeeForm);
         }
     }
     private void Invalid()
@@ -143,17 +145,21 @@
     {
         if (isEditView == false)
         {
-            var employee = data.employees.Find(p => p.ID == Id);
+            var employee = DataService.employees.Find(p => p.ID == Id);
             if (employee == null)
             {
-                navigate.NavigateTo("/");
+                ModalService.NotifyStateChanged("Edit", EmployeeForm);
             }
             EmployeeForm = employee!.ShallowCopy();
             isDisabled = !isDisabled;
         }
         else
         {
-            navigate.NavigateTo("/");
+            ModalService.NotifyStateChanged("Edit", EmployeeForm);
         }
     }
+
+    // Using only for State Event usage Test
+    // ModalService.NotifyStateChanged("Edit", EmployeeForm);
 }
+

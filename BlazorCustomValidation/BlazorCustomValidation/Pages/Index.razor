@@ -1,0 +1,106 @@
+﻿@page "/"
+
+<EditForm Model="@person" class="row" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleCustomCheck">
+    <CustomValidation @ref="customValidation" />
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="col-md-10 col-12 mx-auto">
+        
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="Name" class="form-label">Name</label>
+            <InputText class="form-control" id="Name" @bind-Value="person.Name" placeholder="Name" />
+        </div>
+
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="Age" class="form-label">Age</label>
+            <input type="number" class="form-control" id="Age" @bind-value="person.Age" />
+        </div>
+
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="Email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="Email" @bind-value="person.Email" placeholder="Email" />
+        </div>
+
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="PhoneNumber" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="PhoneNumber" @bind-value="person.PhoneNumber" placeholder="PhoneNumber" />
+        </div>
+
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="CreditCard" class="form-label">CreditCard Number</label>
+            <InputText class="form-control" id="CreditCard" @bind-Value="person.CreditCard" placeholder="CreditCard" />
+        </div>
+
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="JoinDate">Join Date</label>
+            <InputDate class="form-control" id="JoinDate" @bind-Value="person.JoinDate" placeholder="JoinDate" />
+        </div>
+
+        <div class="mb-3 col-lg-4 col-8 mx-auto d-grid">
+            <button class="btn btn-outline-dark" type="submit" @onclick="HandleCustomCheck">Submit</button>
+        </div>
+    </div>
+
+
+</EditForm>
+
+@code{
+    private Person person = new Person();
+    private CustomValidation? customValidation;
+    string emailCheckPattern = "@gmail.com$";
+    string phoneCheckPattern = @"^09\d{9}$";
+
+    private void HandleSubmit()
+    {
+        HandleCustomCheck();
+    }
+
+    public void HandleCustomCheck()
+    {
+        customValidation?.ClearErrors();
+
+        var errors = new Dictionary<string, List<string>>();
+
+        if (person.Age == 0)
+        {
+            errors.Add(nameof(person.Age), new() { "Age is required" });
+        } 
+        else if (!(person.Age >= 18 && person.Age < 100))
+        {
+            errors.Add(nameof(person.Age), new() { "Age must be between 18 and 100 years." });
+        }
+
+        if (person.Email == string.Empty)
+        {
+            errors.Add(nameof(person.Email), new() { "Email is required" });
+        } 
+        else
+        {
+            bool isRightEmail = Regex.IsMatch(person.Email, emailCheckPattern);
+            if (!(isRightEmail))
+            {
+                errors.Add(nameof(person.Email), new() { "Email must contain @gmail.com" });
+            }
+        }
+
+        if (person.PhoneNumber == string.Empty)
+        {
+            errors.Add(nameof(person.PhoneNumber), new() { "Phone is required" });
+        }
+        else
+        {
+            bool isRightPhoneNumber = Regex.IsMatch(person.PhoneNumber, phoneCheckPattern);
+            if (!(isRightPhoneNumber))
+            {
+                errors.Add(nameof(person.PhoneNumber), new() { "Phone number must start with 09 and must contain 11 number including 09" });
+            }
+        }
+
+        if (errors.Any())
+        {
+            customValidation?.DisplayErrors(errors);
+        }
+    }
+
+}

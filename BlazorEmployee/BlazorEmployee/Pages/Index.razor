@@ -1,4 +1,5 @@
-﻿@page "/"
+﻿@*Home Page*@
+@page "/"
 @implements IAsyncDisposable
 
 <PageTitle>Employee Status</PageTitle>
@@ -131,6 +132,12 @@ else
         <EditEmployee isEditView="false" Id="selectId"></EditEmployee>
     </Modal>
 }
+@if (addModal)
+{
+    <Modal Close="AddClose" ButtonTitle="Add Employee">
+        <EditEmployee isEditView="false" Id="0"></EditEmployee>
+    </Modal>
+}
 
 @code{
     //Project Setup
@@ -139,9 +146,10 @@ else
     private string? searchString { get; set;  }
     private string? selectPosition { get; set; }
 
-    private bool deleteModal { get; set; } = false;
-    private bool editModal { get; set; } = false;
-    private int selectId { get; set; } = 0;
+    private bool deleteModal = false;
+    private bool editModal = false;
+    private bool addModal = false;
+    private int selectId = 0;
 
 
     private DotNetObjectReference<Index>? _objectReference;
@@ -155,15 +163,18 @@ else
         //for Browser Resize
         _objectReference = DotNetObjectReference.Create(this);
         await IntialWidthListener();
-        service.modalClick += ABC;
+        ModalService.modalClick += ABC;
 
     }
 
     private void ABC(string key, object obj )
     {
-        SearchTable();
-        EditClose();
-        StateHasChanged();
+        if(key == "Edit")
+        {
+            SearchTable();
+            EditClose();
+            StateHasChanged();
+        }
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -177,7 +188,7 @@ else
     {
         await JSRuntime.InvokeVoidAsync("RemoveWindowWidthListener", _objectReference);
         _objectReference?.Dispose();
-        service.modalClick -= ABC;
+        ModalService.modalClick -= ABC;
     }
 
 
@@ -213,7 +224,7 @@ else
     //Search and filter Function
     private void SearchTable()
     {
-        var result = data.employees;
+        var result = DataService.employees;
 
         if (!string.IsNullOrWhiteSpace(searchString))
         {
@@ -240,11 +251,6 @@ else
 
 
     //Navigate
-    //AddEmployee
-    private void AddEmployee()
-    {
-        navigate.NavigateTo("/editEmployee");
-    }
     //EditEmployee
     private void EditEmployee(int Id)
     {
@@ -253,6 +259,7 @@ else
 
 
 
+    //Modal
     //Delete Modal
     private void DeleteOpen(int id)
     {
@@ -268,26 +275,38 @@ else
     }
     private void HandleDelete()
     {
-        data.DeleteEmployee(selectId);
+        DataService.DeleteEmployee(selectId);
         DeleteClose();
     }
 
 
     //Edit Modal 
-    public async void EditModal(int Id)
+    private async void EditModal(int Id)
     {
         selectId = Id;
         editModal = true;
-        ToggleModal();
+        await ToggleModal();
     }
-    public async void EditClose()
+    private async void EditClose()
     {
         editModal = false;
-        ToggleModal();
+        await ToggleModal();
         StateHasChanged();
         selectId = 0;
     }
 
+    //AddEmployee
+    private async void AddEmployee()
+    {
+        addModal = true;
+        await ToggleModal();
+    }
+    private async void AddClose()
+    {
+        addModal = false;
+        await ToggleModal();
+        StateHasChanged();
+    }
 
     //Toggle Body class for modal
     [JSInvokable]
