@@ -166,16 +166,6 @@ else
         ModalService.modalClick += ABC;
 
     }
-
-    private void ABC(string key, object obj )
-    {
-        if(key == "Edit")
-        {
-            SearchTable();
-            EditClose();
-            StateHasChanged();
-        }
-    }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -190,7 +180,17 @@ else
         _objectReference?.Dispose();
         ModalService.modalClick -= ABC;
     }
-
+    
+    // Listen Modal Service Event Do Something
+    private void ABC(string key, object obj)
+    {
+        if (key == "Edit")
+        {
+            SearchTable();
+            EditClose();
+            StateHasChanged();
+        }
+    }
 
 
 

@@ -38,6 +38,7 @@ C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\D
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\Microsoft.Win32.Registry.dll
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\mscorlib.dll
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\netstandard.dll
+C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\Newtonsoft.Json.dll
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\System.AppContext.dll
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\System.Buffers.dll
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\System.Collections.Concurrent.dll
@@ -234,6 +235,7 @@ C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\D
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\mscorlib.dll.gz
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\System.Data.dll.gz
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\System.Diagnostics.Tools.dll.gz
+C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\Newtonsoft.Json.dll.gz
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\netstandard.dll.gz
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\System.Private.DataContractSerialization.dll.gz
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\wwwroot\_framework\System.Runtime.Intrinsics.dll.gz
@@ -426,6 +428,7 @@ C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\D
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\Microsoft.JSInterop.dll
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\Microsoft.JSInterop.WebAssembly.dll
+C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\System.IO.Pipelines.dll
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\Microsoft.CSharp.dll
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\bin\Debug\net7.0\Microsoft.VisualBasic.Core.dll
@@ -630,6 +633,7 @@ C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\obj\D
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\obj\Debug\net7.0\build-gz\pT+ueFiI.gz
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\obj\Debug\net7.0\build-gz\xoALzrxX.gz
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\obj\Debug\net7.0\build-gz\Jn5jI3D+.gz
+C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\obj\Debug\net7.0\build-gz\8H+i0VAa.gz
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\obj\Debug\net7.0\build-gz\kelXIC5s.gz
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\obj\Debug\net7.0\build-gz\oSlJyaaF.gz
 C:\Users\Server\source\repos\BlazorCustomValidation\BlazorCustomValidation\obj\Debug\net7.0\build-gz\pwzvqv2D.gz

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XNGwAmPT9n1ORlrk2lrZg3Zabh/9XRwwpP7kWiBIDMY=",
+  "Hash": "PxFeuCAKHP9nk41iFd3XWl1Rcfgg1x4p5wdY+ass9yg=",
   "Source": "BlazorCustomValidation",
   "BasePath": "/",
   "Mode": "Root",
@@ -695,6 +695,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Server\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\7.0.3\\runtimes\\browser-wasm\\lib\\net7.0\\netstandard.dll"
+    },
+    {
+      "Identity": "C:\\Users\\Server\\source\\repos\\BlazorCustomValidation\\BlazorCustomValidation\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Newtonsoft.Json.dll",
+      "SourceId": "BlazorCustomValidation",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Server\\source\\repos\\BlazorCustomValidation\\BlazorCustomValidation\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Newtonsoft.Json.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Server\\.nuget\\packages\\newtonsoft.json\\13.0.3\\lib\\net6.0\\Newtonsoft.Json.dll"
     },
     {
       "Identity": "C:\\Users\\Server\\source\\repos\\BlazorCustomValidation\\BlazorCustomValidation\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.AppContext.dll",
@@ -4027,6 +4044,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Server\\source\\repos\\BlazorCustomValidation\\BlazorCustomValidation\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.Diagnostics.Tools.dll"
+    },
+    {
+      "Identity": "C:\\Users\\Server\\source\\repos\\BlazorCustomValidation\\BlazorCustomValidation\\obj\\Debug\\net7.0\\build-gz\\8H+i0VAa.gz",
+      "SourceId": "BlazorCustomValidation",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Server\\source\\repos\\BlazorCustomValidation\\BlazorCustomValidation\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Newtonsoft.Json.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\Users\\Server\\source\\repos\\BlazorCustomValidation\\BlazorCustomValidation\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Newtonsoft.Json.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Server\\source\\repos\\BlazorCustomValidation\\BlazorCustomValidation\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Newtonsoft.Json.dll"
     },
     {
       "Identity": "C:\\Users\\Server\\source\\repos\\BlazorCustomValidation\\BlazorCustomValidation\\obj\\Debug\\net7.0\\build-gz\\8JDHpI0R.gz",
