@@ -91,7 +91,7 @@
     
         if (employeeLists != null)
         {
-            var idx = employeeLists!.FindIndex(data => data.id == person.id);
+            var idx = employeeLists!.FindIndex(data => data.id == employee.id);
             if (idx == -1)
             {
                 employee.id = employeeLists.Count + 1;

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorStorageService", "BlazorStorageService\BlazorStorageService.csproj", "{2BEC61E9-5411-4425-BA9E-A944986C5548}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BEC61E9-5411-4425-BA9E-A944986C5548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BEC61E9-5411-4425-BA9E-A944986C5548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BEC61E9-5411-4425-BA9E-A944986C5548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BEC61E9-5411-4425-BA9E-A944986C5548}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E17EEAFD-3F0C-4FB7-9A21-E5F98902FEA7}
+	EndGlobalSection
+EndGlobal

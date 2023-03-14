@@ -1,0 +1,138 @@
+﻿@page "/"
+
+<h3>List of User</h3>
+<div class="row mb-3">
+    <div class="col-md-1 col-sm-10 mx-sm-auto m-1 d-grid">
+        <button @onclick="HandleAdd" class="btn btn-outline-success">Add</button>
+    </div>
+    <div class="col-md-1 col-sm-10 mx-sm-auto m-1 d-grid">
+        <button @onclick="DeleteAll" class="btn btn-outline-danger">DeleteAllKey</button>
+    </div>
+    <div class="col-md-1 col-sm-10 mx-sm-auto m-1 d-grid">
+        <button @onclick="DeleteOne" class="btn btn-outline-dark">DeleteOneKey</button>
+    </div>
+    <div class="form-group col-md-5 col-sm-10 mx-sm-auto m-1">
+        <div class="input-group">
+            <input class="form-control" @oninput="HandleSearch" placeholder="Search..." />
+        </div>
+    </div>
+</div>
+@if (employeeLists == null || employeeLists.Count == 0)
+{
+    <div class="row">
+        <div class="col mx-auto">
+            <p class="display-5 text-center">Add New Employee</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-10 col-12 mx-auto">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Credit Card</th>
+                        <th scope="col">Join Date</th>
+                        <th scope="col">Settings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var person in employeeLists.Select((data, idx) => (data, idx)))
+                    {
+                        <tr>
+                            <td>@(person.idx + 1)</td>
+                            <td>@person.data.Name</td>
+                            <td>@person.data.Age</td>
+                            <td>@person.data.Email</td>
+                            <td>@person.data.PhoneNumber</td>
+                            <td>@person.data.CreditCard</td>
+                            <td>@person.data.JoinDate</td>
+                            <td>
+                                <button class="btn btn-outline-dark" @onclick="() => HandleEdit(person.data.id)">Edit</button>
+                                <button class="btn btn-outline-danger ms-1" @onclick="() => HandleDelete(person.data.id)">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+
+@code {
+    public List<Employee>? employeeLists { get; set; }
+    private string? searchString;
+    const string localStorageKey = "EmployeeData";
+
+    protected async override void OnInitialized()
+    {
+        await storageService.GetDataFromBrowser(localStorageKey);
+        employeeLists = storageService.GetData();
+        StateHasChanged();
+    }
+
+
+    private async void HandleDelete(int id)
+    {
+        var idx = employeeLists!.FindIndex(d => d.id == id);
+        if (idx != -1)
+        {
+            employeeLists.RemoveAt(idx);
+            storageService.SetData(employeeLists);
+            await jsService.SetItemService(localStorageKey, jsService.ToJson(employeeLists));
+        }
+    }
+    private void DeleteAll()
+    {
+        jsService.LocalStorageClear();
+        employeeLists = null;
+        StateHasChanged();
+    }
+    private void DeleteOne()
+    {
+        jsService.localStorageRemoveAt(localStorageKey);
+        employeeLists = null;
+        StateHasChanged();
+    }
+
+    private void HandleAdd()
+    {
+        navigate.NavigateTo("/addemployee");
+    }
+    private void HandleEdit(int id)
+    {
+        navigate.NavigateTo($"/addemployee?id={id}&isEdit=true");
+    }
+
+
+
+
+    //Search
+    private void SearchTable()
+    {
+        var result = storageService.GetData();
+
+        if (!string.IsNullOrWhiteSpace(searchString))
+        {
+            result = employeeLists?.FindAll(d => d.Name.Contains(searchString.Trim(), StringComparison.OrdinalIgnoreCase));
+        }
+        employeeLists = result;
+    }
+
+    private void HandleSearch(ChangeEventArgs e)
+    {
+        searchString = e?.Value?.ToString();
+        SearchTable();
+    }
+
+
+
+
+}
