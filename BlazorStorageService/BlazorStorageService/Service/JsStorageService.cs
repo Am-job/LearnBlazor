@@ -1,12 +1,11 @@
-﻿using BlazorStorageService.Model;
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 using System.Text.Json;
 
 
 namespace BlazorStorageService.Service
 
 {
-    public class JsStorageService<T>
+    public class JsStorageService
     {
         private readonly IJSRuntime _jsRuntime;
 
@@ -16,22 +15,21 @@ namespace BlazorStorageService.Service
         }
 
         
-        public async Task<List<T>> GetItemService(string key)
+        public async Task<T> GetItemService<T>(T key)
         {
-            string json = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", key);
+            var json = await _jsRuntime.InvokeAsync<T>("localStorage.getItem", key);
             if(json != null)
             {
-                return FromJson(json);
+                return json;
             }
             else
             {
-                return new List<T>();
+                return default;
             }
-           
         }
 
 
-        public async Task SetItemService(string key, string value)
+        public async Task SetItemService<T>(T key,T value)
         {
             await _jsRuntime.InvokeVoidAsync("localStorage.setItem", key, value);
         }
@@ -41,20 +39,10 @@ namespace BlazorStorageService.Service
             _jsRuntime.InvokeVoidAsync("localStorage.clear");
         }
 
-        public void localStorageRemoveAt(string key)
+        public void localStorageRemoveAt<T>(T key)
         {
             _jsRuntime.InvokeVoidAsync("localStorage.removeItem", key);
         }
 
-        public string ToJson(List<T> value)
-        {
-            var opt = new JsonSerializerOptions() { WriteIndented = true };
-            return JsonSerializer.Serialize<List<T>>(value, opt);
-        }
-
-        public List<T>? FromJson(string json)
-        {
-            return JsonSerializer.Deserialize<List<T>>(json);
-        }
     }
 }

@@ -9,7 +9,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-builder.Services.AddSingleton(typeof(JsStorageService<>), typeof(JsStorageService<>));
-builder.Services.AddSingleton(typeof(StorageService<>), typeof(StorageService<>));
+builder.Services.AddScoped<JsStorageService>();
+
 
 await builder.Build().RunAsync();

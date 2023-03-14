@@ -19,7 +19,7 @@ namespace BlazorStorageService.Model
         public string PhoneNumber { get; set; } = string.Empty;
 
         [Required]
-        [CreditCard(ErrorMessage = "Credit Card number must be 15 number and please fill correctly")]
+        [CreditCard(ErrorMessage = "Credit Card number must be at least 15 number and please fill correctly")]
         public string CreditCard { get; set; } = string.Empty;
 
         [Required]

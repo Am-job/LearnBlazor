@@ -67,8 +67,8 @@
 
     protected async override void OnInitialized()
     {
-        await storageService.GetDataFromBrowser(localStorageKey);
-        employeeLists = storageService.GetData();
+        var jsonresponse = await jsService.GetItemService(localStorageKey);
+        employeeLists = JsonSerializer.Deserialize<List<Employee>>(jsonresponse);
 
         if (isEdit && id >= 1)
         {
@@ -98,9 +98,7 @@
             {
                  employeeLists[idx] = employee;
             }
-            storageService.SetData(employeeLists);
-            var json = jsService.ToJson(employeeLists);
-            await jsService.SetItemService(localStorageKey, json);
+            await jsService.SetItemService(localStorageKey, JsonSerializer.Serialize(employeeLists));
             navigate.NavigateTo("/");
     }
 

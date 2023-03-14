@@ -73,8 +73,8 @@ else
 
     protected async override void OnInitialized()
     {
-        await storageService.GetDataFromBrowser(localStorageKey);
-        employeeLists = storageService.GetData();
+        var jsonresponse =  await jsService.GetItemService(localStorageKey);
+        employeeLists = JsonSerializer.Deserialize<List<Employee>>(jsonresponse);
         StateHasChanged();
     }
 
@@ -85,8 +85,7 @@ else
         if (idx != -1)
         {
             employeeLists.RemoveAt(idx);
-            storageService.SetData(employeeLists);
-            await jsService.SetItemService(localStorageKey, jsService.ToJson(employeeLists));
+            await jsService.SetItemService(localStorageKey, JsonSerializer.Serialize(employeeLists));
         }
     }
     private void DeleteAll()
@@ -115,9 +114,10 @@ else
 
 
     //Search
-    private void SearchTable()
+    private async void SearchTable()
     {
-        var result = storageService.GetData();
+        var jsonresponse = await jsService.GetItemService(localStorageKey);
+        var result = JsonSerializer.Deserialize<List<Employee>>(jsonresponse);
 
         if (!string.IsNullOrWhiteSpace(searchString))
         {
