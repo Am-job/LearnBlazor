@@ -2,7 +2,7 @@
 
 namespace BlazorCustomValidation.Model
 {
-    public class Person
+    public class Employee
     {
 
         [Required]

@@ -69,7 +69,7 @@ else
 
 
 @code {
-    public List<Person>? employeeLists { get; set; }
+    public List<Employee>? employeeLists { get; set; }
     private string? searchString;
     const string localStorageKey = "Employee";
 
@@ -78,12 +78,7 @@ else
         var json = await jsService.GetItemAsync(localStorageKey);
         if (json == null)
         {
-            employeeLists = new List<Person>();
-        }
-        else if (json == localStorageKey)
-        {
-            employeeLists = new List<Person>();
-            jsService.DeleteOneKey(localStorageKey);
+            employeeLists = new List<Employee>();
         }
         else
         {
@@ -100,19 +95,18 @@ else
         if (idx >= 0)
         {
             employeeLists.RemoveAt(idx);
-            jsService.ToJson(employeeLists);
-            await jsService.SetItemAsync("Employee", localStorageKey);
+            await jsService.SetItemAsync("Employee", jsService.ToJson(employeeLists));
         }
     }
     private async void DeleteAll()
     {
-        await jsService.DeleteAllKey();
+        await jsService.LocalStorageClear();
         employeeLists = null;
         StateHasChanged();
     }
     private async void DeleteOne()
     {
-        await jsService.DeleteOneKey(localStorageKey);
+        await jsService.localStorageRemoveAt(localStorageKey);
         employeeLists = null;
         StateHasChanged();
     }

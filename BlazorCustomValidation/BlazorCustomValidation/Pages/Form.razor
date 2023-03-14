@@ -2,7 +2,7 @@
 
 
 
-<EditForm Model="@person" class="row" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleCustomCheck">
+<EditForm Model="@employee" class="row" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleCustomCheck">
     <CustomValidation @ref="customValidation" />
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -12,32 +12,32 @@
         <h2>Employee @(isEdit == true ? "Edit" : "Add") Form</h2>
         <div class="mb-3 col-lg-6 col-12 mx-auto">
             <label for="Name" class="form-label">Name</label>
-            <InputText class="form-control" id="Name" @bind-Value="person.Name" placeholder="Name" />
+            <InputText class="form-control" id="Name" @bind-Value="employee.Name" placeholder="Name" />
         </div>
 
         <div class="mb-3 col-lg-6 col-12 mx-auto">
             <label for="Age" class="form-label">Age</label>
-            <InputNumber class="form-control" id="Age" @onfocusout=HandleCustomCheck @bind-Value="person.Age" />
+            <InputNumber class="form-control" id="Age" @onfocusout=HandleCustomCheck @bind-Value="employee.Age" />
         </div>
 
         <div class="mb-3 col-lg-6 col-12 mx-auto">
             <label for="Email" class="form-label">Email</label>
-            <InputText class="form-control" id="Email" @onfocusout=HandleCustomCheck @bind-Value="person.Email" placeholder="Email" />
+            <InputText class="form-control" id="Email" @onfocusout=HandleCustomCheck @bind-Value="employee.Email" placeholder="Email" />
         </div>
 
         <div class="mb-3 col-lg-6 col-12 mx-auto">
             <label for="PhoneNumber" class="form-label">Phone Number</label>
-            <InputText class="form-control" id="PhoneNumber" @onfocusout=HandleCustomCheck @bind-Value="person.PhoneNumber" placeholder="PhoneNumber" />
+            <InputText class="form-control" id="PhoneNumber" @onfocusout=HandleCustomCheck @bind-Value="employee.PhoneNumber" placeholder="PhoneNumber" />
         </div>
 
         <div class="mb-3 col-lg-6 col-12 mx-auto">
             <label for="CreditCard" class="form-label">CreditCard Number Eg: 374245455400126</label>
-            <InputText class="form-control" id="CreditCard" @bind-Value="person.CreditCard" placeholder="CreditCard" />
+            <InputText class="form-control" id="CreditCard" @bind-Value="employee.CreditCard" placeholder="CreditCard" />
         </div>
 
         <div class="mb-3 col-lg-6 col-12 mx-auto">
             <label for="JoinDate">Join Date</label>
-            <InputDate class="form-control" id="JoinDate" @bind-Value="person.JoinDate" placeholder="JoinDate" />
+            <InputDate class="form-control" id="JoinDate" @bind-Value="employee.JoinDate" placeholder="JoinDate" />
         </div>
 
         <div class="mb-3 col-lg-4 col-8 mx-auto d-grid">
@@ -49,8 +49,8 @@
 </EditForm>
 
 @code {
-    private List<Person>? employeeLists;
-    private Person person = new Person();
+    private List<Employee>? employeeLists;
+    private Employee employee = new Employee();
     private CustomValidation? customValidation;
     string emailCheckPattern = "@gmail.com$";
     string phoneCheckPattern = @"^09\d{9}$";
@@ -70,12 +70,7 @@
         var json = await jsService.GetItemAsync(localStorageKey);
         if(json == null)
         {
-            employeeLists = new List<Person>();
-        }
-        else if (json == localStorageKey)
-        {
-            employeeLists = new List<Person>();
-            jsService.DeleteOneKey(localStorageKey);
+            employeeLists = new List<Employee>();
         }
         else
         {
@@ -85,7 +80,7 @@
         if (isEdit && id >= 1)
         {
             var idx = employeeLists!.FindIndex(d => d.id == id);
-            person = employeeLists[idx];
+            employee = employeeLists[idx];
             StateHasChanged();
         }
     }
@@ -93,23 +88,22 @@
 
     private async Task HandleSubmit()
     {
-        if (isEdit == false)
+    
+        if (employeeLists != null)
         {
-            person.id = employeeLists.Count + 1;
-            employeeLists.Add(person);
+            var idx = employeeLists!.FindIndex(data => data.id == person.id);
+            if (idx == -1)
+            {
+                employee.id = employeeLists.Count + 1;
+                employeeLists.Add(employee);
+            }
+            else
+            {
+                employeeLists[idx] = employee;
+            }
             var json = jsService.ToJson(employeeLists);
             await jsService.SetItemAsync(localStorageKey, json);
             navigate.NavigateTo("/");
-        }else if (isEdit == true)
-        {
-            var idx = employeeLists!.FindIndex(data => data.id == person.id);
-            if (idx >= 0)
-            {
-                employeeLists[idx] = person;
-                var json = jsService.ToJson(employeeLists);
-                await jsService.SetItemAsync(localStorageKey, json);
-                navigate.NavigateTo("/");
-            }
         }
     }
 
@@ -122,24 +116,24 @@
         var errors = new Dictionary<string, List<string>>();
 
         //Check for Age
-        if (!(person.Age >= 18 && person.Age < 100) && person.Age >= 0)
+        if (!(employee.Age >= 18 && employee.Age < 100) && employee.Age >= 0)
         {
-            errors.Add(nameof(person.Age), new() { "Age must be between 18 and 100 years." });
+            errors.Add(nameof(employee.Age), new() { "Age must be between 18 and 100 years." });
         }
 
         //Check For Email
-        bool isRightEmail = Regex.IsMatch(person.Email, emailCheckPattern);
-        if (!(isRightEmail) && !string.IsNullOrWhiteSpace(person.Email))
+        bool isRightEmail = Regex.IsMatch(employee.Email, emailCheckPattern);
+        if (!(isRightEmail) && !string.IsNullOrWhiteSpace(employee.Email))
          {
-            errors.Add(nameof(person.Email), new() { "Email must contain @gmail.com" });
+            errors.Add(nameof(employee.Email), new() { "Email must contain @gmail.com" });
          }
         
 
         //Check For Phone Number
-         bool isRightPhoneNumber = Regex.IsMatch(person.PhoneNumber, phoneCheckPattern);
-        if (!(isRightPhoneNumber) && !string.IsNullOrWhiteSpace(person.PhoneNumber))
+        bool isRightPhoneNumber = Regex.IsMatch(employee.PhoneNumber, phoneCheckPattern);
+        if (!(isRightPhoneNumber) && !string.IsNullOrWhiteSpace(employee.PhoneNumber))
             {
-            errors.Add(nameof(person.PhoneNumber), new() { "Phone number must start with 09 and must contain 11 number including 09" });
+            errors.Add(nameof(employee.PhoneNumber), new() { "Phone number must start with 09 and must contain 11 number including 09" });
          }
         
 
