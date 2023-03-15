@@ -15,25 +15,17 @@ namespace BlazorRestApi.Service
 
         public async Task<T?> GetAsync<T>(string uri)
         {
-            try
-            {
-                var response = await _httpClient.GetAsync(uri);
+
+            var response = await _httpClient.GetAsync(uri);
          
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.WriteLine($"HTTP status code: {response.StatusCode}");
-                    return await response.Content.ReadFromJsonAsync<T>();
-                }
-                else
-                {
-                    throw new Exception($"HTTP code error: {response.StatusCode}");
-                }
-            }
-            catch(Exception ex)
+            if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", ex.Message);
-                return default;
+                Console.WriteLine($"HTTP status code: {response.StatusCode}");
+                return await response.Content.ReadFromJsonAsync<T>();
+            }
+            else
+            {
+                throw new Exception($"HTTP code error: {response.StatusCode}");
             }
         }
 

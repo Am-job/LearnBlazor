@@ -22,8 +22,6 @@
                         <th scope="col">Account Type</th>
                         <th scope="col">Crruid</th>
                         <th scope="col">sLock</th>
-                        <th scope="col">sUdt</th>
-                        <th scope="col">sEditBy</th>
                      </tr>
                 </thead>
             @foreach(var account in accounts!.Select((data,idx) => (data,idx)))
@@ -36,8 +34,6 @@
                         <td>@account.data.acc_type</td>
                         <td>@account.data.currid</td>
                         <td>@account.data.sLock</td>
-                        <td>@account.data.sUdt</td>
-                        <td>@account.data.sEditBy</td>
                     </tr>
                 </tbody> 
             }
@@ -54,11 +50,29 @@
 
     private IEnumerable<Account>? accounts;
     private string uri = "https://ers.itstar.io/api/account/123";
+    private string apiKeyForStorage = "ApiCall";
 
     protected override async void OnInitialized()
     {
-        var data = await apiCallService.GetAsync<IEnumerable<Account>>(uri);
-        if (data != null) accounts = data;
+        if (storageService.Get(apiKeyForStorage) == null)
+        {
+            try
+            {
+                var data = await apiCallService.GetAsync<IEnumerable<Account>>(uri);
+                if (data != null) {
+                    accounts = data;
+                    storageService.Set(apiKeyForStorage, data);
+                }
+            }catch(Exception e)
+            {
+                Console.WriteLine($"Error Occur with {e.Message}");
+            }
+        }
+        else
+        {
+            accounts = storageService.Get(apiKeyForStorage);
+        }
+
         StateHasChanged();
     }
 }

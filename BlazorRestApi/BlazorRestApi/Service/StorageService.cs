@@ -7,7 +7,7 @@ namespace BlazorRestApi.Service
     {
 
         private readonly JsStorageService jsStorageService;
-
+        
         public StorageService(JsStorageService jsStorageService)
         {
             this.jsStorageService = jsStorageService;
@@ -42,5 +42,7 @@ namespace BlazorRestApi.Service
                 Set(key, data);
             }
         }
+
+        
     }
 }
