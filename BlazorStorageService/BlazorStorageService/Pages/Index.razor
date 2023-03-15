@@ -72,9 +72,13 @@ else
     const string localStorageKey = "EmployeeData";
 
     protected async override void OnInitialized()
-    {
-        var jsonresponse =  await jsService.GetItemService(localStorageKey);
-        employeeLists = JsonSerializer.Deserialize<List<Employee>>(jsonresponse);
+    {  
+        if (storageService.Get(localStorageKey) == null)
+        {
+            await storageService.GetDataFromBrowser<Employee>(localStorageKey);
+        }
+        employeeLists = storageService.Get(localStorageKey);
+
         StateHasChanged();
     }
 
@@ -85,18 +89,21 @@ else
         if (idx != -1)
         {
             employeeLists.RemoveAt(idx);
+            storageService.Set(localStorageKey, employeeLists);
             await jsService.SetItemService(localStorageKey, JsonSerializer.Serialize(employeeLists));
         }
     }
     private void DeleteAll()
     {
-        jsService.LocalStorageClear();
+        jsService.LocalStorageClear(); // Remove All
+        storageService.Storage = new Dictionary<string, dynamic>();// wrong
         employeeLists = null;
         StateHasChanged();
     }
     private void DeleteOne()
     {
         jsService.localStorageRemoveAt(localStorageKey);
+        storageService.Storage.Remove(localStorageKey);
         employeeLists = null;
         StateHasChanged();
     }
@@ -116,8 +123,7 @@ else
     //Search
     private async void SearchTable()
     {
-        var jsonresponse = await jsService.GetItemService(localStorageKey);
-        var result = JsonSerializer.Deserialize<List<Employee>>(jsonresponse);
+        var result = storageService.Get(localStorageKey) == null ? string.Empty : storageService.Get(localStorageKey); 
 
         if (!string.IsNullOrWhiteSpace(searchString))
         {

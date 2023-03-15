@@ -49,7 +49,7 @@
 </EditForm>
 
 @code {
-    private List<Employee>? employeeLists;
+    private List<Employee>? employeeLists; 
     private Employee employee = new Employee();
     private CustomValidation? customValidation;
     string emailCheckPattern = "@gmail.com$";
@@ -67,8 +67,12 @@
 
     protected async override void OnInitialized()
     {
-        var jsonresponse = await jsService.GetItemService(localStorageKey);
-        employeeLists = JsonSerializer.Deserialize<List<Employee>>(jsonresponse);
+        if (storageService.Get(localStorageKey) == null)
+        {
+            await storageService.GetDataFromBrowser<Employee>(localStorageKey);
+        }
+        employeeLists = storageService.Get(localStorageKey) == null ? new List<Employee>() : storageService.Get(localStorageKey);
+
 
         if (isEdit && id >= 1)
         {
@@ -99,6 +103,7 @@
                  employeeLists[idx] = employee;
             }
             await jsService.SetItemService(localStorageKey, JsonSerializer.Serialize(employeeLists));
+            storageService.Set(localStorageKey, employeeLists);
             navigate.NavigateTo("/");
     }
 
