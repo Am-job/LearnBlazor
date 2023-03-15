@@ -1,0 +1,64 @@
+﻿@page "/request"
+
+
+<div class="row">
+    <div class="col-12 col-lg-10 mx-auto">
+        @if (accounts == null)
+        {
+            <div class="col-2 mx-auto">
+                <div class="spinner-grow" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                     <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Account Name</th>
+                        <th scope="col">Account No</th>
+                        <th scope="col">Account Type</th>
+                        <th scope="col">Crruid</th>
+                        <th scope="col">sLock</th>
+                        <th scope="col">sUdt</th>
+                        <th scope="col">sEditBy</th>
+                     </tr>
+                </thead>
+            @foreach(var account in accounts!.Select((data,idx) => (data,idx)))
+            {
+                <tbody>
+                    <tr>
+                        <td>@(account.idx + 1)</td>
+                        <td>@account.data.acc_name</td>
+                        <td>@account.data.acc_no</td>
+                        <td>@account.data.acc_type</td>
+                        <td>@account.data.currid</td>
+                        <td>@account.data.sLock</td>
+                        <td>@account.data.sUdt</td>
+                        <td>@account.data.sEditBy</td>
+                    </tr>
+                </tbody> 
+            }
+            </table>
+        }
+    </div>
+</div>
+
+
+
+@code{
+    [Inject]
+    public ApiCallService apiCallService { get; set; }
+
+    private IEnumerable<Account>? accounts;
+    private string uri = "https://ers.itstar.io/api/account/123";
+
+    protected override async void OnInitialized()
+    {
+        var data = await apiCallService.GetAsync<IEnumerable<Account>>(uri);
+        if (data != null) accounts = data;
+        StateHasChanged();
+    }
+}

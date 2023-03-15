@@ -1,0 +1,147 @@
+﻿@page "/addemployee"
+
+
+
+<EditForm Model="@employee" class="row" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleCustomCheck">
+    <CustomValidation @ref="customValidation" />
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <button class="btn btn-outline-dark col-4 my-2" @onclick="@(() => navigate.NavigateTo("/"))">Back</button>
+    <div class="col-md-10 col-12 mx-auto">
+        <h2>Employee @(isEdit == true ? "Edit" : "Add") Form</h2>
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="Name" class="form-label">Name</label>
+            <InputText class="form-control" id="Name" @bind-Value="employee.Name" placeholder="Name" />
+        </div>
+
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="Age" class="form-label">Age</label>
+            <InputNumber class="form-control" id="Age" @onfocusout=HandleCustomCheck @bind-Value="employee.Age" />
+        </div>
+
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="Email" class="form-label">Email</label>
+            <InputText class="form-control" id="Email" @onfocusout=HandleCustomCheck @bind-Value="employee.Email" placeholder="Email" />
+        </div>
+
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="PhoneNumber" class="form-label">Phone Number</label>
+            <InputText class="form-control" id="PhoneNumber" @onfocusout=HandleCustomCheck @bind-Value="employee.PhoneNumber" placeholder="PhoneNumber" />
+        </div>
+
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="CreditCard" class="form-label">CreditCard Number Eg: 374245455400126</label>
+            <InputText class="form-control" id="CreditCard" @bind-Value="employee.CreditCard" placeholder="CreditCard" />
+        </div>
+
+        <div class="mb-3 col-lg-6 col-12 mx-auto">
+            <label for="JoinDate">Join Date</label>
+            <InputDate class="form-control" id="JoinDate" @bind-Value="employee.JoinDate" placeholder="JoinDate" />
+        </div>
+
+        <div class="mb-3 col-lg-4 col-8 mx-auto d-grid">
+            <button class="btn btn-outline-dark" type="submit" @onclick="HandleCustomCheck">Submit</button>
+        </div>
+    </div>
+
+
+</EditForm>
+
+@code {
+    private List<Employee>? employeeLists; 
+    private Employee employee = new Employee();
+    private CustomValidation? customValidation;
+    string emailCheckPattern = "@gmail.com$";
+    string phoneCheckPattern = @"^09\d{9}$";
+    const string localStorageKey = "EmployeeData";
+
+
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public int id { get; set; }
+
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public bool isEdit { get; set; } = false;
+
+    protected async override void OnInitialized()
+    {
+        if (storageService.Get(localStorageKey) == null)
+        {
+            await storageService.GetDataFromBrowser<Employee>(localStorageKey);
+        }
+        employeeLists = storageService.Get(localStorageKey) == null ? new List<Employee>() : storageService.Get(localStorageKey);
+
+
+        if (isEdit && id >= 1)
+        {
+            var idx = employeeLists!.FindIndex(d => d.id == id);
+            if(idx != -1)
+            {
+                employee = employeeLists[idx].ShallowCopy();
+                StateHasChanged();
+            }
+            else
+            {
+                navigate.NavigateTo("/addemployee");
+            }
+        }
+    }
+
+
+    private async Task HandleSubmit()
+    {
+            var idx = employeeLists!.FindIndex(data => data.id == employee.id); 
+            if (idx <= 0 && !isEdit)
+            {
+                 employee.id = employeeLists.Count == 0 ? 1 : employeeLists.Max(x => x.id) + 1;
+                 employeeLists.Add(employee);
+            }
+            else
+            {
+                 employeeLists[idx] = employee;
+            }
+            await jsService.SetItemService(localStorageKey, JsonSerializer.Serialize(employeeLists));
+            storageService.Set(localStorageKey, employeeLists);
+            navigate.NavigateTo("/");
+    }
+
+
+    //Check Validation
+    public void HandleCustomCheck()
+    {
+        customValidation?.ClearErrors();
+
+        var errors = new Dictionary<string, List<string>>();
+
+        //Check for Age
+        if (!(employee.Age >= 18 && employee.Age < 100) && employee.Age >= 0)
+        {
+            errors.Add(nameof(employee.Age), new() { "Age must be between 18 and 100 years." });
+        }
+
+        //Check For Email
+        bool isRightEmail = Regex.IsMatch(employee.Email, emailCheckPattern);
+        if (!(isRightEmail) && !string.IsNullOrWhiteSpace(employee.Email))
+        {
+            errors.Add(nameof(employee.Email), new() { "Email must contain @gmail.com" });
+        }
+
+
+        //Check For Phone Number
+        bool isRightPhoneNumber = Regex.IsMatch(employee.PhoneNumber, phoneCheckPattern);
+        if (!(isRightPhoneNumber) && !string.IsNullOrWhiteSpace(employee.PhoneNumber))
+        {
+            errors.Add(nameof(employee.PhoneNumber), new() { "Phone number must start with 09 and must contain 11 number including 09" });
+        }
+
+
+        if (errors.Any())
+        {
+            customValidation?.DisplayErrors(errors);
+        }
+
+    }
+
+}
