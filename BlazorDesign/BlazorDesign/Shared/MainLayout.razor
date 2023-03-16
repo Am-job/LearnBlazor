@@ -1,0 +1,127 @@
+﻿@inherits LayoutComponentBase
+
+<CNavMenu></CNavMenu>
+<div class="page">
+    <div class="sidebar d-flex justify-content-center">
+        <ul class="iconLists d-none d-md-block">
+            <li class="text-center @(isActive == "Todo"?"active":"")" @onclick="@(() => ChangeActive("Todo"))">
+                <div>
+                    <i class="fas fa-list-alt fa-2x"></i>
+                </div>
+                <p>To Do</p>
+            </li>
+            <li class="text-center @(isActive == "Tickets"?"active":"")" @onclick="@(() => ChangeActive("Tickets"))">
+                <div>
+                    <i class="fas fa-ticket-alt fa-2x"></i>
+                </div>
+                <p>Tickets</p>
+            </li>
+            <li class="text-center @(isActive == "Data"?"active":"")" @onclick="@(() => ChangeActive("Data"))">
+                <div>
+                    <i class="fas fa-table fa-2x"></i>
+                </div>
+                <p>Data</p>
+            </li>
+        </ul>
+        <ul class="iconLists d-flex justify-content-between d-md-none">
+            <li class="text-center @(isActive == "Todo"?"active":"")" @onclick="@(() => ChangeActive("Todo"))">
+                <div>
+                    <i class="fas fa-list-alt fa-2x"></i>
+                </div>
+                <p>To Do</p>
+            </li>
+            <li class="text-center @(isActive == "Data"?"active":"")" @onclick="@(() => ChangeActive("Data"))">
+                <div>
+                    <i class="fas fa-table fa-2x"></i>
+                </div>
+                <p>Data</p>
+            </li>
+            <li class="text-center @(isActive == "Tickets"?"active":"")" @onclick="@(() => ChangeActive("Tickets"))">
+               <div>
+                    <i class="fas fa-ticket-alt fa-2x"></i>
+               </div>
+                <p>Tickets</p>
+            </li>
+        </ul>
+    </div>
+
+
+    <main>
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+
+    
+    
+    <div class="dataFunctions row @(isActive == "Data" ? "": "d-none")" style="transition:all 0.4s">
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-bottom border-end">
+                <i class="fas fa-users fa-2x"></i>
+                <p class="mt-1">Customers</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-bottom border-end">
+                <i class="fas fa-user-tie fa-2x"></i>
+                <p class="mt-1">Staffs</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-bottom border-end">
+                <i class="fas fa-sign-in-alt fa-2x"></i>
+                <p class="mt-1">Login Users</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-bottom">
+                <i class="far fa-share-square fa-2x"></i>
+                <p class="mt-1">Referrs</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-bottom border-end">
+                <i class="far fa-building fa-2x"></i>
+                <p class="mt-1">Departments</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-bottom border-end">
+                <i class="fas fa-shapes fa-2x"></i>
+                <p class="mt-1">Categories</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-bottom border-end">
+                <i class="far fa-window-restore fa-2x"></i>
+                <p class="mt-1">Service Types</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-bottom">
+                <i class="far fa-comment fa-2x"></i>
+                <p class="mt-1">Communicatios</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-end">
+                <i class="fas fa-tag fa-2x"></i>
+                <p class="mt-1">Tags</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-end">
+                <i class="fas fa-people-arrows fa-2x"></i>
+                <p class="mt-1">Staff Complexity</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center border-end">
+                <i class="fas fa-list-ol fa-2x"></i>
+                <p class="mt-1">Complexity</p>
+            </div>
+            <div class="col-3 d-flex justify-content-center align-content-center flex-column text-center">
+                <i class="far fa-comment-dots fa-2x"></i>
+                <p class="mt-1">Customers Feedback</p>
+            </div>
+        </div>
+   
+</div>
+
+
+
+@code{
+    private string isActive = string.Empty; 
+
+    private void ChangeActive(string active)
+    {
+        if(isActive == active) {
+            Console.WriteLine(isActive);
+            Console.WriteLine(active);
+            isActive = string.Empty;
+        }
+        else
+        {    
+            isActive = active;
+        }
+    }
+}

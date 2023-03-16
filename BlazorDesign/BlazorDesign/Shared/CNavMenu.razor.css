@@ -1,0 +1,19 @@
+﻿.navbar {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.navbar .navbar-brand {
+    color: var(--secondary-color);
+ }
+
+.navbar .ms-auto button{
+    outline:none;
+    border:none;
+    background:none;
+    color:var(--secondary-color);
+}
+
+.navbar .ms-auto button .translate-middle {
+    transform: translate(-63%,-50%) !important;
+}

@@ -1,0 +1,204 @@
+.page {
+    position: relative;
+    display: flex;
+    background: var(--primary-color);
+}
+
+main {
+    flex: 1;
+}
+
+.sidebar {
+    background: var(--secondary-color);
+    color:var(--primary-color);
+}
+
+.iconLists {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .iconLists li div {
+        margin-bottom: 5px;
+        transition: 0.1s all;
+    }
+
+    .iconLists li.active div {
+        color: var(--secondary-color);
+        background: var(--primary-color);
+        padding: 7px 8px;
+        border-radius: 10px;
+        transform: rotate(45deg);
+        transition: 0.4s all;
+    }
+
+        .iconLists li.active div i {
+            transform: rotate(-45deg) translateX(-1px);
+            transition: 0.01s all;
+        }
+
+
+
+ul li:hover {
+    cursor: pointer;
+}
+
+
+@media (max-width:767.5px) {
+    .page {
+        flex-direction: column-reverse;
+        height:100vh;
+    }
+
+    .main {
+        height: 92%;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: 8%;
+        position: sticky;
+        bottom: 0;
+        border-radius: 20px 20px 0px 0px;
+        padding:5px 30px;
+        z-index:3;
+    }
+
+    
+    .sidebar ul li{
+        margin:0px 50px;
+        transition:0.4s all;
+    }
+
+        .sidebar ul li p {
+            white-space: nowrap;
+            transition: 0.4s all;
+        }
+
+    .iconLists li.active div {
+        box-shadow: -1px -1px 4px 4px rgb(0,0,0);
+        transform: translateY(-31px) rotate(45deg);
+        margin: 0;
+        transition: 0.4s all;
+    }
+
+    .iconLists li.active p {
+        transform: translateY(-10px);
+    }
+
+    .dataFunctions {
+        position: absolute;
+        right: 12px;
+        background: #c5bdf7;
+        color: var(--primary-color);
+        bottom: 17%;
+        width: 100%;
+        z-index: 2;
+        transition: 0.4s all;
+        border-radius:10px;
+    }
+
+        .dataFunctions div {
+            padding:20px;
+            box-shadow: 0px 0px 5px -1px black;
+            transition: 0.4s all;
+        }
+
+        .dataFunctions i{
+            font-size:1.2rem;
+        }
+
+        .dataFunctions p {
+            margin: 0;
+            font-size:0.75rem;
+        }
+}
+
+@media (min-width:768px){
+    .page {
+        flex-direction:row;
+        height:100vh;
+    }
+
+    .sidebar{
+        width:70px;
+        height:100vh;
+        position:sticky;
+        top:0;
+        border-top-right-radius:30px;
+        padding:30px 0px;
+    }
+
+    .dataFunctions {
+        position: absolute;
+        top: 21%;
+        left: 70px;
+        background: #c5bdf7;
+        color: var(--primary-color);
+        overflow: hidden;
+        transition: 0.4s all;
+        border-radius: 10px;
+        width:600px;
+    }
+
+        .dataFunctions div {
+            padding:15px;
+            box-shadow: 0px 0px 5px -1px black;
+            transition: 0.4s all;
+        }
+
+        .dataFunctions p {
+            margin: 0;
+        }
+
+}
+
+@media (max-width:1280px) and
+       (max-heigth:800px){
+        .page{
+            width:100vw;
+            height:100vh;
+        }
+
+       
+        .dataFunctions div {
+            height: 50px;
+            width: 25%;
+            box-shadow: 0px 0px 5px -1px black;
+            transition: 0.4s all;
+        }
+
+        .dataFunctions i {
+            font-size: 1.2rem;
+        }
+
+        .dataFunctions p {
+            margin: 0;
+            font-size: 0.75rem;
+        }
+}
+
+@media (max-height:800px) {
+    .main {
+        height: 90%;
+    }
+
+    .sidebar {
+        height: auto;
+    }
+
+    .dataFunctions {
+        bottom: 28%;
+    }
+
+    .dataFunctions div{
+        padding:8px;
+    }
+}
+
+@media (max-width:340px) {
+    .sidebar ul li {
+        margin: 0px 20px;
+    }
+}

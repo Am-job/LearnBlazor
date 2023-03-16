@@ -1,0 +1,41 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = BlazorDesign
+build_property.RootNamespace = BlazorDesign
+build_property.ProjectDir = C:\Users\Server\source\repos\BlazorDesign\BlazorDesign\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Server\source\repos\BlazorDesign\BlazorDesign
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Server/source/repos/BlazorDesign/BlazorDesign/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/BlazorDesign/BlazorDesign/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Server/source/repos/BlazorDesign/BlazorDesign/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-6e98tqdnbs
+
+[C:/Users/Server/source/repos/BlazorDesign/BlazorDesign/Shared/CNavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENOYXZNZW51LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-xwjtm6wrhp
+
+[C:/Users/Server/source/repos/BlazorDesign/BlazorDesign/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-wn05fkv7a0
+
+[C:/Users/Server/source/repos/BlazorDesign/BlazorDesign/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-tfydnwvm57

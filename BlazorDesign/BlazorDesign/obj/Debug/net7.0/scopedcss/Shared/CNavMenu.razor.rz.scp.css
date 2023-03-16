@@ -1,0 +1,19 @@
+.navbar[b-xwjtm6wrhp] {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.navbar .navbar-brand[b-xwjtm6wrhp] {
+    color: var(--secondary-color);
+ }
+
+.navbar .ms-auto button[b-xwjtm6wrhp]{
+    outline:none;
+    border:none;
+    background:none;
+    color:var(--secondary-color);
+}
+
+.navbar .ms-auto button .translate-middle[b-xwjtm6wrhp] {
+    transform: translate(-63%,-50%) !important;
+}
