@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oSTUbuVurRwnliZSCmfu0lCZgc2mXOebZxNUbK2Vug0MTe5DHL/VnJxwy5X7f5pkrhaWkCO2nk92ZYDwTdGV/Q==",
+  "dgSpecHash": "sLDk5gUASNS/hb1Tw3DRyprRTg2X2+IF08ORvjNcuMc3IQ+PgBir6MnniQvXs2AIJg3jK/pM5P1nuNmjPlI0Dw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Server\\source\\repos\\BlazorAppTuto_3.3.23\\BlazorAppTuto\\BlazorAppTuto.csproj",
+  "projectFilePath": "D:\\RID\\BlazorAppTuto_3.3.23\\BlazorAppTuto\\BlazorAppTuto.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

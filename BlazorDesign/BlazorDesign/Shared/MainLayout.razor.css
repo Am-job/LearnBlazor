@@ -96,7 +96,8 @@ ul li:hover {
         width: 100%;
         z-index: 2;
         transition: 0.4s all;
-        border-radius:10px;
+        border-radius: 10px;
+        overflow-y: scroll;
     }
 
         .dataFunctions div {
@@ -133,13 +134,13 @@ ul li:hover {
     .dataFunctions {
         position: absolute;
         top: 21%;
-        left: 70px;
+        left: 80px;
         background: #c5bdf7;
         color: var(--primary-color);
         overflow: hidden;
         transition: 0.4s all;
         border-radius: 10px;
-        width:600px;
+        width: 600px;
     }
 
         .dataFunctions div {
@@ -190,6 +191,7 @@ ul li:hover {
 
     .dataFunctions {
         bottom: 28%;
+        overflow-y: scroll;
     }
 
     .dataFunctions div{
@@ -200,5 +202,39 @@ ul li:hover {
 @media (max-width:340px) {
     .sidebar ul li {
         margin: 0px 20px;
+    }
+}
+
+@media (max-height:540px) {
+    .dataFunctions {
+        bottom: 30%;
+        overflow-y: scroll;
+    }
+}
+
+@media (max-height:420px){
+    .dataFunctions {
+        bottom: 45%;
+        overflow-y: scroll;
+    }
+}
+
+@media (max-height:320px) {
+    .dataFunctions {
+        bottom: 50%;
+        overflow-y: scroll;
+    }
+}
+
+@media (max-height:280px) {
+    .dataFunctions {
+        bottom: 55%;
+        overflow-y: scroll;
+    }
+}
+
+@media (min-height:1000px){
+    .dataFunctions{
+        top:15%;
     }
 }

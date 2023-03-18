@@ -1,0 +1,39 @@
+﻿@page "/"
+@inject IJSRuntime JS
+
+<h1>Call .NET Example 4</h1>
+
+<p>
+    <label>
+        Name: <input @bind="name" />
+    </label>
+</p>
+
+<p>
+    <button @onclick="TriggerDotNetInstanceMethod">
+        Trigger .NET instance method
+    </button>
+</p>
+
+<p>
+    @result
+</p>
+
+@code {
+    private string? name;
+    private string? result;
+    private ButtonHelper? buttonHelper;
+
+    protected override void OnInitialized()
+    {
+        buttonHelper = new ButtonHelper(JS);
+    }
+
+    private async Task TriggerDotNetInstanceMethod()
+    {
+        if (buttonHelper is not null)
+        {
+            result = await buttonHelper.CallButtonHelperGetHelloMessage(name);
+        }
+    }
+}

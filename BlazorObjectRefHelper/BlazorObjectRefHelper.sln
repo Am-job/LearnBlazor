@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorObjectRefHelper", "BlazorObjectRefHelper\BlazorObjectRefHelper.csproj", "{E55BB520-01C4-4007-856C-87C7AF1F72CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E55BB520-01C4-4007-856C-87C7AF1F72CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E55BB520-01C4-4007-856C-87C7AF1F72CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E55BB520-01C4-4007-856C-87C7AF1F72CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E55BB520-01C4-4007-856C-87C7AF1F72CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {047322C6-DCE5-46ED-9DE6-34421DF87074}
+	EndGlobalSection
+EndGlobal

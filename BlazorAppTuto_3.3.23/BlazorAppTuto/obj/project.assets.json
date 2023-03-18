@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Server\\source\\repos\\BlazorAppTuto_3.3.23\\BlazorAppTuto\\BlazorAppTuto.csproj",
+      "projectUniqueName": "D:\\RID\\BlazorAppTuto_3.3.23\\BlazorAppTuto\\BlazorAppTuto.csproj",
       "projectName": "BlazorAppTuto",
-      "projectPath": "C:\\Users\\Server\\source\\repos\\BlazorAppTuto_3.3.23\\BlazorAppTuto\\BlazorAppTuto.csproj",
+      "projectPath": "D:\\RID\\BlazorAppTuto_3.3.23\\BlazorAppTuto\\BlazorAppTuto.csproj",
       "packagesPath": "C:\\Users\\Server\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Server\\source\\repos\\BlazorAppTuto_3.3.23\\BlazorAppTuto\\obj\\",
+      "outputPath": "D:\\RID\\BlazorAppTuto_3.3.23\\BlazorAppTuto\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
