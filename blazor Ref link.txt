@@ -7,9 +7,7 @@ https://blazor-university.com  ==> HOME
 
 
 
----------------------------- Home Work -------------------------------------
-https://www.pragimtech.com/blog/blazor/what-is-blazor/
-
-DI
-https://www.thinktecture.com/en/blazor/dependency-injection-scopes-in-blazor/
+Drag and Drop
+https://github.com/chrissainty/SimpleDragAndDropWithBlazor.git
+https://chrissainty.com/investigating-drag-and-drop-with-blazor/
  
